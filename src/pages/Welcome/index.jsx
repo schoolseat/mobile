@@ -26,7 +26,7 @@ export default function Calendar() {
   const [TodayIsThursday, setTodayIsThursday] = useState(false);
   const [TodayIsSaturday, setTodayIsSaturday] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [classes, setClasses] = useState(true);
+  const [classes, setClasses] = useState(false);
   const [filteredClasses, setFilteredClasses] = useState();
 
   async function fetchClasses() {
@@ -35,7 +35,7 @@ export default function Calendar() {
 
     if (!data) return setLoading(true)
     setClasses(data);
-    setLoading(false)
+    setLoading(false);
   }
   function WhatDayIsToday() {
     const day = today.getDay();
