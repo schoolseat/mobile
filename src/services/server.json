@@ -1,0 +1,34 @@
+{
+  "classes": [
+    {
+      "_id": "1",
+      "class": 890,
+      "discipline": "Matematica",
+      "content": "Algebra",
+      "teacher": {
+        "name": "Jorge Henrique",
+        "profilePic": "https://dummyimage.com/600x400/ff00ff/ffffff.png&text=gosto+de+macaco"
+      },
+      "lessonStatus": {
+        "startHour": "13:45",
+        "finishHour": "14:30",
+        "isActive": true
+      }
+    },
+    {
+      "_id": "2",
+      "class": 471,
+      "discipline": "Matematica",
+      "content": "Operadores",
+      "teacher": {
+        "name": "Jorge Henrique",
+        "profilePic": "https://dummyimage.com/1080x720/ff00ff/ffffff.png&text=bodia"
+      },
+      "lessonStatus": {
+        "startHour": "8:45",
+        "finishHour": "9:30",
+        "isActive": false
+      }
+    }
+  ]
+}
