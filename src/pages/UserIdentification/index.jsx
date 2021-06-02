@@ -33,6 +33,10 @@ export default function Welcome() {
   function handlePassword() {
     setHide(!hide);
   }
+  const navigation = useNavigation();
+  function handleStart() {
+    navigation.navigate('Calendar')
+}
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -79,7 +83,7 @@ export default function Welcome() {
             </View>
 
             <Text style={styles.forgotPass} onPress={() => Linking.openURL('http://google.com')}>Esqueceu a senha?</Text>
-            <Button name="Logar" onPress={() => Linking.openURL('http://google.com')}/>
+            <Button name="Logar" onPress={() => handleStart()}/>
 
             <Text style={styles.little}>
               Não é cadastrado?

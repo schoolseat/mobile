@@ -2,6 +2,7 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 
+
 import {
   useFonts,
   Poppins_400Regular,
@@ -18,7 +19,6 @@ export default function App() {
     Poppins_500Medium,
   });
   if (!fontsLoaded) return <AppLoading />;
-
   return (
     <Routes />
   );

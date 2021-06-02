@@ -1,8 +1,14 @@
 
-import Welcome from './Welcome'
+import Calendar from './Calendar'
 import UserIdentification from './UserIdentification'
+import Home from './Home'
+import Messages from './Messages'
+import Profile from './Profile'
 
 export {
-    Welcome,
-    UserIdentification
+    Calendar,
+    UserIdentification,
+    Home,
+    Messages,
+    Profile
 }

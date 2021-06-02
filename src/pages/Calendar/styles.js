@@ -78,6 +78,7 @@ export default StyleSheet.create({
   Cards: {
     flexDirection: 'column',
     margin: 0,
+    marginTop: -35,
   },
   ScrollView: {
     flex: 1,
