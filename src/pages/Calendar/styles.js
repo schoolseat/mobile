@@ -33,6 +33,7 @@ export default StyleSheet.create({
   texts: {
     color: colors.heading,
     fontFamily: fonts.text,
+    marginRight: 5,
   },
   text: {
     backgroundColor: colors.green_light,

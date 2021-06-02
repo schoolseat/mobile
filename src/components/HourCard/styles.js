@@ -54,8 +54,9 @@ export default StyleSheet.create({
     },
     classesContent: {
       fontSize: 12,
-      marginLeft: '10%',
-      fontFamily: fonts.text
+      fontFamily: fonts.text,
+
+      marginLeft: '10%'
     },
     SelectedData: {
       marginLeft: '10%',
@@ -67,11 +68,14 @@ export default StyleSheet.create({
     classesNumber: {
       marginLeft: '10%',
       fontFamily: fonts.complement,
+      fontSize: 12,
+
     },
     classesTName: {
       marginTop: '5%',
       marginLeft: '10%',
       fontFamily: fonts.complement,
+      fontSize: 12,
     },
     icons: {
       marginLeft: '5%',
