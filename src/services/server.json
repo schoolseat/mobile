@@ -10,24 +10,39 @@
         "profilePic": "https://dummyimage.com/600x400/ff00ff/ffffff.png&text=gosto+de+macaco"
       },
       "lessonStatus": {
-        "startHour": "13:45",
-        "finishHour": "14:30",
-        "isActive": true
+        "startHour": "1345",
+        "finishHour": "1430",
+        "isActive": false
       }
     },
     {
       "_id": "2",
       "class": 471,
-      "discipline": "Matematica",
+      "discipline": "Portugas",
       "content": "Operadores",
       "teacher": {
         "name": "Jorge Henrique",
         "profilePic": "https://dummyimage.com/1080x720/ff00ff/ffffff.png&text=bodia"
       },
       "lessonStatus": {
-        "startHour": "8:45",
-        "finishHour": "9:30",
+        "startHour": "845",
+        "finishHour": "930",
         "isActive": false
+      }
+    },
+    {
+      "_id": "3",
+      "class": 471,
+      "discipline": "Englix",
+      "content": "Operadores",
+      "teacher": {
+        "name": "Jorge Henrique",
+        "profilePic": "https://dummyimage.com/1080x720/ff00ff/ffffff.png&text=bodia"
+      },
+      "lessonStatus": {
+        "startHour": "730",
+        "finishHour": "830",
+        "isActive": true
       }
     }
   ]

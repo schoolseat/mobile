@@ -49,6 +49,7 @@ export default StyleSheet.create({
   calendar: {
     flexDirection: 'row',
     justifyContent: 'center',
+    marginTop: -15,
   },
   days: {
     margin: 5,
@@ -79,7 +80,7 @@ export default StyleSheet.create({
   Cards: {
     flexDirection: 'column',
     margin: 0,
-    marginTop: -35,
+    marginTop: -30,
   },
   ScrollView: {
     flex: 1,

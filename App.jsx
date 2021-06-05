@@ -2,7 +2,6 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 
-
 import {
   useFonts,
   Poppins_400Regular,

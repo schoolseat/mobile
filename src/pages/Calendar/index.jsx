@@ -27,15 +27,18 @@ export default function Calendar() {
   const [TodayIsSaturday, setTodayIsSaturday] = useState(false);
   const [loading, setLoading] = useState(true);
   const [classes, setClasses] = useState(false);
-  const [filteredClasses, setFilteredClasses] = useState();
+  const [reverse, setReverse] = useState(false);
 
   async function fetchClasses() {
     const { data } = await api
       .get(`classes`)
 
     if (!data) return setLoading(true)
-    setClasses(data);
+    setClasses(data.sort((a, b) => a.lessonStatus.startHour - b.lessonStatus.startHour));
     setLoading(false);
+  }
+  function handleReverse() {
+    setReverse(!reverse)
   }
   function WhatDayIsToday() {
     const day = today.getDay();
@@ -170,13 +173,15 @@ export default function Calendar() {
               <Text style={styles.ScrollViewText}>Materia</Text> 
             </View>
             <View>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleReverse()}>
                   <FontAwesome5 name="sort-amount-down-alt" size={24} color="#BCC1CD" />
               </TouchableOpacity>
             </View>
         </View>
         <View style={styles.Cards}>
           {
+            reverse ? 
+            Object.values(classes.reverse()).map(card => <HourCard classes={card} key={card._id} selected={card.lessonStatus.isActive} />) :
             Object.values(classes).map(card => <HourCard classes={card} key={card._id} selected={card.lessonStatus.isActive} />)
           }
 

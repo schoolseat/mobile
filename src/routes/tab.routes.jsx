@@ -1,6 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign, EvilIcons } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { Platform } from 'react-native';
 
 import colors from '../styles/colors';
@@ -58,8 +58,8 @@ const AuthRoutes = () => {
                 component={Messages}
                 options={{
                     tabBarIcon: ({ size, color }) => (
-                    <EvilIcons 
-                        name="comment" 
+                    <FontAwesome
+                        name="comment-o" 
                         size={size} 
                         color={color}
                          />
