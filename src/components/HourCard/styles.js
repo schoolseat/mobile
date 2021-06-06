@@ -6,7 +6,7 @@ export default StyleSheet.create({
     card: {
       alignContent: 'center',
       left: 150,
-      height: 300,
+      height: 350,
       marginTop: -20,
       margin: -40,
       marginBottom: -150
@@ -92,5 +92,15 @@ export default StyleSheet.create({
       left: 10,
       top: 5,
       borderRadius: 50,
-    }
+    },
+    options: {
+      height: 70,
+      backgroundColor: colors.red,
+      marginTop: 30,
+      borderRadius: 20,
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+      right: 20,
+  }
 })

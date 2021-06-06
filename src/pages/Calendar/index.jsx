@@ -7,6 +7,7 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  FlatList
 } from 'react-native';
 
 import styles from './styles';
@@ -168,23 +169,28 @@ export default function Calendar() {
       </View>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.ScrollView}>
         <View style={styles.ScrollViewButtons}>
-            <View style={styles.ScrollViewTexts}>
-              <Text style={styles.ScrollViewText}>Horario</Text> 
-              <Text style={styles.ScrollViewText}>Materia</Text> 
-            </View>
-            <View>
-              <TouchableOpacity onPress={() => handleReverse()}>
-                  <FontAwesome5 name="sort-amount-down-alt" size={24} color="#BCC1CD" />
-              </TouchableOpacity>
-            </View>
+          <View style={styles.ScrollViewTexts}>
+            <Text style={styles.ScrollViewText}>Horario</Text>
+            <Text style={styles.ScrollViewText}>Materia</Text>
+          </View>
+          <View>
+            <TouchableOpacity onPress={() => handleReverse()}>
+              <FontAwesome5 name="sort-amount-down-alt" size={24} color="#BCC1CD" />
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.Cards}>
-          {
-            reverse ? 
-            Object.values(classes.reverse()).map(card => <HourCard classes={card} key={card._id} selected={card.lessonStatus.isActive} />) :
-            Object.values(classes).map(card => <HourCard classes={card} key={card._id} selected={card.lessonStatus.isActive} />)
-          }
-
+          <FlatList
+            data={reverse ? classes.reverse() : classes}
+            keyExtractor={item => String(item._id)}
+            renderItem={({ item }) => (
+              <HourCard
+                classes={item}
+                key={item._id}
+                selected={item.lessonStatus.isActive}
+              />
+            )}
+          />
         </View>
       </ScrollView>
     </View>

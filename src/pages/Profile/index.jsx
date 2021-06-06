@@ -10,6 +10,8 @@ import { ProgressBar } from 'react-native-paper';
 import styles from './styles';
 import colors from '../../styles/colors';
 
+import { Button } from '../../components';
+import { useNavigation } from '@react-navigation/core';
 const data = {
     name: "Jorge Henrique",
     pfp: "https://dummyimage.com/600x400/ff00ff/ffffff.png",
@@ -19,6 +21,11 @@ const data = {
     xp: "42000"
 }
 export default function profile() {
+
+    const navigation = useNavigation();
+    function handleStart() {
+      navigation.navigate('UserIdentification')
+  }
     function stars(total) {
         if (!total || total === 0 ) {
             return <View style={styles.stars}>
@@ -99,6 +106,8 @@ export default function profile() {
                 <ProgressBar style={styles.progressbar} progress={0.3} color='#6DA7F6' />
                 <Text style={styles.remainXp}>100.000 xp</Text>
             </View>
+            <Button name="Deslogar" onPress={() => handleStart()}/>
+
         </View>
     )
 }

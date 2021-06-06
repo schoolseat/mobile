@@ -82,9 +82,7 @@ export default StyleSheet.create({
     margin: 0,
     marginTop: -30,
   },
-  ScrollView: {
-    flex: 1,
-  },
+
   ScrollViewButtons:{
     flexDirection: 'row',
     justifyContent: 'space-between',
