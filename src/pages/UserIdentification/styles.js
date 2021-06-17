@@ -1,26 +1,26 @@
-import { StyleSheet } from 'react-native'
+import StyleSheet from 'react-native-extended-stylesheet';
+import { Dimensions } from 'react-native'
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
 export default StyleSheet.create({
     container: {
-     flex: 1, 
+      flex: 1
     },
     wrapper: {
       justifyContent: 'space-around', 
       alignItems: 'center',
-      paddingHorizontal: 20
     },
     title: {
-      fontSize: 28,
+      fontSize: '2rem',
       textAlign: 'center',
       color: colors.heading,
-      marginTop: '20%',
+      marginTop: '2rem',
       fontFamily: fonts.heading,
-      lineHeight: 34,
+      lineHeight: '2rem',
     },
     image: {
-      marginTop: 10,
+      marginTop: '1rem',
     },
     views: {
       flexDirection: 'row',
@@ -28,24 +28,40 @@ export default StyleSheet.create({
       borderBottomWidth: 1,
       borderColor: colors.gray
     },
+    icons: {
+      marginRight: '1rem',
+      marginTop: '2rem'
+    },
+    lefticons: {
+      marginTop: '2rem'
+    },
     inputs: {
-      margin: 15,
-      padding: '1%',
-      width: '50%',
+      alignItems: 'center',
+      width:  Dimensions.get('window').width * 0.6,
+      marginTop: '2rem'
     },
     forgotPass: {
       color: colors.blue,
       width: '100%',
       textAlign: 'right',
-      margin: 10
+      marginTop: '1rem',
+      marginRight: '5rem',
     },
     little: {
-      fontSize: 10,
+      fontSize: '.6rem',
       width: '100%',
       color: colors.heading,
       textAlign: 'center',
       justifyContent: 'flex-end',
       alignItems: 'flex-end'
+    },
+    button: {
+      marginTop: '2rem',
+    },
+    lowerView: {
+      alignItems: 'center',
+      marginTop: Dimensions.get('window').height * 0.95,
+      position: 'absolute'
     },
     logonLink: {
       color: colors.blue

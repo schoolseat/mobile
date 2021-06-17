@@ -8,7 +8,7 @@ export default {
   title: '#545871',
   body_dark: '#738078',
   body_light: '#AAB2AD',
-  cards_background: "#F6F6F5",
+  cards_background: "#e7e7e4",
   cards_selected_background: '#4DC591',
   background: '#FFFFFF',
   shape: '#F0F0F0',

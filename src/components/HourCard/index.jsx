@@ -6,19 +6,19 @@ import {
   Animated
 } from 'react-native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 
+import { RectButton, Swipeable } from 'react-native-gesture-handler'
 import styles from './styles'
 
-export default function HourCard({ classes, selected }) {
+export default function HourCard({ lesons, classe, selected, isActivity, ...rest }) {
   const [isSelected, setSelected] = useState(false);
   const [emojiColor, setEmojiColor] = useState("black");
   const [startHour, setStartHour] = useState(false)
   const [finishHour, setFinishHourelected] = useState(false)
 
   function handleHour() {
-    const start = classes.lessonStatus.startHour;
-    const end = classes.lessonStatus.finishHour;
+    const start = lesons.startHour;
+    const end = lesons.finishHour;
     if (start.length === 3) {
       setStartHour(start[0] + ':' + start[1] + start[2])
     }
@@ -33,13 +33,13 @@ export default function HourCard({ classes, selected }) {
     }
   }
   useEffect(() => {
-    if (selected === true) {
+    if (selected || !isActivity) {
       setSelected(true)
     }
     if (isSelected) {
       setEmojiColor("white");
     }
-    handleHour()
+    if(isActivity) handleHour();
   }, [])
   return (
     <Swipeable
@@ -52,34 +52,41 @@ export default function HourCard({ classes, selected }) {
         </Animated.View>
       )}
     >
-      <View style={styles.card}>
+      <View style={isActivity ? styles.card : styles.longCard} >
+        { isActivity ? 
         <View style={styles.hours}>
           <Text style={styles.startHour} >{startHour}</Text>
           <Text style={styles.finishHour} >{finishHour}</Text>
         </View>
-        <View style={isSelected ? styles.SelectedClasses : styles.classes}>
-          <Text style={isSelected ? styles.SelectedHeading : styles.classesName}>{classes.discipline}</Text>
-          <Text style={isSelected ? styles.SelectedContent : styles.classesContent}>{classes.content}</Text>
-          <View style={styles.data} >
-            <Ionicons name="location-outline" size={24} color={emojiColor} style={styles.icons} />
-            <Text style={isSelected ? styles.SelectedContent : styles.classesNumber}>{classes.class}</Text>
-          </View>
-          <View style={styles.data}>
-            {
-              classes.teacher.profilePic ?
-                <Image
-                  source={{
-                    uri: classes.teacher.profilePic,
-                  }}
-                  style={styles.teacherPic}
-                /> :
-                <FontAwesome name="user-circle-o" size={24} color={emojiColor} style={styles.icons} />
-            }
-            <Text style={isSelected ? styles.SelectedData : styles.classesTName}>{classes.teacher.name}</Text>
-          </View>
-        </View>
+        :
+        null
+        }
+        <RectButton
+          style={isActivity ? (isSelected ? styles.SelectedClasses : styles.classes) : styles.SelectedClasses}
+          {...rest}
+        >
+            <Text style={isActivity ? (isSelected ? styles.SelectedHeading : styles.classesName) : styles.SelectedHeading}>{lesons.title}</Text>
+            <Text style={isActivity ? (isSelected ? styles.SelectedContent : styles.classesContent) : styles.SelectedContent}>{lesons.content}</Text>
+            <View style={styles.data} >
+              <Ionicons name="location-outline" size={24} color={emojiColor} style={styles.icons} />
+              <Text style={isActivity ? (isSelected ? styles.SelectedContent : styles.classesNumber) : styles.SelectedContent}>{classe[0].class}</Text>
+            </View>
+            <View style={styles.data}>
+              {
+                classe[0].teacher.profilePic ?
+                  <Image
+                    source={{
+                      uri: classe[0].teacher.profilePic,
+                    }}
+                    style={styles.teacherPic}
+                  /> :
+                  <FontAwesome name="user-circle-o" size={24} color={emojiColor} style={styles.icons} />
+              }
+              <Text style={isActivity ? (isSelected ? styles.SelectedData : styles.classesTName) : styles.SelectedData}>{classe[0].teacher.name}</Text>
+            </View>
+        </RectButton>
       </View>
-    </Swipeable>
+    </Swipeable> 
   );
 }
 

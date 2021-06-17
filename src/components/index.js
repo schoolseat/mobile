@@ -1,7 +1,13 @@
-import Button from './button'
-import HourCard from './HourCard'
+import Button from './button';
+import HourCard from './HourCard';
+import Loading from './loading';
+import ActivitiesCard from './ActivitiesCard';
+import MessagesCard from './MessagesCard';
 
 export {
     Button,
-    HourCard
+    HourCard,
+    Loading,
+    ActivitiesCard,
+    MessagesCard
 } 

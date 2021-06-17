@@ -10,9 +10,14 @@ import {
   Poppins_600SemiBold,
 } from '@expo-google-fonts/poppins';
 
+import EStyleSheet from 'react-native-extended-stylesheet';
+ 
+EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use global variables!
+  $textColor: '#0275d8'
+});
 import Routes from './src/routes';
 
-LogBox.ignoreWarnings([
+LogBox.ignoreLogs([
   'VirtualizedLists should never be nested', // TODO: Remove when fixed
 ])
 export default function App() {

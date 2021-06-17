@@ -14,6 +14,7 @@ import {
   Linking,
   TouchableOpacity,
   Image,
+  Platform
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
@@ -36,12 +37,11 @@ export default function Welcome() {
   const navigation = useNavigation();
   function handleStart() {
     navigation.navigate('Calendar')
-}
+  }
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={styles.container}
-        behavior="height"
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.wrapper}>
@@ -49,7 +49,7 @@ export default function Welcome() {
 
             <Image style={styles.image} source={img} />
             <View style={styles.views}>
-              <Feather name="mail" size={24} color={colors.blue} />
+              <Feather name="mail" size={24} style={styles.icons} color={colors.blue} />
               <TextInput
                 style={styles.inputs}
                 placeholder="insira o seu e-mail"
@@ -62,6 +62,7 @@ export default function Welcome() {
                       name="check-circle"
                       size={32}
                       color={colors.blue}
+                      style={styles.lefticons}
                     />
                   )
                   : (
@@ -69,30 +70,48 @@ export default function Welcome() {
                       name="close"
                       size={32}
                       color={colors.red}
+                      style={styles.lefticons}
                     />
                   )
               }
             </View>
             <View style={styles.views}>
-              <Feather name="lock" size={24} color={colors.blue} />
+              <Feather name="lock" size={24} color={colors.blue} style={styles.icons} />
               <TextInput style={styles.inputs} secureTextEntry={hide} placeholder="insira a sua senha" />
 
               <TouchableOpacity onPress={() => handlePassword()}>
-                {hide ? <Feather name="eye" size={24} color="#A2A2A2" /> : <Feather name="eye-off" size={24} color="#A2A2A2" />}
+                {
+                hide ? 
+                <Feather 
+                name="eye"
+                size={24} 
+                color="#A2A2A2"
+                style={styles.lefticons} 
+                /> : 
+                <Feather 
+                name="eye-off"
+                size={24} 
+                color="#A2A2A2"
+                style={styles.lefticons} />
+                }
               </TouchableOpacity>
+            </View >
+
+            <Text style={styles.forgotPass} onPress={() => Linking.openURL('http://google.com')}>Esqueceu a senha ?</Text>
+            
+            <View style={styles.button}>
+                <Button name="Logar"  onPress={() => handleStart()} />
             </View>
-
-            <Text style={styles.forgotPass} onPress={() => Linking.openURL('http://google.com')}>Esqueceu a senha?</Text>
-            <Button name="Logar" onPress={() => handleStart()}/>
-
-            <Text style={styles.little}>
-              Não é cadastrado?
-              <Text style={styles.logonLink} onPress={() => Linking.openURL('http://google.com')}>Cadastre-se agora.</Text>
-            </Text>
-            <Text style={styles.little}>
-              Ao se cadastrar você concorda com os
-              <Text style={styles.thermsLink} onPress={() => Linking.openURL('http://google.com')}>Termos e Condições</Text>
-            </Text>
+            <View style={styles.lowerView}>
+              <Text style={styles.little}>
+                Não é cadastrado ?
+              <Text style={styles.logonLink} onPress={() => Linking.openURL('http://google.com')}> Cadastre-se agora.</Text>
+              </Text>
+              <Text style={styles.little}>
+                Ao se cadastrar você concorda com os 
+              <Text style={styles.thermsLink} onPress={() => Linking.openURL('http://google.com')}> Termos e Condições</Text>
+              </Text>
+            </View>
           </View>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import StyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
@@ -10,19 +10,18 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 10,
-        width: Dimensions.get('window').width * 0.4,
-        height: Dimensions.get('window').height * 0.06,
+        width: '8rem',
+        height: '2rem',
 
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
+        shadowOpacity: 0.50,
+        shadowRadius: 3.84,
 
-        elevation: 4,
-        // filter: dropShadow(0, 4, 4, rgba(0, 0, 0, 0.25))
+        elevation: 5,
     },
     text: {
         fontSize: 16,

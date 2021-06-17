@@ -12,16 +12,21 @@ import colors from '../../styles/colors';
 
 import { Button } from '../../components';
 import { useNavigation } from '@react-navigation/core';
-const data = {
-    name: "Jorge Henrique",
-    pfp: "https://dummyimage.com/600x400/ff00ff/ffffff.png",
-    bio: "a",
-    stars: 5,
-    level: "80",
-    xp: "42000"
-}
-export default function profile() {
+import Api from '../../services/api';
 
+
+export default function profile() {
+    const [loading, setLoading] = useState(true);
+    const [user, setUser] = useState(false);
+
+    async function fetchMessages() {
+        const { data } = await api
+          .get(`users?id=0`)
+    
+        if (!data) return setLoading(true);
+        setUser(data);
+        setLoading(false);
+      }
     const navigation = useNavigation();
     function handleStart() {
       navigation.navigate('UserIdentification')
@@ -86,22 +91,22 @@ export default function profile() {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Image style={styles.image} source={{
-                    uri: data.pfp,
+                    uri: user.profilePic,
                 }} />
                 <View style={styles.headerTexts}>
-                    <Text style={styles.title}>{data.name}</Text>
+                    <Text style={styles.title}>{user.name}</Text>
                     <View style={styles.data}>
-                        <Text style={styles.text}>{data.bio}</Text>
-                        {stars(data.stars)}
+                        <Text style={styles.text}>{user.bio}</Text>
+                        {stars(user.stars)}
                     </View>
                 </View>
             </View>
             <View style={styles.level}>
-                <Text style={styles.text} >Nivel {data.level}</Text>
+                <Text style={styles.text} >Nivel {user.level}</Text>
 
                 <View style={styles.levelTexts}>
                     <Text style={styles.text}>Experiencia atual</Text>
-                    <Text style={styles.userXp}>{data.xp} XP</Text>
+                    <Text style={styles.userXp}>{user.xp} XP</Text>
                 </View>
                 <ProgressBar style={styles.progressbar} progress={0.3} color='#6DA7F6' />
                 <Text style={styles.remainXp}>100.000 xp</Text>

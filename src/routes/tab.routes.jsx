@@ -8,7 +8,8 @@ import {
     Calendar,
     Home,
     Profile,
-    Messages
+    Messages,
+    Activity
     } from '../pages'
 
 const AppTab = createBottomTabNavigator();

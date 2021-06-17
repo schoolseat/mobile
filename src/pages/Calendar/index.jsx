@@ -1,88 +1,140 @@
 import React, { useEffect, useState } from 'react';
-import Moment from 'moment'
+import Moment from 'moment';
 import api from '../../services/api';
 import { FontAwesome5 } from '@expo/vector-icons';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   View,
   Text,
   ScrollView,
   TouchableOpacity,
-  FlatList
+  FlatList,
 } from 'react-native';
 
 import styles from './styles';
 
-import { HourCard } from '../../components';
+import { useNavigation } from '@react-navigation/core';
+
+import { HourCard, Loading } from '../../components';
 
 const today = new Date();
-const days = ['Domingo', 'Segunda', 'Terca', 'Quarta', 'Quinta', 'Sexta', 'Sabado'];
-const months = ['Janeiro', 'Fevereiro', 'Marco', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const days = [
+  'Domingo',
+  'Segunda',
+  'Terca',
+  'Quarta',
+  'Quinta',
+  'Sexta',
+  'Sabado',
+];
+const months = [
+  'Janeiro',
+  'Fevereiro',
+  'Marco',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
+];
 
 export default function Calendar() {
-  const [TodayIsSunday, setTodayIsSunday] = useState(false);
-  const [TodayIsMonday, setTodayIsMonday] = useState(false);
-  const [TodayIsTuesday, setTodayIsTuesday] = useState(false);
-  const [TodayIsWenesday, setTodayIsWenesday] = useState(false);
-  const [TodayIsFriday, setTodayIsFriday] = useState(false);
-  const [TodayIsThursday, setTodayIsThursday] = useState(false);
-  const [TodayIsSaturday, setTodayIsSaturday] = useState(false);
   const [loading, setLoading] = useState(true);
   const [classes, setClasses] = useState(false);
+  const [content, setContent] = useState(false);
+  const [lessons, setLessons] = useState(false);
+  const [parsedLessons, setParsedLessons] = useState(false);
   const [reverse, setReverse] = useState(false);
+  const [isActivity, setIsActivity] = useState(false);
+  const [showPicker, setShowPicker] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(
+    Moment(today).format('YYYY-MM-DD'),
+  );
+
+  const navigation = useNavigation();
 
   async function fetchClasses() {
-    const { data } = await api
-      .get(`classes`)
+    let { data: user } = await api.get(`users?id=0`);
+    let { data: classes } = await api.get(`classes`);
+    let { data: lessonsReq } = await api.get(`lessons`);
+    let { data: content } = await api.get(`content`);
 
-    if (!data) return setLoading(true)
-    setClasses(data.sort((a, b) => a.lessonStatus.startHour - b.lessonStatus.startHour));
+    if (!user || !lessonsReq || !classes || !content) return setLoading(true);
+
+    const myUser = user[0];
+    const classesMap = new Map(classes.map(classe => [classe._id, classe]));
+    const lessonsMap = new Map(lessonsReq.map(lesson => [lesson._id, lesson]));
+
+    const filteredClasses = [...new Set(myUser.classes)].reduce(
+      (currentArray, classeId) =>
+        currentArray.concat(classesMap.get(classeId) || []),
+      [],
+    );
+
+    const mappedLessons = filteredClasses.reduce(
+      (currentArray, { lessons: classeLessons }) => {
+        classeLessons.forEach(lessonId => {
+          if (lessonsMap.has(lessonId)) {
+            currentArray.push(lessonsMap.get(lessonId));
+          }
+        });
+
+        return currentArray;
+      },
+      [],
+    );
+
+    setLessons(mappedLessons.sort((a, b) => a.startHour - b.startHour));
+    setClasses(filteredClasses);
+    setContent(content);
     setLoading(false);
   }
+
   function handleReverse() {
-    setReverse(!reverse)
+    setReverse(!reverse);
   }
-  function WhatDayIsToday() {
-    const day = today.getDay();
-    switch (day) {
-      case 0:
-        setTodayIsSunday(true);
-        break;
-      case 1:
-        setTodayIsMonday(true);
-        break;
-      case 2:
-        setTodayIsTuesday(true);
-        break;
-      case 3:
-        setTodayIsWenesday(true);
-        break;
-      case 4:
-        setTodayIsThursday(true);
-        break;
-      case 5:
-        setTodayIsFriday(true);
-        break;
-      case 6:
-        setTodayIsSaturday(true);
-        break
-      default:
-        setTodayIsSunday(false);
-        setTodayIsMonday(false);
-        setTodayIsTuesday(false);
-        setTodayIsWenesday(false);
-        setTodayIsFriday(false);
-        setTodayIsSaturday(false);
-        break;
+
+  function handleActivity() {
+    setIsActivity(!isActivity);
+  }
+
+  function handleDatePicker() {
+    setShowPicker(!showPicker);
+  }
+
+  function handleActivitySelect(activity) {
+    navigation.navigate('activity', { activity });
+  }
+
+  function handleLessons() {
+    if (!lessons) {
+      return setLoading(true);
     }
+
+    const parsed = lessons.filter(
+      classe => classe.day === Moment(selectedDay).format('YYYY-MM-DD'),
+    );
+
+    setParsedLessons(parsed);
+    setLoading(false);
   }
+
   useEffect(() => {
-    WhatDayIsToday();
     fetchClasses();
   }, []);
 
+  useEffect(() => {
+    handleLessons();
+  }, [selectedDay, lessons]);
+
   if (loading) {
-    return <Text>Carregando esse carai</Text>
+    return <Loading />;
   }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -99,100 +151,118 @@ export default function Calendar() {
           </View>
         </View>
         <View style={styles.text}>
-          <Text style={styles.text}>Hoje</Text>
+          <Text onPress={() => handleDatePicker()} style={styles.text}>
+            {Moment(selectedDay).format('YYYY-MM-DD') !=
+            Moment(today).format('YYYY-MM-DD')
+              ? days[today.getDay()]
+              : 'Hoje'}
+          </Text>
+          {showPicker && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={new Date()}
+              mode="date"
+              is24Hour={true}
+              display="default"
+              onChange={(event, selectedDayDate) => {
+                handleDatePicker();
+                setSelectedDay(String(selectedDayDate));
+              }}
+            />
+          )}
         </View>
       </View>
       <View style={styles.calendar}>
-        <View style={TodayIsSunday ? styles.SelectedDay : styles.days}>
-          <Text style={TodayIsSunday ? styles.SelectedDaysText : styles.daysText}>D</Text>
-          <Text style={
-            TodayIsSunday ? styles.SelectedDaysDay : styles.daysDay
-          }
-          >
-            {Moment().day(0).format('DD')}
-          </Text>
-        </View>
-        <View style={TodayIsMonday ? styles.SelectedDay : styles.days}>
-          <Text style={TodayIsMonday ? styles.SelectedDaysText : styles.daysText}>S</Text>
-          <Text style={
-            TodayIsMonday ? styles.SelectedDaysDay : styles.daysDay
-          }
-          >
-            {Moment().day(1).format('DD')}
-          </Text>
-        </View>
-        <View style={TodayIsTuesday ? styles.SelectedDay : styles.days}>
-          <Text style={TodayIsTuesday ? styles.SelectedDaysText : styles.daysText}>T</Text>
-          <Text style={
-            TodayIsTuesday ? styles.SelectedDaysDay : styles.daysDay
-          }
-          >
-            {Moment().day(2).format('DD')}
-          </Text>
-        </View>
-        <View style={TodayIsWenesday ? styles.SelectedDay : styles.days}>
-          <Text style={TodayIsWenesday ? styles.SelectedDaysText : styles.daysText}>Q</Text>
-          <Text style={
-            TodayIsWenesday ? styles.SelectedDaysDay : styles.daysDay
-          }
-          >
-            {Moment().day(3).format('DD')}
-          </Text>
-        </View>
-        <View style={TodayIsThursday ? styles.SelectedDay : styles.days}>
-          <Text style={TodayIsThursday ? styles.SelectedDaysText : styles.daysText}>Q</Text>
-          <Text style={
-            TodayIsThursday ? styles.SelectedDaysDay : styles.daysDay
-          }
-          >
-            {Moment().day(4).format('DD')}
-          </Text>
-        </View>
-        <View style={TodayIsFriday ? styles.SelectedDay : styles.days}>
-          <Text style={TodayIsFriday ? styles.SelectedDaysText : styles.daysText}>S</Text>
-          <Text style={
-            TodayIsFriday ? styles.SelectedDaysDay : styles.daysDay
-          }
-          >
-            {Moment().day(5).format('DD')}
-          </Text>
-        </View>
-        <View style={TodayIsSaturday ? styles.SelectedDay : styles.days}>
-          <Text style={TodayIsSaturday ? styles.SelectedDaysText : styles.daysText}>S</Text>
-          <Text style={
-            TodayIsSaturday ? styles.SelectedDaysDay : styles.daysDay
-          }
-          >
-            {Moment().day(6).format('DD')}
-          </Text>
-        </View>
+        <DaysOfWeek day={0} dayInitial='D' />
+        <DaysOfWeek day={1} dayInitial='S'/>
+        <DaysOfWeek day={2} dayInitial='T'/>
+        <DaysOfWeek day={3} dayInitial='Q'/>
+        <DaysOfWeek day={4} dayInitial='Q'/>
+        <DaysOfWeek day={5} dayInitial='S'/>
+        <DaysOfWeek day={6} dayInitial='S'/>
       </View>
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={styles.ScrollView}>
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        style={styles.ScrollView}
+      >
         <View style={styles.ScrollViewButtons}>
+          <Text
+            onPress={() => handleActivity()}
+            style={
+              isActivity ? styles.ScrollViewText : styles.SelectedScrollViewText
+            }
+          >
+            Materia
+          </Text>
           <View style={styles.ScrollViewTexts}>
-            <Text style={styles.ScrollViewText}>Horario</Text>
-            <Text style={styles.ScrollViewText}>Materia</Text>
+            <Text
+              onPress={() => handleActivity()}
+              style={
+                isActivity
+                  ? styles.SelectedScrollViewText
+                  : styles.ScrollViewText
+              }
+            >
+              Atividades
+            </Text>
           </View>
           <View>
             <TouchableOpacity onPress={() => handleReverse()}>
-              <FontAwesome5 name="sort-amount-down-alt" size={24} color="#BCC1CD" />
+              <FontAwesome5
+                name="sort-amount-down-alt"
+                size={24}
+                color="#BCC1CD"
+              />
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.Cards}>
-          <FlatList
-            data={reverse ? classes.reverse() : classes}
-            keyExtractor={item => String(item._id)}
-            renderItem={({ item }) => (
-              <HourCard
-                classes={item}
-                key={item._id}
-                selected={item.lessonStatus.isActive}
-              />
-            )}
-          />
-        </View>
+          <View style={styles.Cards}>
+            <FlatList
+              data={
+                isActivity
+                  ? reverse
+                    ? parsedLessons.reverse()
+                    : parsedLessons
+                  : reverse
+                  ? content.reverse()
+                  : content
+              }
+              keyExtractor={item => String(item._id)}
+              ListEmptyComponent={
+                <View style={styles.noClass}>
+                  <Text style={styles.noClassText}>
+                    Parece que não há nenhum conteudo para hoje
+                  </Text>
+                </View>
+              }
+              renderItem={({ item }) => (
+                <HourCard
+                  lesons={item}
+                  classe={classes}
+                  key={item._id}
+                  selected={item.isActive}
+                  isActivity={isActivity}
+                  showsVericalScrollIndicator={false}
+                  onEndReachedThreshold={0.1}
+                  onPress={() => handleActivitySelect(item)}
+                />
+              )}
+            />
+          </View>
       </ScrollView>
+    </View>
+  );
+}
+
+export function DaysOfWeek({day, dayInitial }) {
+  return (
+    <View style={today.getDay() === day ? styles.SelectedDay : styles.days}>
+      <Text style={today.getDay() === day ? styles.SelectedDaysText : styles.daysText}>{dayInitial}</Text>
+      <Text
+        style={today.getDay() === day ? styles.SelectedDaysDay : styles.daysDay}
+      >
+        {Moment().day(day).format('DD')}
+      </Text>
     </View>
   );
 }

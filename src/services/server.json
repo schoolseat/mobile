@@ -1,49 +1,167 @@
 {
-  "classes": [
+  "lessons": [
     {
       "_id": "1",
+      "startHour": "1345",
+      "day": "2021-06-15",
+      "finishHour": "1430",
+      "isActive": false,
+      "title": "Atividade 01 de Matematica",
+      "content": "Algebra",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores provident quibusdam adipisci nihil dolore unde labore ipsum accusamus, voluptatibus illo ab doloremque maiores fuga sed aperiam, earum officia itaque autem?",
+      "activityLink": ""
+    },
+    {
+      "_id": "2",
+      "startHour": "1345",
+      "day": "2021-06-15",
+      "finishHour": "1430",
+      "isActive": false,
+      "title": "Atividade 02 de Matematica",
+      "content": "Algebra",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores provident quibusdam adipisci nihil dolore unde labore ipsum accusamus, voluptatibus illo ab doloremque maiores fuga sed aperiam, earum officia itaque autem?",
+      "activityLink": ""
+    }
+  ],
+  "messages": [
+    {
+      "_id": "0",
+      "author": {
+        "id": 1,
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "dreto",
+        "timestamp": "0",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "13"
+      },
+      "content": "OI cronus",
+      "attachments": {},
+      "reactions": {},
+      "reference": null
+    },
+    {
+      "_id": "1",
+      "author": {
+        "id": 1,
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "dreto",
+        "timestamp": "1",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "13"
+      },
+      "content": "Quando vai me pagar aquele dinheiro? calotero",
+      "attachments": {},
+      "reactions": {},
+      "reference": null
+    },
+    {
+      "_id": "2",
+      "author": {
+        "id": 0,
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "dreto",
+        "timestamp": "2",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "13"
+      },
+      "content": "OI cronus",
+      "attachments": {},
+      "reactions": {},
+      "reference": null
+    },
+    {
+      "_id": "3",
+      "author": {
+        "id": 0,
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "dreto",
+        "timestamp": "3",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "13"
+      },
+      "content": "Quando vai me pagar aquele dinheiro? calotero",
+      "attachments": {},
+      "reactions": {},
+      "reference": null
+    }
+  ],
+  "content": [
+    {
+      "_id": "0",
+      "title": "Conteudo 01 de Matematica",
+      "content": "Algebra",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores provident quibusdam adipisci nihil dolore unde labore ipsum accusamus, voluptatibus illo ab doloremque maiores fuga sed aperiam, earum officia itaque autem?"
+    },
+    {
+      "_id": "1",
+      "title": "Conteudo 02 de Matematica",
+      "content": "Algebra",
+      "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores provident quibusdam adipisci nihil dolore unde labore ipsum accusamus, voluptatibus illo ab doloremque maiores fuga sed aperiam, earum officia itaque autem?"
+    }
+  ],
+  "classes": [
+    {
+      "_id": "0",
       "class": 890,
       "discipline": "Matematica",
-      "content": "Algebra",
+      "icon": "book",
+      "color": "#FF7648",
+      "bio": "Algebra",
       "teacher": {
         "name": "Jorge Henrique",
         "profilePic": "https://dummyimage.com/600x400/ff00ff/ffffff.png&text=gosto+de+macaco"
       },
-      "lessonStatus": {
-        "startHour": "1345",
-        "finishHour": "1430",
-        "isActive": false
-      }
+      "School": {
+        "name": "Hogwards"
+      },
+      "lessons": [
+        "1", "2"
+      ],
+      "content": [
+       "0", "1"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": 0,
+      "passswd": "1234",
+      "email": "doocu@gmail.com",
+      "name": "Dreto",
+      "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+      "age": "13",
+      "bio": "a",
+      "stars": 5,
+      "level": "80",
+      "xp": "42000",
+      "lastMessageID": "",
+      "classes": [
+        "0"
+      ],
+      "messages": [
+        "0",
+        "1"
+      ]
     },
     {
-      "_id": "2",
-      "class": 471,
-      "discipline": "Portugas",
-      "content": "Operadores",
-      "teacher": {
-        "name": "Jorge Henrique",
-        "profilePic": "https://dummyimage.com/1080x720/ff00ff/ffffff.png&text=bodia"
-      },
-      "lessonStatus": {
-        "startHour": "845",
-        "finishHour": "930",
-        "isActive": false
-      }
-    },
-    {
-      "_id": "3",
-      "class": 471,
-      "discipline": "Englix",
-      "content": "Operadores",
-      "teacher": {
-        "name": "Jorge Henrique",
-        "profilePic": "https://dummyimage.com/1080x720/ff00ff/ffffff.png&text=bodia"
-      },
-      "lessonStatus": {
-        "startHour": "730",
-        "finishHour": "830",
-        "isActive": true
-      }
+      "id": 1,
+      "passswd": "1234",
+      "email": "doocu@gmail.com",
+      "name": "Chronous",
+      "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+      "age": "17",
+      "bio": "a",
+      "stars": 5,
+      "level": "80",
+      "xp": "42000",
+      "lastMessageID": "",
+      "messages": [
+        "2", "3"
+      ]
     }
   ]
 }

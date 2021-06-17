@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import StyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    margin: '10%',
+    margin: '1rem',
 
     alignItems: 'center',
     textAlign: 'center',
@@ -19,11 +19,11 @@ export default StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     textAlign: 'center',
-    marginRight: '5%',
+    marginRight: '1rem',
   },
   day: {
     fontSize: 44,
-    marginRight: '5%',
+    marginRight: '.5rem',
 
     fontFamily: fonts.text,
   },
@@ -33,7 +33,7 @@ export default StyleSheet.create({
   texts: {
     color: colors.heading,
     fontFamily: fonts.text,
-    marginRight: 5,
+    marginRight: '.1rem',
   },
   text: {
     backgroundColor: colors.green_light,
@@ -43,33 +43,36 @@ export default StyleSheet.create({
     textAlign: 'center',
 
     fontFamily: fonts.text,
-    padding: 6,
+    padding:  '.4rem',
     borderRadius: 10,
   },
   calendar: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: -15,
+    marginTop:  '-1rem',
   },
   days: {
-    margin: 5,
-    padding: 10,
-    borderRadius: 10,
+    margin: '1rem',
+    borderRadius:  '1rem',
   },
   daysText: {
+    fontSize:  '.7rem',
     color: colors.heading,
     fontFamily: fonts.text,
   },
   daysDay: {
+    fontSize: '1rem',
     fontFamily: fonts.heading,
   },
   SelectedDay: {
-    borderRadius: 10,
+    fontSize: '1rem',
+    borderRadius:  '.8rem',
     margin: 5,
     padding: 10,
     backgroundColor: colors.orange,
   },
   SelectedDaysText: {
+    fontSize:  '.7rem',
     color: colors.white,
     fontFamily: fonts.text,
   },
@@ -79,10 +82,8 @@ export default StyleSheet.create({
   },
   Cards: {
     flexDirection: 'column',
-    margin: 0,
-    marginTop: -30,
+    marginTop: '-2rem',
   },
-
   ScrollViewButtons:{
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -91,9 +92,28 @@ export default StyleSheet.create({
   ScrollViewTexts: {
     flexDirection: 'row',
   },
+  SelectedScrollViewText: {
+    marginLeft: '3rem',
+    marginBottom: '1rem',
+    fontFamily: fonts.complement,
+    color: colors.heading,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.heading
+  },
   ScrollViewText: {
-    marginRight: '20%',
+    marginLeft: '3rem',
+    marginBottom: '1rem',
     fontFamily: fonts.complement,
     color: colors.heading
+  },
+  noClass: {
+    alignContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 100
+  },
+  noClassText: {
+    fontFamily: fonts.text,
+    color: colors.title
   }
 });

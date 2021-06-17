@@ -4,7 +4,7 @@ import colors from '../styles/colors';
 
 import AuthRoutes from './tab.routes';
 
-import { UserIdentification} from '../pages'
+import { UserIdentification, Activity, Messaging} from '../pages'
 
 const StackRoutes = createStackNavigator();
 
@@ -17,8 +17,10 @@ const AppRoutes = () => (
         }
     }}
     >
-        <StackRoutes.Screen name="Calendar" component={AuthRoutes} />
         <StackRoutes.Screen name="UserIdentification" component={UserIdentification} />  
+        <StackRoutes.Screen name="activity" component={Activity} />
+        <StackRoutes.Screen name="Calendar" component={AuthRoutes} />
+        <StackRoutes.Screen name="Messaging" component={Messaging} />
     </StackRoutes.Navigator>
 )
 

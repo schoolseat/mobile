@@ -1,15 +1,22 @@
-import { StyleSheet } from 'react-native';
+import StyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
 export default StyleSheet.create({
     card: {
       alignContent: 'center',
-      left: 150,
-      height: 350,
-      marginTop: -20,
+      left: '10rem',
+      height: '22rem',
+      marginTop: '-2rem',
       margin: -40,
-      marginBottom: -150
+      marginBottom: -160,
+    },
+    longCard: {
+      left: '2.5rem',
+      height: '22rem',
+      width: '36rem',
+      marginTop: '1rem',
+      marginBottom: '-13rem',
     },
     hours: {
       top: '20%',
@@ -25,13 +32,13 @@ export default StyleSheet.create({
       backgroundColor: colors.cards_background,
       borderRadius: 20,
       width: '50%',
-      height: '40%'
+      height: '40%',
     },
     SelectedClasses: {
       backgroundColor: colors.cards_selected_background,
       borderRadius: 20,
       width: '50%',
-      height: '40%'
+      height: '40%',
     },
     SelectedHeading: {
       color: colors.white,
@@ -49,6 +56,7 @@ export default StyleSheet.create({
     },
     classesName: {
       marginLeft: '10%',
+      marginRight: '10%',
       marginTop: '5%',
       fontFamily: fonts.heading
     },
@@ -59,6 +67,7 @@ export default StyleSheet.create({
       marginLeft: '10%'
     },
     SelectedData: {
+      marginTop: '5%',
       marginLeft: '10%',
 
       fontFamily: fonts.complement,
@@ -89,8 +98,8 @@ export default StyleSheet.create({
     teacherPic: {
       width: 30,
       height: 30,
+      marginTop: 10,
       left: 10,
-      top: 5,
       borderRadius: 50,
     },
     options: {
@@ -102,5 +111,14 @@ export default StyleSheet.create({
       alignItems: 'center',
       position: 'relative',
       right: 20,
+  },
+  noActivity: {
+    color: colors.blue,
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+  },
+  noActivityText: {
+    fontSize: 999
   }
 })
