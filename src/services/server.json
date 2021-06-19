@@ -27,14 +27,26 @@
     {
       "_id": "0",
       "author": {
-        "id": 1,
-        "passswd": "1234",
-        "email": "doocu@gmail.com",
-        "name": "dreto",
-        "timestamp": "0",
-        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
-        "age": "13"
+        "id": 0,
+      "passswd": "1234",
+      "email": "doocu@gmail.com",
+      "name": "Dreto",
+      "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+      "age": "13",
+      "bio": "a",
+      "stars": 5,
+      "level": "80",
+      "xp": "42000",
+      "classes": [
+        "0"
+      ],
+      "messages": [
+        "0",
+        "1"
+      ]
       },
+      "to": 0,
+      "timestamp": "1624039259052",
       "content": "OI cronus",
       "attachments": {},
       "reactions": {},
@@ -43,14 +55,26 @@
     {
       "_id": "1",
       "author": {
-        "id": 1,
-        "passswd": "1234",
-        "email": "doocu@gmail.com",
-        "name": "dreto",
-        "timestamp": "1",
-        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
-        "age": "13"
+        "id": 0,
+      "passswd": "1234",
+      "email": "doocu@gmail.com",
+      "name": "Dreto",
+      "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+      "age": "13",
+      "bio": "a",
+      "stars": 5,
+      "level": "80",
+      "xp": "42000",
+      "classes": [
+        "0"
+      ],
+      "messages": [
+        "0",
+        "1"
+      ]
       },
+      "to": 0,
+      "timestamp": "1624039259052",
       "content": "Quando vai me pagar aquele dinheiro? calotero",
       "attachments": {},
       "reactions": {},
@@ -59,15 +83,28 @@
     {
       "_id": "2",
       "author": {
-        "id": 0,
+        "id": 1,
         "passswd": "1234",
         "email": "doocu@gmail.com",
-        "name": "dreto",
-        "timestamp": "2",
+        "name": "Chronous",
         "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
-        "age": "13"
+        "age": "17",
+        "bio": "a",
+        "stars": 5,
+        "level": "80",
+        "xp": "42000",
+        "lastMessageID": "2",
+        "classes": [
+          "0"
+        ],
+        "messages": [
+          "2",
+          "3"
+        ]
       },
-      "content": "OI cronus",
+      "to": 1,
+      "timestamp": "1624039259052",
+      "content": "OI dreto",
       "attachments": {},
       "reactions": {},
       "reference": null
@@ -75,15 +112,86 @@
     {
       "_id": "3",
       "author": {
-        "id": 0,
+        "id": 1,
         "passswd": "1234",
         "email": "doocu@gmail.com",
-        "name": "dreto",
-        "timestamp": "3",
+        "name": "Chronous",
         "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
-        "age": "13"
+        "age": "17",
+        "bio": "a",
+        "stars": 5,
+        "level": "80",
+        "xp": "42000",
+        "lastMessageID": "2",
+        "classes": [
+          "0"
+        ],
+        "messages": [
+          "2",
+          "3"
+        ]
       },
+      "to": 1,
+      "timestamp": "1624039259052",
       "content": "Quando vai me pagar aquele dinheiro? calotero",
+      "attachments": {},
+      "reactions": {},
+      "reference": null
+    },
+    {
+      "_id": "4",
+      "author": {
+        "id": 3,
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "Cleitim da XT",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "17",
+        "bio": "a",
+        "stars": 5,
+        "level": "80",
+        "xp": "42000",
+        "lastMessageID": "5",
+        "classes": [
+          "0"
+        ],
+        "messages": [
+          "4",
+          "5"
+        ]
+      },
+      "to": 0,
+      "timestamp": "1624039259052",
+      "content": "Oi lindo sdds",
+      "attachments": {},
+      "reactions": {},
+      "reference": null
+    },
+    {
+      "_id": "5",
+      "author": {
+        "id": 3,
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "Cleitim da XT",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "17",
+        "bio": "a",
+        "stars": 5,
+        "level": "80",
+        "xp": "42000",
+        "lastMessageID": "5",
+        "classes": [
+          "0"
+        ],
+        "messages": [
+          "4",
+          "5"
+        ]
+      },
+      "to": 0,
+      "timestamp": "1624039259052",
+      "content": "Quando vai terminar esse app?",
       "attachments": {},
       "reactions": {},
       "reference": null
@@ -115,14 +223,16 @@
         "name": "Jorge Henrique",
         "profilePic": "https://dummyimage.com/600x400/ff00ff/ffffff.png&text=gosto+de+macaco"
       },
-      "School": {
+      "school": {
         "name": "Hogwards"
       },
       "lessons": [
-        "1", "2"
+        "1",
+        "2"
       ],
       "content": [
-       "0", "1"
+        "0",
+        "1"
       ]
     }
   ],
@@ -138,7 +248,6 @@
       "stars": 5,
       "level": "80",
       "xp": "42000",
-      "lastMessageID": "",
       "classes": [
         "0"
       ],
@@ -158,9 +267,33 @@
       "stars": 5,
       "level": "80",
       "xp": "42000",
-      "lastMessageID": "",
+      "lastMessageID": "2",
+      "classes": [
+        "0"
+      ],
       "messages": [
-        "2", "3"
+        "2",
+        "3"
+      ]
+    },
+    {
+      "id": 3,
+      "passswd": "1234",
+      "email": "doocu@gmail.com",
+      "name": "Cleitim da XT",
+      "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+      "age": "17",
+      "bio": "a",
+      "stars": 5,
+      "level": "80",
+      "xp": "42000",
+      "lastMessageID": "5",
+      "classes": [
+        "0"
+      ],
+      "messages": [
+        "4",
+        "5"
       ]
     }
   ]

@@ -13,12 +13,14 @@ import styles from './styles';
 
 import { ActivitiesCard, Loading } from '../../components';
 
+import { useNavigation } from '@react-navigation/core'
 import book from '../../assets/book.png';
 
 export default function home() {
   const [loading, setLoading] = useState(true);
   const [classes, setClasses] = useState(false);
 
+  const navigation = useNavigation();
   async function fetchClasses() {
     const { data } = await api
       .get(`classes`)
@@ -26,6 +28,9 @@ export default function home() {
     if (!data) return setLoading(true)
     setClasses(data);
     setLoading(false);
+  }
+  function handleClassSelect(grade) {
+    navigation.navigate('Grade', { grade })
   }
   useEffect(() => {
     fetchClasses();
@@ -53,6 +58,7 @@ export default function home() {
                 name={item.discipline}
                 icon={item.icon}
                 color={item.color}
+                onPress={() => handleClassSelect(item)}
               />
             )}
           />

@@ -5,7 +5,7 @@ import styles from './styles';
 
 import { RectButton } from 'react-native-gesture-handler'
 
-export default function messagescard({ name, lastContent, profilePic, ...rest }) {
+export default function messagescard({ name, lastContent, profilePic, allMessages, ...rest }) {
     return (
         <RectButton style={styles.container} {...rest}>
             {

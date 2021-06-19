@@ -5,6 +5,7 @@ import Messages from './Messages';
 import Profile from './Profile';
 import Activity from './Activity';
 import Messaging from './Messaging';
+import Grade from './Grade';
 
 export {
     Calendar,
@@ -13,5 +14,6 @@ export {
     Messages,
     Profile,
     Activity,
-    Messaging
+    Messaging,
+    Grade
 }
