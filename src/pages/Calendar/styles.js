@@ -10,6 +10,7 @@ export default StyleSheet.create({
   header: {
     flexDirection: 'row',
     margin: '1rem',
+    marginTop: '1.5rem',
 
     alignItems: 'center',
     textAlign: 'center',
@@ -115,5 +116,5 @@ export default StyleSheet.create({
   noClassText: {
     fontFamily: fonts.text,
     color: colors.title
-  }
+  },
 });

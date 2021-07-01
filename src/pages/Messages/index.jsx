@@ -1,17 +1,17 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   ScrollView,
-  FlatList
+  FlatList,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
 import api from '../../services/api';
 
-import { useNavigation } from '@react-navigation/core'
-
-import Styles from './styles'
+import Styles from './styles';
 import { MessagesCard, Loading } from '../../components';
 
 export default function Messages() {
@@ -21,42 +21,59 @@ export default function Messages() {
   const navigation = useNavigation();
 
   async function fetchMessages() {
-    let { data: messages } = await api.get(`messages?to=0`);
+    const { data: messages } = await api.get('messages?to=0');
 
     if (!messages) return setLoading(true);
 
     const filtered = Array.from(
-      new Set(messages.map(a => a.author.id))
+      new Set(messages.map((a) => a.author.id)),
     )
-      .map(id => {
-        return messages.find(a => a.author.id === id)
-      })
+      .map((id) => messages.find((a) => a.author.id === id));
     setMessages(filtered);
     setLoading(false);
+    return 0;
   }
   function toggleTeacher() {
-    setIsTeachers(!isTeachers)
+    setIsTeachers(!isTeachers);
   }
   function handleActivitySelect(data) {
-    navigation.navigate('Messaging', { data })
+    navigation.navigate('Messaging', { data });
   }
   useEffect(() => {
     fetchMessages();
   }, []);
 
   if (loading) {
-    return <Loading />
+    return <Loading />;
   }
   return (
     <View style={Styles.container}>
       <View style={Styles.toggle}>
-        <Text onPress={() => toggleTeacher()} style={isTeachers ? Styles.toggleSelectedText : Styles.toggleText}>Professores</Text>
-        <Text onPress={() => toggleTeacher()} style={isTeachers ? Styles.toggleText : Styles.toggleSelectedText}>Alunos</Text>
+        <Text
+          onPress={() => toggleTeacher()}
+          style={
+            isTeachers
+              ? Styles.toggleSelectedText
+              : Styles.toggleText
+          }
+        >
+          Professores
+        </Text>
+        <Text
+          onPress={() => toggleTeacher()}
+          style={
+            isTeachers
+              ? Styles.toggleText
+              : Styles.toggleSelectedText
+          }
+        >
+          Alunos
+        </Text>
       </View>
       <ScrollView>
         <FlatList
           data={lastMessage}
-          keyExtractor={item => String(item._id)}
+          keyExtractor={(item) => String(item._id)}
           renderItem={({ item }) => (
             <MessagesCard
               name={item.author.name}
@@ -75,5 +92,5 @@ export default function Messages() {
         </TouchableOpacity>
       </View>
     </View>
-  )
+  );
 }

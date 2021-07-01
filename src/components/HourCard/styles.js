@@ -12,6 +12,7 @@ export default StyleSheet.create({
       marginBottom: -160,
     },
     longCard: {
+      alignContent: 'center',
       left: '2.5rem',
       height: '22rem',
       width: '36rem',

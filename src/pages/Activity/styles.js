@@ -13,41 +13,41 @@ export default StyleSheet.create({
     marginBottom: 20,
     width: Dimensions.get('window').width * 0.9,
     height: Dimensions.get('window').height * 0.4,
-    position: 'absolute'
+    position: 'absolute',
   },
   scrollContainer: {
+    alignItems: 'center',
+    textAlign: 'center',
+    backgroundColor: colors.white,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
+    height: Dimensions.get('window').height * 0.5,
     marginTop: Dimensions.get('window').width * 0.7,
-    textAlign: 'center',
-    backgroundColor: colors.white
   },
   title: {
-    marginTop: 30,
-    marginLeft: 30,
+    marginTop: 20,
     color: colors.title,
     fontFamily: fonts.heading,
   },
   subTitle: {
     marginTop: 10,
-    marginLeft: 30,
     color: colors.title,
     fontFamily: fonts.text,
   },
   text: {
     marginTop: 10,
-    marginLeft: 30,
-    marginRight: 30,
+    paddingHorizontal: 20,
     marginBottom: 20,
     color: colors.heading,
     fontFamily: fonts.complement,
   },
   button: {
     marginTop: 20,
-    marginLeft: 100,
+    marginBottom: 30,
   },
   backButton: {
+    marginTop: 20,
     margin: 10,
     width: 30,
-  }
+  },
 });

@@ -1,6 +1,7 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import Moment from 'moment';
-import api from '../../services/api';
 import { FontAwesome5 } from '@expo/vector-icons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
@@ -11,9 +12,12 @@ import {
   FlatList,
 } from 'react-native';
 
-import styles from './styles';
+import PropTypes from 'prop-types';
 
 import { useNavigation } from '@react-navigation/core';
+import styles from './styles';
+
+import api from '../../services/api';
 
 import { HourCard, Loading } from '../../components';
 
@@ -58,26 +62,25 @@ export default function Calendar() {
   const navigation = useNavigation();
 
   async function fetchClasses() {
-    let { data: user } = await api.get(`users?id=0`);
-    let { data: classes } = await api.get(`classes`);
-    let { data: lessonsReq } = await api.get(`lessons`);
-    let { data: content } = await api.get(`content`);
+    const { data: useReq } = await api.get('users?id=0');
+    const { data: classesReq } = await api.get('classes');
+    const { data: lessonsReq } = await api.get('lessons');
+    const { data: contentReq } = await api.get('content');
 
-    if (!user || !lessonsReq || !classes || !content) return setLoading(true);
+    if (!useReq || !lessonsReq || !classesReq || !contentReq) return setLoading(true);
 
-    const myUser = user[0];
-    const classesMap = new Map(classes.map(classe => [classe._id, classe]));
-    const lessonsMap = new Map(lessonsReq.map(lesson => [lesson._id, lesson]));
+    const myUser = useReq[0];
+    const classesMap = new Map(classes.map((classe) => [classe._id, classe]));
+    const lessonsMap = new Map(lessonsReq.map((lesson) => [lesson._id, lesson]));
 
     const filteredClasses = [...new Set(myUser.classes)].reduce(
-      (currentArray, classeId) =>
-        currentArray.concat(classesMap.get(classeId) || []),
+      (currentArray, classeId) => currentArray.concat(classesMap.get(classeId) || []),
       [],
     );
 
     const mappedLessons = filteredClasses.reduce(
       (currentArray, { lessons: classeLessons }) => {
-        classeLessons.forEach(lessonId => {
+        classeLessons.forEach((lessonId) => {
           if (lessonsMap.has(lessonId)) {
             currentArray.push(lessonsMap.get(lessonId));
           }
@@ -92,14 +95,11 @@ export default function Calendar() {
     setClasses(filteredClasses);
     setContent(content);
     setLoading(false);
+    return 0;
   }
 
   function handleReverse() {
     setReverse(!reverse);
-  }
-
-  function handleActivity() {
-    setIsActivity(!isActivity);
   }
 
   function handleDatePicker() {
@@ -116,11 +116,12 @@ export default function Calendar() {
     }
 
     const parsed = lessons.filter(
-      classe => classe.day === Moment(selectedDay).format('YYYY-MM-DD'),
+      (classe) => classe.day === Moment(selectedDay).format('YYYY-MM-DD'),
     );
 
     setParsedLessons(parsed);
     setLoading(false);
+    return 0;
   }
 
   useEffect(() => {
@@ -152,34 +153,39 @@ export default function Calendar() {
         </View>
         <View style={styles.text}>
           <Text onPress={() => handleDatePicker()} style={styles.text}>
-            {Moment(selectedDay).format('YYYY-MM-DD') !=
-            Moment(today).format('YYYY-MM-DD')
-              ? days[today.getDay()]
-              : 'Hoje'}
+            {
+            Moment(selectedDay).format('YYYY-MM-DD') !== Moment(today).format('YYYY-MM-DD')
+              ? Moment(selectedDay).format('ll')
+              : 'Hoje'
+}
           </Text>
-          {showPicker && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={new Date()}
-              mode="date"
-              is24Hour={true}
-              display="default"
-              onChange={(event, selectedDayDate) => {
-                handleDatePicker();
-                setSelectedDay(String(selectedDayDate));
-              }}
-            />
-          )}
+          {
+            showPicker && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={new Date(selectedDay)}
+                mode="date"
+                is24Hour
+                display="default"
+                onChange={(event, selectedDayDate) => {
+                  handleDatePicker();
+                  setSelectedDay(String(selectedDayDate));
+                }}
+                maximumDate={new Date(2100, 0, 1)}
+                minimumDate={new Date(2021, 0, 1)}
+              />
+            )
+}
         </View>
       </View>
       <View style={styles.calendar}>
-        <DaysOfWeek day={0} dayInitial='D' />
-        <DaysOfWeek day={1} dayInitial='S'/>
-        <DaysOfWeek day={2} dayInitial='T'/>
-        <DaysOfWeek day={3} dayInitial='Q'/>
-        <DaysOfWeek day={4} dayInitial='Q'/>
-        <DaysOfWeek day={5} dayInitial='S'/>
-        <DaysOfWeek day={6} dayInitial='S'/>
+        <DaysOfWeek day={0} dayInitial="D" />
+        <DaysOfWeek day={1} dayInitial="S" />
+        <DaysOfWeek day={2} dayInitial="T" />
+        <DaysOfWeek day={3} dayInitial="Q" />
+        <DaysOfWeek day={4} dayInitial="Q" />
+        <DaysOfWeek day={5} dayInitial="S" />
+        <DaysOfWeek day={6} dayInitial="S" />
       </View>
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
@@ -187,7 +193,7 @@ export default function Calendar() {
       >
         <View style={styles.ScrollViewButtons}>
           <Text
-            onPress={() => handleActivity()}
+            onPress={() => setIsActivity(false)}
             style={
               isActivity ? styles.ScrollViewText : styles.SelectedScrollViewText
             }
@@ -196,7 +202,7 @@ export default function Calendar() {
           </Text>
           <View style={styles.ScrollViewTexts}>
             <Text
-              onPress={() => handleActivity()}
+              onPress={() => setIsActivity(true)}
               style={
                 isActivity
                   ? styles.SelectedScrollViewText
@@ -216,48 +222,61 @@ export default function Calendar() {
             </TouchableOpacity>
           </View>
         </View>
-          <View style={styles.Cards}>
-            <FlatList
-              data={
-                isActivity
-                  ? reverse
-                    ? parsedLessons.reverse()
-                    : parsedLessons
-                  : reverse
+        <View style={styles.Cards}>
+          <FlatList
+            data={
+              isActivity
+                ? reverse
+                  ? parsedLessons.reverse()
+                  : parsedLessons
+                : reverse
                   ? content.reverse()
                   : content
-              }
-              keyExtractor={item => String(item._id)}
-              ListEmptyComponent={
-                <View style={styles.noClass}>
-                  <Text style={styles.noClassText}>
-                    Parece que não há nenhum conteudo para hoje
-                  </Text>
-                </View>
-              }
-              renderItem={({ item }) => (
-                <HourCard
-                  lesons={item}
-                  classe={classes}
-                  key={item._id}
-                  selected={item.isActive}
-                  isActivity={isActivity}
-                  showsVericalScrollIndicator={false}
-                  onEndReachedThreshold={0.1}
-                  onPress={() => handleActivitySelect(item)}
-                />
-              )}
-            />
-          </View>
+            }
+            keyExtractor={(item) => String(item._id)}
+            ListEmptyComponent={(
+              <View style={styles.noClass}>
+                <Text style={styles.noClassText}>
+                  Parece que não há nenhum conteudo para hoje
+                </Text>
+              </View>
+            )}
+            renderItem={({ item }) => (
+              <HourCard
+                lesons={item}
+                classe={classes}
+                key={item._id}
+                selected={item.isActive}
+                isActivity={isActivity}
+                showsVericalScrollIndicator={false}
+                onEndReachedThreshold={0.1}
+                onPress={() => handleActivitySelect(item)}
+              />
+            )}
+            style={styles.flatlist}
+          />
+        </View>
       </ScrollView>
     </View>
   );
 }
 
-export function DaysOfWeek({day, dayInitial }) {
+export function DaysOfWeek({ day, dayInitial }) {
   return (
-    <View style={today.getDay() === day ? styles.SelectedDay : styles.days}>
-      <Text style={today.getDay() === day ? styles.SelectedDaysText : styles.daysText}>{dayInitial}</Text>
+    <View style={
+      today.getDay() === day
+        ? styles.SelectedDay
+        : styles.days
+      }
+    >
+      <Text style={
+        today.getDay() === day
+          ? styles.SelectedDaysText
+          : styles.daysText
+        }
+      >
+        {dayInitial}
+      </Text>
       <Text
         style={today.getDay() === day ? styles.SelectedDaysDay : styles.daysDay}
       >
@@ -266,3 +285,8 @@ export function DaysOfWeek({day, dayInitial }) {
     </View>
   );
 }
+
+DaysOfWeek.propTypes = {
+  day: PropTypes.string.isRequired,
+  dayInitial: PropTypes.string.isRequired,
+};

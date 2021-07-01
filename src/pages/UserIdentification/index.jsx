@@ -14,7 +14,6 @@ import {
   Linking,
   TouchableOpacity,
   Image,
-  Platform
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
@@ -26,7 +25,6 @@ import img from '../../assets/loginimg.png';
 
 const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
 
-
 export default function Welcome() {
   const [hide, setHide] = useState(true);
   const [verified, setVerified] = useState(false);
@@ -36,7 +34,7 @@ export default function Welcome() {
   }
   const navigation = useNavigation();
   function handleStart() {
-    navigation.navigate('Calendar')
+    navigation.navigate('Calendar');
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -53,7 +51,12 @@ export default function Welcome() {
               <TextInput
                 style={styles.inputs}
                 placeholder="insira o seu e-mail"
-                onChangeText={(text) => (expression.test(String(text).toLowerCase()) ? setVerified(true) : setVerified(false))}
+                onChangeText={
+                  (text) => (expression.test(String(text).toLowerCase())
+                    ? setVerified(true)
+                    : setVerified(false)
+                  )
+                }
               />
               {
                 verified
@@ -81,35 +84,56 @@ export default function Welcome() {
 
               <TouchableOpacity onPress={() => handlePassword()}>
                 {
-                hide ? 
-                <Feather 
-                name="eye"
-                size={24} 
-                color="#A2A2A2"
-                style={styles.lefticons} 
-                /> : 
-                <Feather 
-                name="eye-off"
-                size={24} 
-                color="#A2A2A2"
-                style={styles.lefticons} />
+                hide
+                  ? (
+                    <Feather
+                      name="eye"
+                      size={24}
+                      color="#A2A2A2"
+                      style={styles.lefticons}
+                    />
+                  )
+                  : (
+                    <Feather
+                      name="eye-off"
+                      size={24}
+                      color="#A2A2A2"
+                      style={styles.lefticons}
+                    />
+                  )
                 }
               </TouchableOpacity>
-            </View >
+            </View>
 
-            <Text style={styles.forgotPass} onPress={() => Linking.openURL('http://google.com')}>Esqueceu a senha ?</Text>
-            
+            <Text
+              style={styles.forgotPass}
+              onPress={() => Linking.openURL('http://google.com')}
+            >
+              Esqueceu a senha ?
+            </Text>
+
             <View style={styles.button}>
-                <Button name="Logar"  onPress={() => handleStart()} />
+              <Button name="Logar" onPress={() => handleStart()} />
             </View>
             <View style={styles.lowerView}>
               <Text style={styles.little}>
                 Não é cadastrado ?
-              <Text style={styles.logonLink} onPress={() => Linking.openURL('http://google.com')}> Cadastre-se agora.</Text>
+                <Text
+                  style={styles.logonLink}
+                  onPress={() => Linking.openURL('http://google.com')}
+                >
+                  {' '}
+                  Cadastre-se agora.
+                </Text>
               </Text>
               <Text style={styles.little}>
-                Ao se cadastrar você concorda com os 
-              <Text style={styles.thermsLink} onPress={() => Linking.openURL('http://google.com')}> Termos e Condições</Text>
+                Ao se cadastrar você concorda com os
+                <Text
+                  style={styles.thermsLink}
+                  onPress={() => Linking.openURL('http://google.com')}
+                >
+                  Termos e Condições
+                </Text>
               </Text>
             </View>
           </View>

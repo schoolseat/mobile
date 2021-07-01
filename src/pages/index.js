@@ -8,12 +8,12 @@ import Messaging from './Messaging';
 import Grade from './Grade';
 
 export {
-    Calendar,
-    UserIdentification,
-    Home,
-    Messages,
-    Profile,
-    Activity,
-    Messaging,
-    Grade
-}
+  Calendar,
+  UserIdentification,
+  Home,
+  Messages,
+  Profile,
+  Activity,
+  Messaging,
+  Grade,
+};

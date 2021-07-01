@@ -28,56 +28,52 @@
       "_id": "0",
       "author": {
         "id": 0,
-      "passswd": "1234",
-      "email": "doocu@gmail.com",
-      "name": "Dreto",
-      "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
-      "age": "13",
-      "bio": "a",
-      "stars": 5,
-      "level": "80",
-      "xp": "42000",
-      "classes": [
-        "0"
-      ],
-      "messages": [
-        "0",
-        "1"
-      ]
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "Dreto",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "13",
+        "bio": "a",
+        "stars": 5,
+        "level": "80",
+        "xp": "42000",
+        "classes": [
+          "0"
+        ],
+        "messages": [
+          "0",
+          "1"
+        ]
       },
       "to": 0,
       "timestamp": "1624039259052",
       "content": "OI cronus",
-      "attachments": {},
-      "reactions": {},
       "reference": null
     },
     {
       "_id": "1",
       "author": {
         "id": 0,
-      "passswd": "1234",
-      "email": "doocu@gmail.com",
-      "name": "Dreto",
-      "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
-      "age": "13",
-      "bio": "a",
-      "stars": 5,
-      "level": "80",
-      "xp": "42000",
-      "classes": [
-        "0"
-      ],
-      "messages": [
-        "0",
-        "1"
-      ]
+        "passswd": "1234",
+        "email": "doocu@gmail.com",
+        "name": "Dreto",
+        "profilePic": "https://dummyimage.com/120x330/ff00ff/ffffff.png&text=bodia",
+        "age": "13",
+        "bio": "a",
+        "stars": 5,
+        "level": "80",
+        "xp": "42000",
+        "classes": [
+          "0"
+        ],
+        "messages": [
+          "0",
+          "1"
+        ]
       },
       "to": 0,
       "timestamp": "1624039259052",
       "content": "Quando vai me pagar aquele dinheiro? calotero",
-      "attachments": {},
-      "reactions": {},
       "reference": null
     },
     {
@@ -105,8 +101,6 @@
       "to": 1,
       "timestamp": "1624039259052",
       "content": "OI dreto",
-      "attachments": {},
-      "reactions": {},
       "reference": null
     },
     {
@@ -134,8 +128,6 @@
       "to": 1,
       "timestamp": "1624039259052",
       "content": "Quando vai me pagar aquele dinheiro? calotero",
-      "attachments": {},
-      "reactions": {},
       "reference": null
     },
     {
@@ -163,8 +155,6 @@
       "to": 0,
       "timestamp": "1624039259052",
       "content": "Oi lindo sdds",
-      "attachments": {},
-      "reactions": {},
       "reference": null
     },
     {
@@ -230,6 +220,11 @@
         "1",
         "2"
       ],
+      "users": [
+        0,
+        1,
+        2
+      ],
       "content": [
         "0",
         "1"
@@ -277,7 +272,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": 2,
       "passswd": "1234",
       "email": "doocu@gmail.com",
       "name": "Cleitim da XT",

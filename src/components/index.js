@@ -6,10 +6,10 @@ import MessagesCard from './MessagesCard';
 import MessagingCard from './MessagingCard';
 
 export {
-    Button,
-    HourCard,
-    Loading,
-    ActivitiesCard,
-    MessagesCard,
-    MessagingCard
-} 
+  Button,
+  HourCard,
+  Loading,
+  ActivitiesCard,
+  MessagesCard,
+  MessagingCard,
+};
