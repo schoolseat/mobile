@@ -3,28 +3,28 @@ import {
   View,
   Text,
   Image,
+  Alert,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import { ProgressBar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
 import styles from './styles';
 import colors from '../../styles/colors';
 
+import { useApi } from '../../hooks/auth';
 import { Button, Loading } from '../../components';
-import api from '../../services/api';
 
 export default function profile() {
-  const [loading, setLoading] = useState(true);
+  const { user:data, getApiData, loading } = useApi();
   const [user, setUser] = useState(false);
 
   async function fetchUser() {
-    const { data } = await api
-      .get('users?id=0');
-
-    if (!data) return setLoading(true);
-    setUser(data);
-    setLoading(false);
-    return 0;
+    try{
+        await getApiData();
+        if(!loading) return setUser(data)
+    }catch (error) {
+        Alert.alert(error)
+    }
   }
   const navigation = useNavigation();
   function handleStart() {
@@ -58,9 +58,9 @@ export default function profile() {
         <View style={styles.stars}>
           <AntDesign name="star" size={20} color={colors.yellow} />
           <AntDesign name="star" size={20} color={colors.yellow} />
-          <AntDesign name="staro" size={20} color="black" />
-          <AntDesign name="staro" size={20} color="black" />
-          <AntDesign name="staro" size={20} color="black" />
+          <AntDesign name="staro" size={20} color={colors.heading} />
+          <AntDesign name="staro" size={20} color={colors.heading} />
+          <AntDesign name="staro" size={20} color={colors.heading} />
         </View>
       );
     }
@@ -70,8 +70,8 @@ export default function profile() {
           <AntDesign name="star" size={20} color={colors.yellow} />
           <AntDesign name="star" size={20} color={colors.yellow} />
           <AntDesign name="star" size={20} color={colors.yellow} />
-          <AntDesign name="staro" size={20} color="black" />
-          <AntDesign name="staro" size={20} color="black" />
+          <AntDesign name="staro" size={20} color={colors.heading} />
+          <AntDesign name="staro" size={20} color={colors.heading} />
         </View>
       );
     }
@@ -82,7 +82,7 @@ export default function profile() {
           <AntDesign name="star" size={20} color={colors.yellow} />
           <AntDesign name="star" size={20} color={colors.yellow} />
           <AntDesign name="star" size={20} color={colors.yellow} />
-          <AntDesign name="staro" size={20} color="black" />
+          <AntDesign name="staro" size={20} color={colors.heading} />
         </View>
       );
     }
@@ -97,13 +97,13 @@ export default function profile() {
         </View>
       );
     }
-    return 0;
+    return null;
   }
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [user]);
 
-  if (loading) {
+  if (loading && !user) {
     return <Loading />;
   }
   return (
@@ -116,10 +116,13 @@ export default function profile() {
           }}
         />
         <View style={styles.headerTexts}>
-          <Text style={styles.title}>{user.name}</Text>
-          <View style={styles.data}>
-            <Text style={styles.text}>{user.bio}</Text>
-            {stars(user.stars)}
+            <Text style={styles.title}>{user.name}</Text>
+            <View style={styles.data}>
+              <Text style={styles.text}>{user.bio}</Text>
+              {stars(Number(user.stars))}
+            </View>
+          <View style={styles.editprofile}>
+            <Button name="Editar perfil" onPress={() => handleStart()} />
           </View>
         </View>
       </View>
@@ -128,7 +131,6 @@ export default function profile() {
           Nivel
           {user.level}
         </Text>
-
         <View style={styles.levelTexts}>
           <Text style={styles.text}>Experiencia atual</Text>
           <Text style={styles.userXp}>

@@ -14,24 +14,28 @@ import api from '../../services/api';
 import Styles from './styles';
 import { MessagesCard, Loading } from '../../components';
 
+import { useApi } from '../../hooks/auth';
+
 export default function Messages() {
   const [isTeachers, setIsTeachers] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [lastMessage, setMessages] = useState(false);
   const navigation = useNavigation();
+  const {
+    messages: messagesReq,
+    getApiData,
+    loading
+  } = useApi();
 
   async function fetchMessages() {
-    const { data: messages } = await api.get('messages?to=0');
-
-    if (!messages) return setLoading(true);
+    await getApiData();
+    if (!messagesReq) return
 
     const filtered = Array.from(
-      new Set(messages.map((a) => a.author.id)),
+      new Set(messagesReq.map((a) => a.author.id)),
     )
-      .map((id) => messages.find((a) => a.author.id === id));
+      .map((id) => messagesReq.find((a) => a.author.id === id));
     setMessages(filtered);
-    setLoading(false);
-    return 0;
+    return;
   }
   function toggleTeacher() {
     setIsTeachers(!isTeachers);

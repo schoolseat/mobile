@@ -33,8 +33,8 @@ export default function Welcome() {
     setHide(!hide);
   }
   const navigation = useNavigation();
-  function handleStart() {
-    navigation.navigate('Calendar');
+  function handleNavigate(place) {
+    navigation.navigate(place);
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -111,30 +111,15 @@ export default function Welcome() {
             >
               Esqueceu a senha ?
             </Text>
-
+            <Text
+              style={styles.forgotPass}
+              onPress={() => handleNavigate('CreateAccount')}
+            >
+               Não é cadastrado ? {`\n`}
+               Cadastre-se agora.
+            </Text>
             <View style={styles.button}>
-              <Button name="Logar" onPress={() => handleStart()} />
-            </View>
-            <View style={styles.lowerView}>
-              <Text style={styles.little}>
-                Não é cadastrado ?
-                <Text
-                  style={styles.logonLink}
-                  onPress={() => Linking.openURL('http://google.com')}
-                >
-                  {' '}
-                  Cadastre-se agora.
-                </Text>
-              </Text>
-              <Text style={styles.little}>
-                Ao se cadastrar você concorda com os
-                <Text
-                  style={styles.thermsLink}
-                  onPress={() => Linking.openURL('http://google.com')}
-                >
-                  Termos e Condições
-                </Text>
-              </Text>
+              <Button name="Logar" onPress={() => handleNavigate('Calendar')} />
             </View>
           </View>
         </TouchableWithoutFeedback>

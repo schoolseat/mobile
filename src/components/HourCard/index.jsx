@@ -18,13 +18,13 @@ export default function HourCard({
   lesons, classe, selected, isActivity, ...rest
 }) {
   const [isSelected, setSelected] = useState(false);
-  const [emojiColor, setEmojiColor] = useState('black');
+  const [emojiColor, setEmojiColor] = useState(false);
   const [startHour, setStartHour] = useState(false);
   const [finishHour, setFinishHourelected] = useState(false);
 
   function handleHour() {
-    const start = lesons.startHour;
-    const end = lesons.finishHour;
+    const start = lesons.timestamp;
+    const end = lesons.deadline;
     if (start.length === 3) {
       setStartHour(`${start[0]}:${start[1]}${start[2]}`);
     }
@@ -42,9 +42,11 @@ export default function HourCard({
   useEffect(() => {
     if (selected || !isActivity) {
       setSelected(true);
+
+      setEmojiColor(true);
     }
     if (isSelected) {
-      setEmojiColor('white');
+      setEmojiColor(true);
     }
     if (isActivity) handleHour();
   }, []);
@@ -106,7 +108,7 @@ export default function HourCard({
             {lesons.content}
           </Text>
           <View style={styles.data}>
-            <Ionicons name="location-outline" size={24} color={emojiColor} style={styles.icons} />
+            <Ionicons name="location-outline" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />
             <Text style={
               isActivity
                 ? (
@@ -117,21 +119,22 @@ export default function HourCard({
                 : styles.SelectedContent
               }
             >
-              {classe[0].class}
+              {classe.class}
             </Text>
           </View>
           <View style={styles.data}>
             {
-                classe[0].teacher.profilePic
+                // classe.teacher.profilePic
+                false
                   ? (
                     <Image
                       source={{
-                        uri: classe[0].teacher.profilePic,
+                        uri: classe.teacher.profilePic,
                       }}
                       style={styles.teacherPic}
                     />
                   )
-                  : <FontAwesome name="user-circle-o" size={24} color={emojiColor} style={styles.icons} />
+                  : <FontAwesome name="user-circle-o" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />
               }
             <Text style={
               isActivity
@@ -142,7 +145,7 @@ export default function HourCard({
                 ) : styles.SelectedData
                 }
             >
-              {classe[0].teacher.name}
+              {classe.teacher}
             </Text>
           </View>
         </RectButton>

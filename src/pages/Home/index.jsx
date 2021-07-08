@@ -17,19 +17,21 @@ import { ActivitiesCard, Loading } from '../../components';
 
 import book from '../../assets/book.png';
 
+import { useApi } from '../../hooks/auth';
+
 export default function home() {
-  const [loading, setLoading] = useState(true);
   const [classes, setClasses] = useState(false);
+  const {
+    classes: classesReq,
+    getApiData,
+    loading
+  } = useApi();
 
   const navigation = useNavigation();
   async function fetchClasses() {
-    const { data } = await api
-      .get('classes');
-
-    if (!data) return setLoading(true);
-    setClasses(data);
-    setLoading(false);
-    return 0;
+    await getApiData();
+    if (loading) return;
+    setClasses(classesReq);
   }
   function handleClassSelect(grade) {
     navigation.navigate('Grade', { grade });
@@ -38,7 +40,7 @@ export default function home() {
     fetchClasses();
   }, []);
 
-  if (loading) {
+  if (loading || !classesReq) {
     return <Loading />;
   }
   return (
@@ -47,7 +49,7 @@ export default function home() {
       <View style={styles.image}>
         <Image style={styles.image} source={book} />
       </View>
-      <ScrollView>
+      <ScrollView >
         <View style={styles.classes}>
           <Text style={styles.title}>
             Materias

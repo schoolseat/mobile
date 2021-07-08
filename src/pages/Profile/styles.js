@@ -19,6 +19,13 @@ export default StyleSheet.create({
     height: 80,
     borderRadius: 100,
     margin: 10,
+    bottom: 20
+  },
+  imagePicker: {
+    marginLeft: 70,
+    bottom: 70,
+    zIndex: 1,
+    position: 'absolute'
   },
   title: {
     fontFamily: fonts.text,
@@ -30,10 +37,16 @@ export default StyleSheet.create({
   },
   stars: {
     flexDirection: 'row',
-    left: '80%',
+    left: '100%',
+    position: 'absolute'
+  },
+  editprofile: {
+    left: '90%',
+    bottom: 50
   },
   level: {
     margin: 10,
+    bottom: 50,
   },
   levelTexts: {
     flexDirection: 'row',
@@ -41,6 +54,8 @@ export default StyleSheet.create({
   text: {
     fontFamily: fonts.text,
     color: colors.title,
+    fontSize: 10,
+    width: 150
   },
   userXp: {
     marginLeft: '15%',

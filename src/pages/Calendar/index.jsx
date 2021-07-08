@@ -14,10 +14,9 @@ import {
 
 import PropTypes from 'prop-types';
 
+import { useApi } from '../../hooks/auth';
 import { useNavigation } from '@react-navigation/core';
 import styles from './styles';
-
-import api from '../../services/api';
 
 import { HourCard, Loading } from '../../components';
 
@@ -47,33 +46,33 @@ const months = [
 ];
 
 export default function Calendar() {
-  const [loading, setLoading] = useState(true);
-  const [classes, setClasses] = useState(false);
+  const { 
+    user: userReq, 
+    classes: classesReq, 
+    lessons: lessonsReq, 
+    content: contentReq, 
+    getApiData, 
+    loading  
+  } = useApi();
+
   const [content, setContent] = useState(false);
   const [lessons, setLessons] = useState(false);
   const [parsedLessons, setParsedLessons] = useState(false);
   const [reverse, setReverse] = useState(false);
   const [isActivity, setIsActivity] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
-  const [selectedDay, setSelectedDay] = useState(
-    Moment(today).format('YYYY-MM-DD'),
-  );
+  const [selectedDay, setSelectedDay] = useState(today);
 
   const navigation = useNavigation();
 
   async function fetchClasses() {
-    const { data: useReq } = await api.get('users?id=0');
-    const { data: classesReq } = await api.get('classes');
-    const { data: lessonsReq } = await api.get('lessons');
-    const { data: contentReq } = await api.get('content');
+    await getApiData();
 
-    if (!useReq || !lessonsReq || !classesReq || !contentReq) return setLoading(true);
-
-    const myUser = useReq[0];
-    const classesMap = new Map(classes.map((classe) => [classe._id, classe]));
+    if (!userReq || !lessonsReq || !classesReq || !contentReq) return;
+    const classesMap = new Map(classesReq.map((classe) => [classe._id, classe]));
     const lessonsMap = new Map(lessonsReq.map((lesson) => [lesson._id, lesson]));
 
-    const filteredClasses = [...new Set(myUser.classes)].reduce(
+    const filteredClasses = [...new Set(userReq.classes)].reduce(
       (currentArray, classeId) => currentArray.concat(classesMap.get(classeId) || []),
       [],
     );
@@ -85,17 +84,13 @@ export default function Calendar() {
             currentArray.push(lessonsMap.get(lessonId));
           }
         });
-
         return currentArray;
       },
       [],
     );
 
-    setLessons(mappedLessons.sort((a, b) => a.startHour - b.startHour));
-    setClasses(filteredClasses);
-    setContent(content);
-    setLoading(false);
-    return 0;
+    setLessons(mappedLessons.sort((a, b) => a.deadline - b.deadline));
+    setContent(contentReq);
   }
 
   function handleReverse() {
@@ -111,16 +106,15 @@ export default function Calendar() {
   }
 
   function handleLessons() {
-    if (!lessons) {
-      return setLoading(true);
-    }
+    if (!lessons) return 
 
     const parsed = lessons.filter(
-      (classe) => classe.day === Moment(selectedDay).format('YYYY-MM-DD'),
+      (lesson) => {
+        Moment(lesson.deadline).format('YYYY-MM-DD') === Moment(selectedDay).format('YYYY-MM-DD')
+      }
     );
 
     setParsedLessons(parsed);
-    setLoading(false);
     return 0;
   }
 
@@ -135,7 +129,6 @@ export default function Calendar() {
   if (loading) {
     return <Loading />;
   }
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -244,7 +237,7 @@ export default function Calendar() {
             renderItem={({ item }) => (
               <HourCard
                 lesons={item}
-                classe={classes}
+                classe={item.classe}
                 key={item._id}
                 selected={item.isActive}
                 isActivity={isActivity}
@@ -287,6 +280,6 @@ export function DaysOfWeek({ day, dayInitial }) {
 }
 
 DaysOfWeek.propTypes = {
-  day: PropTypes.string.isRequired,
+  day: PropTypes.number.isRequired,
   dayInitial: PropTypes.string.isRequired,
 };

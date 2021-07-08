@@ -44,10 +44,30 @@ export default StyleSheet.create({
     color: colors.blue,
     width: '100%',
     textAlign: 'right',
-    marginTop: '2rem',
+    marginTop: '1rem',
     marginRight: '5rem',
   },
+  little: {
+    fontSize: '.6rem',
+    width: '100%',
+    color: colors.heading,
+    textAlign: 'center',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+  },
   button: {
-    marginTop: '2.5rem',
+    marginTop: '1rem',
+  },
+  lowerView: {
+    alignItems: 'center',
+    marginTop: Dimensions.get('window').height * 0.95,
+    position: 'absolute',
+  },
+  logonLink: {
+    color: colors.blue,
+  },
+  thermsLink: {
+    color: colors.blue,
+    textDecorationLine: 'underline',
   },
 });

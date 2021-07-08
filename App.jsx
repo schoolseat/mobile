@@ -1,6 +1,9 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React , { useEffect } from 'react';
 import AppLoading from 'expo-app-loading';
+
+import { ApiProvider } from './src/hooks/auth';
+import { LogBox } from 'react-native';
 
 import {
   useFonts,
@@ -13,7 +16,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import Routes from './src/routes';
 
 EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use global variables!
-  $textColor: '#0275d8',
+$textColor: '#0275d8',
 });
 
 export default function App() {
@@ -22,8 +25,14 @@ export default function App() {
     Poppins_600SemiBold,
     Poppins_500Medium,
   });
+  
+  useEffect(() => {
+      LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+  }, [])
   if (!fontsLoaded) return <AppLoading />;
   return (
-    <Routes />
+    <ApiProvider>
+      <Routes />
+    </ApiProvider>
   );
 }
