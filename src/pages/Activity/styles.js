@@ -17,12 +17,16 @@ export default StyleSheet.create({
   },
   scrollContainer: {
     alignItems: 'center',
-    textAlign: 'center',
+    textAlign: 'justify',
     backgroundColor: colors.white,
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     height: Dimensions.get('window').height * 0.5,
     marginTop: Dimensions.get('window').width * 0.7,
+  },
+  titlesContainer: {
+    alignItems: 'center',
+    textAlign: 'justify',
   },
   title: {
     marginTop: 20,

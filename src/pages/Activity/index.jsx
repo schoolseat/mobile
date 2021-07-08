@@ -38,17 +38,20 @@ export default function Activity() {
       <Image style={styles.image} source={book} />
       <ScrollView>
         <View style={styles.scrollContainer}>
-          <View>
+          <View style={styles.titlesContainer}>
             <Text style={styles.title}>{activity.title}</Text>
             <Text style={styles.subTitle}>{activity.content}</Text>
           </View>
           <View>
             <Text style={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Asperiores provident quibusdam adipisci nihil dolore unde labore ipsum accusamus,
-              voluptatibus illo ab doloremque maiores fuga sed aperiam,
-              earum officia itaque autem?
+                    {activity.content}
             </Text>
+            {
+              activity.activityLink && 
+              <Text>
+                {activity.activityLink}
+              </Text>
+            }
           </View>
           <View style={styles.button}>
             <Button name="entendido" onPress={() => handleStart()} />

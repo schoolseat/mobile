@@ -19,12 +19,11 @@ function ApiProvider({ children }) {
         if (!useReq || !lessonsReq || !classesReq || !contentReq) return;
         const userObj = useReq[0];
 
-        setUser(userObj)
-        setClasses(classesReq)
-        setLessons(lessonsReq)
-        setContent(contentReq)
-
-        if (user && classes && lessons && content) return setLoading(false)
+        setUser(await userObj)
+        setClasses(await classesReq)
+        setLessons(await lessonsReq)
+        setContent(await contentReq)
+        if (user && classes && lessons && content) return setLoading(false);
     }
 
     return (

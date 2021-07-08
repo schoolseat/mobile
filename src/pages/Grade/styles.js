@@ -10,7 +10,7 @@ export default StyleSheet.create({
   headerContent: {
     width: '100%',
     height: 104,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     paddingTop: getStatusBarHeight(),
     flexDirection: 'row',
     justifyContent: 'center',
@@ -18,9 +18,9 @@ export default StyleSheet.create({
   },
   title: {
     flex: 1,
-    textAlign: 'center',
+    marginLeft: 20,
     fontFamily: fonts.title700,
-    fontSize: 20,
+    fontSize: 25,
     color: colors.heading,
   },
   teacherView: {

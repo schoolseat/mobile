@@ -50,8 +50,7 @@ export default function Calendar() {
     user: userReq, 
     classes: classesReq, 
     lessons: lessonsReq, 
-    content: contentReq, 
-    getApiData, 
+    content: contentReq,
     loading  
   } = useApi();
 
@@ -66,9 +65,7 @@ export default function Calendar() {
   const navigation = useNavigation();
 
   async function fetchClasses() {
-    await getApiData();
-
-    if (!userReq || !lessonsReq || !classesReq || !contentReq) return;
+    if (loading) return;
     const classesMap = new Map(classesReq.map((classe) => [classe._id, classe]));
     const lessonsMap = new Map(lessonsReq.map((lesson) => [lesson._id, lesson]));
 
@@ -102,7 +99,7 @@ export default function Calendar() {
   }
 
   function handleActivitySelect(activity) {
-    navigation.navigate('activity', { activity });
+    navigation.navigate('Activity', { activity });
   }
 
   function handleLessons() {
@@ -126,7 +123,7 @@ export default function Calendar() {
     handleLessons();
   }, [selectedDay, lessons]);
 
-  if (loading) {
+  if (loading || !content) {
     return <Loading />;
   }
   return (

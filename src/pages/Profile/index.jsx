@@ -3,9 +3,8 @@ import {
   View,
   Text,
   Image,
-  Alert,
 } from 'react-native';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import { ProgressBar } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
 import styles from './styles';
@@ -15,16 +14,12 @@ import { useApi } from '../../hooks/auth';
 import { Button, Loading } from '../../components';
 
 export default function profile() {
-  const { user:data, getApiData, loading } = useApi();
+  const { user:data, loading } = useApi();
   const [user, setUser] = useState(false);
 
   async function fetchUser() {
-    try{
-        await getApiData();
-        if(!loading) return setUser(data)
-    }catch (error) {
-        Alert.alert(error)
-    }
+        if(loading) return 
+        setUser(data)
   }
   const navigation = useNavigation();
   function handleStart() {
@@ -103,7 +98,7 @@ export default function profile() {
     fetchUser();
   }, [user]);
 
-  if (loading && !user) {
+  if (loading || !user) {
     return <Loading />;
   }
   return (

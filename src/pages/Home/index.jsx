@@ -29,7 +29,7 @@ export default function home() {
 
   const navigation = useNavigation();
   async function fetchClasses() {
-    await getApiData();
+    await getApiData()
     if (loading) return;
     setClasses(classesReq);
   }
@@ -38,9 +38,9 @@ export default function home() {
   }
   useEffect(() => {
     fetchClasses();
-  }, []);
+  }, [classes, classesReq, loading]);
 
-  if (loading || !classesReq) {
+  if (loading || !classes) {
     return <Loading />;
   }
   return (
@@ -52,7 +52,7 @@ export default function home() {
       <ScrollView >
         <View style={styles.classes}>
           <Text style={styles.title}>
-            Materias
+            Classes
           </Text>
           <FlatList
             data={classes}
