@@ -60,8 +60,7 @@ export default StyleSheet.create({
   },
   lowerView: {
     alignItems: 'center',
-    marginTop: Dimensions.get('window').height * 0.95,
-    position: 'absolute',
+    marginTop: 10,
   },
   logonLink: {
     color: colors.blue,

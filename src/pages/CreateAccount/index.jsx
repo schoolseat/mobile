@@ -23,7 +23,7 @@ import * as ImagePicker from 'expo-image-picker';
 
 import colors from '../../styles/colors';
 import styles from './styles';
-import { Button } from '../../components';
+import { Button, FieldError } from '../../components';
 import img from '../../assets/loginimg.png';
 
 const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
@@ -36,9 +36,10 @@ export default function Welcome() {
   const [dateVerified, setDateVerified] = useState(false);
   const [nameVerified, setNameVerified] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
+  const [sendLoginChecker, setSendLoginChecker] = useState(false);
   const [image, setImage] = useState(null);
   const [selectedDay, setSelectedDay] = useState(
-   ' insira a sua data de nascimento',
+    ' insira a sua data de nascimento',
   );
 
 
@@ -47,7 +48,7 @@ export default function Welcome() {
   }
   const navigation = useNavigation();
   function handleStart() {
-    navigation.navigate('');
+    navigation.navigate('Calendar');
   }
   function handleDatePicker() {
     setShowPicker(!showPicker);
@@ -55,11 +56,9 @@ export default function Welcome() {
   }
   useEffect(() => {
     (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Sorry, we need camera roll permissions to make this work!');
       }
     })();
   }, []);
@@ -72,10 +71,8 @@ export default function Welcome() {
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage(result);
     }
   };
   return (
@@ -94,10 +91,9 @@ export default function Welcome() {
                 style={styles.inputs}
                 placeholder="insira o seu e-mail"
                 onChangeText={
-                  (text) => (expression.test(String(text).toLowerCase())
-                    ? setVerified(true)
+                  (text) => expression.test(String(text).toLowerCase())
+                    ? setVerified(text)
                     : setVerified(false)
-                  )
                 }
               />
               {
@@ -120,6 +116,11 @@ export default function Welcome() {
                   )
               }
             </View>
+              {
+                sendLoginChecker 
+                && !verified 
+                && <FieldError error='Você precisa inserir o seu e-mail'/>
+              }
             <View style={styles.views}>
               <FontAwesome name="pencil-square-o" size={24} style={styles.icons} color={colors.blue} />
               <TextInput
@@ -127,7 +128,7 @@ export default function Welcome() {
                 placeholder="insira o seu nome"
                 onChangeText={
                   (text) => text
-                    ? setNameVerified(true)
+                    ? setNameVerified(text)
                     : setNameVerified(false)
                 }
               />
@@ -151,6 +152,11 @@ export default function Welcome() {
                   )
               }
             </View>
+              {
+                sendLoginChecker 
+                && !nameVerified 
+                && <FieldError error='você precisa inserir o seu nome'/>
+              }
             <View style={styles.views}>
               <Feather name="lock" size={24} color={colors.blue} style={styles.icons} />
               <TextInput style={styles.inputs} secureTextEntry={hide} placeholder="insira a sua senha" />
@@ -177,6 +183,11 @@ export default function Welcome() {
                 }
               </TouchableOpacity>
             </View>
+                {
+                sendLoginChecker 
+                && !nameVerified 
+                && <FieldError error='você precisa inserir uma senha'/>
+              }
             <View style={styles.views}>
               <Feather name="calendar" size={24} color={colors.blue} style={styles.icons} />
               <TouchableOpacity onPress={() => setShowPicker(true)}>
@@ -219,13 +230,27 @@ export default function Welcome() {
                 )
               }
             </View>
+              {
+                sendLoginChecker 
+                && !dateVerified 
+                && <FieldError error='você precisa inserir uma senha'/>
+              }
             <View style={styles.views}>
               <Feather name="camera" size={24} color={colors.blue} style={styles.icons} />
               <TouchableOpacity onPress={pickImage}>
-                <TextInput style={styles.inputs} editable={false} placeholder='Uma foto sua' />
+                <TextInput
+                  style={styles.inputs}
+                  editable={false}
+                  placeholder={
+                    image
+                      ? 'Prontinho 😊'
+                      : 'Uma foto sua'
+                  }
+                />
+
               </TouchableOpacity>
               {
-                dateVerified
+                image
                   ? (
                     <FontAwesome
                       name="check-circle"
@@ -243,9 +268,9 @@ export default function Welcome() {
                     />
                   )
               }
-              </View>
+            </View>
             <View style={styles.button}>
-              <Button name="Criar Conta" onPress={() => handleStart()} />
+              <Button name="Criar Conta" onPress={() => (verified && dateVerified && nameVerified) ? handleStart() : setSendLoginChecker(true) } />
             </View>
             <View style={styles.lowerView}>
               <Text style={styles.little}>
