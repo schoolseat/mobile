@@ -7,16 +7,11 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-
 import { useNavigation } from '@react-navigation/core';
-import api from '../../services/api';
 
 import styles from './styles';
-
 import { ActivitiesCard, Loading } from '../../components';
-
 import book from '../../assets/book.png';
-
 import { useApi } from '../../hooks/auth';
 
 export default function home() {
@@ -45,7 +40,6 @@ export default function home() {
   }
   return (
     <View style={styles.container}>
-
       <View style={styles.image}>
         <Image style={styles.image} source={book} />
       </View>

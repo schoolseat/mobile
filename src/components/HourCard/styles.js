@@ -64,7 +64,6 @@ export default StyleSheet.create({
     classesContent: {
       fontSize: 12,
       fontFamily: fonts.text,
-
       marginLeft: '10%'
     },
     SelectedData: {
@@ -79,7 +78,6 @@ export default StyleSheet.create({
       marginLeft: '10%',
       fontFamily: fonts.complement,
       fontSize: 12,
-
     },
     classesTName: {
       marginTop: '5%',
@@ -92,7 +90,6 @@ export default StyleSheet.create({
     },  
     data: {
       flexDirection: 'row',
-  
       alignItems: 'center',
       textAlign: 'center',
     },

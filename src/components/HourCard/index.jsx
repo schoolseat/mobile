@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
+import Moment from 'moment';
 import PropTypes from 'prop-types';
 
 import { RectButton, Swipeable } from 'react-native-gesture-handler';
@@ -19,26 +20,7 @@ export default function HourCard({
 }) {
   const [isSelected, setSelected] = useState(false);
   const [emojiColor, setEmojiColor] = useState(false);
-  const [startHour, setStartHour] = useState(false);
-  const [finishHour, setFinishHourelected] = useState(false);
 
-  function handleHour() {
-    const start = lesons.timestamp;
-    const end = lesons.deadline;
-    if (start.length === 3) {
-      setStartHour(`${start[0]}:${start[1]}${start[2]}`);
-    }
-    if (start.length === 4) {
-      setStartHour(`${start[0] + start[1]}:${start[2]}${start[3]}`);
-    }
-    if (end.length === 3) {
-      return setFinishHourelected(`${end[0]}:${end[1]}${end[2]}`);
-    }
-    if (end.length === 4) {
-      return setFinishHourelected(`${end[0] + end[1]}:${end[2]}${end[3]}`);
-    }
-    return 0;
-  }
   useEffect(() => {
     if (selected || !isActivity) {
       setSelected(true);
@@ -48,7 +30,6 @@ export default function HourCard({
     if (isSelected) {
       setEmojiColor(true);
     }
-    if (isActivity) handleHour();
   }, []);
   return (
     <Swipeable
@@ -62,14 +43,13 @@ export default function HourCard({
       )}
     >
       <View style={isActivity ? styles.card : styles.longCard}>
-        { isActivity
-          ? (
-            <View style={styles.hours}>
-              <Text style={styles.startHour}>{startHour}</Text>
-              <Text style={styles.finishHour}>{finishHour}</Text>
-            </View>
-          )
-          : null}
+        {
+          isActivity
+          && <View style={styles.hours}>
+                <Text style={styles.startHour}>{Moment(new Date(lesons.timestamp).getTime()).format('HH:​mm')}</Text>
+                <Text style={styles.finishHour}>{Moment(new Date(lesons.deadline).getTime()).format('HH:​mm')}</Text>
+              </View>
+        }
         <RectButton
           style={
             isActivity
@@ -79,7 +59,7 @@ export default function HourCard({
                   : styles.classes
               )
               : styles.SelectedClasses
-            }
+          }
           {...rest}
         >
           <Text style={
@@ -90,20 +70,20 @@ export default function HourCard({
                   : styles.classesName
               )
               : styles.SelectedHeading
-            }
+          }
           >
             {lesons.title}
           </Text>
           <Text
             style={
-            isActivity
-              ? (
-                isSelected
-                  ? styles.SelectedContent
-                  : styles.classesContent
-              )
-              : styles.SelectedContent
-              }
+              isActivity
+                ? (
+                  isSelected
+                    ? styles.SelectedContent
+                    : styles.classesContent
+                )
+                : styles.SelectedContent
+            }
           >
             {lesons.content}
           </Text>
@@ -117,25 +97,24 @@ export default function HourCard({
                     : styles.classesNumber
                 )
                 : styles.SelectedContent
-              }
+            }
             >
               {classe.class}
             </Text>
           </View>
           <View style={styles.data}>
             {
-                // classe.teacher.profilePic
-                false
-                  ? (
-                    <Image
-                      source={{
-                        uri: classe.teacher.profilePic,
-                      }}
-                      style={styles.teacherPic}
-                    />
-                  )
-                  : <FontAwesome name="user-circle-o" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />
-              }
+              classe.teacher.profilePic
+                ? (
+                  <Image
+                    source={{
+                      uri: classe.teacher.profilePic,
+                    }}
+                    style={styles.teacherPic}
+                  />
+                )
+                : <FontAwesome name="user-circle-o" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />
+            }
             <Text style={
               isActivity
                 ? (
@@ -143,9 +122,9 @@ export default function HourCard({
                     ? styles.SelectedData
                     : styles.classesTName
                 ) : styles.SelectedData
-                }
+            }
             >
-              {classe.teacher}
+              {classe.teacher.name}
             </Text>
           </View>
         </RectButton>

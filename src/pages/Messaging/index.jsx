@@ -13,52 +13,50 @@ import { useRoute, useNavigation } from '@react-navigation/core';
 import { AntDesign, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
 import { MessagingCard, Loading } from '../../components';
 
-import api from '../../services/api';
 import styles from './styles';
+
+import { useApi } from '../../hooks/auth';
 
 export default function Messaging() {
   const [messages, setMessages] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [inputValues, setInputValues] = useState(false);
+  const {
+    messages: messagesReq,
+    user,
+    loading
+  } = useApi();
 
   const navigation = useNavigation();
   const route = useRoute();
   const { data } = route.params;
 
   async function fetchMessages() {
-    const { data: user } = await api.get(`users?id=${data.author.id}`);
-    const { data: messagesReq } = await api.get('messages');
-
-    if (!user || !messagesReq) return setLoading(true);
-
-    const myUser = user[0];
     const messagesMap = new Map(messagesReq.map((classe) => [classe._id, classe]));
 
-    const filteredLastMessage = [...new Set(myUser.messages)].reduce(
+    const filteredLastMessage = [...new Set(user.messages)].reduce(
       (currentArray, classeId) => currentArray.concat(messagesMap.get(classeId) || []),
       [],
     );
     setMessages(filteredLastMessage);
-    setLoading(false);
-    return 0;
   }
+
   function handleStart() {
     navigation.navigate('Calendar');
   }
 
+  /*
   async function sendMessage(message) {
-    const { data: author } = await api.get('users?id=0');
-
     const messageData = {
       _id: '6',
-      author,
-      to: messages[0].author.id,
+      user,
+      to: messages[0].user.id,
       timestamp: Date.now(),
       content: message,
       reference: null,
     };
     await api.post('messages', messageData);
   }
+  */
   useEffect(() => {
     fetchMessages();
   }, []);
@@ -74,10 +72,10 @@ export default function Messaging() {
         </TouchableOpacity>
         <Text style={styles.name}>{data.author.name}</Text>
         {
-                    data.author.profilePic
-                      ? <Image style={styles.image} source={{ uri: data.author.profilePic }} />
-                      : <FontAwesome name="user-circle-o" style={styles.image} size={45} color="black" />
-                }
+          data.author.profilePic
+            ? <Image style={styles.image} source={{ uri: data.author.profilePic }} />
+            : <FontAwesome name="user-circle-o" style={styles.image} size={45} color="black" />
+        }
       </View>
       <ScrollView style={styles.scrollView}>
         <FlatList
@@ -105,9 +103,10 @@ export default function Messaging() {
           }}
           placeholder="Escreva uma mensagem"
         />
-        {inputValues
+        {
+        inputValues
           ? (
-            <TouchableOpacity onPress={() => sendMessage(inputValues)}>
+            <TouchableOpacity /* onPress={() => sendMessage(inputValues) } */>
               <FontAwesome name="send-o" style={styles.sendIconn} size={24} color="black" />
             </TouchableOpacity>
           )

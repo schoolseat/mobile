@@ -50,7 +50,6 @@ const AuthRoutes = () => (
             size={size}
             color={color}
           />
-
         ),
       }}
     />

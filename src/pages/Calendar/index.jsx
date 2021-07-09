@@ -46,12 +46,12 @@ const months = [
 ];
 
 export default function Calendar() {
-  const { 
-    user: userReq, 
-    classes: classesReq, 
-    lessons: lessonsReq, 
+  const {
+    user: userReq,
+    classes: classesReq,
+    lessons: lessonsReq,
     content: contentReq,
-    loading  
+    loading
   } = useApi();
 
   const [content, setContent] = useState(false);
@@ -66,27 +66,9 @@ export default function Calendar() {
 
   async function fetchClasses() {
     if (loading) return;
-    const classesMap = new Map(classesReq.map((classe) => [classe._id, classe]));
-    const lessonsMap = new Map(lessonsReq.map((lesson) => [lesson._id, lesson]));
 
-    const filteredClasses = [...new Set(userReq.classes)].reduce(
-      (currentArray, classeId) => currentArray.concat(classesMap.get(classeId) || []),
-      [],
-    );
-
-    const mappedLessons = filteredClasses.reduce(
-      (currentArray, { lessons: classeLessons }) => {
-        classeLessons.forEach((lessonId) => {
-          if (lessonsMap.has(lessonId)) {
-            currentArray.push(lessonsMap.get(lessonId));
-          }
-        });
-        return currentArray;
-      },
-      [],
-    );
-
-    setLessons(mappedLessons.sort((a, b) => a.deadline - b.deadline));
+    setLessons(lessonsReq);
+    setParsedLessons(lessonsReq);
     setContent(contentReq);
   }
 
@@ -95,6 +77,7 @@ export default function Calendar() {
   }
 
   function handleDatePicker() {
+    handleLessons();
     setShowPicker(!showPicker);
   }
 
@@ -103,7 +86,7 @@ export default function Calendar() {
   }
 
   function handleLessons() {
-    if (!lessons) return 
+    if (!lessons) return
 
     const parsed = lessons.filter(
       (lesson) => {
@@ -119,9 +102,6 @@ export default function Calendar() {
     fetchClasses();
   }, []);
 
-  useEffect(() => {
-    handleLessons();
-  }, [selectedDay, lessons]);
 
   if (loading || !content) {
     return <Loading />;
@@ -144,10 +124,10 @@ export default function Calendar() {
         <View style={styles.text}>
           <Text onPress={() => handleDatePicker()} style={styles.text}>
             {
-            Moment(selectedDay).format('YYYY-MM-DD') !== Moment(today).format('YYYY-MM-DD')
-              ? Moment(selectedDay).format('ll')
-              : 'Hoje'
-}
+              Moment(selectedDay).format('YYYY-MM-DD') !== Moment(today).format('YYYY-MM-DD')
+                ? Moment(selectedDay).format('ll')
+                : 'Hoje'
+            }
           </Text>
           {
             showPicker && (
@@ -165,7 +145,7 @@ export default function Calendar() {
                 minimumDate={new Date(2021, 0, 1)}
               />
             )
-}
+          }
         </View>
       </View>
       <View style={styles.calendar}>
@@ -257,13 +237,13 @@ export function DaysOfWeek({ day, dayInitial }) {
       today.getDay() === day
         ? styles.SelectedDay
         : styles.days
-      }
+    }
     >
       <Text style={
         today.getDay() === day
           ? styles.SelectedDaysText
           : styles.daysText
-        }
+      }
       >
         {dayInitial}
       </Text>
