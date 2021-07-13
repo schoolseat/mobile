@@ -7,6 +7,7 @@ import Profile from './Profile';
 import Activity from './Activity';
 import Messaging from './Messaging';
 import Grade from './Grade';
+import EditAccount from './EditAccount';
 
 export {
   UserIdentification,
@@ -18,4 +19,5 @@ export {
   Activity,
   Messaging,
   Grade,
+  EditAccount,
 };

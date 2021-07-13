@@ -22,8 +22,9 @@ export default function profile() {
         setUser(data)
   }
   const navigation = useNavigation();
-  function handleStart() {
-    navigation.navigate('UserIdentification');
+
+  function handleNavigation(place) {
+    navigation.navigate(place);
   }
   function stars(total) {
     if (!total || total === 0) {
@@ -117,7 +118,7 @@ export default function profile() {
               {stars(Number(user.stars))}
             </View>
           <View style={styles.editprofile}>
-            <Button name="Editar perfil" onPress={() => handleStart()} />
+            <Button name="Editar perfil" onPress={() => handleNavigation('EditAccount')} />
           </View>
         </View>
       </View>
@@ -137,7 +138,7 @@ export default function profile() {
         <ProgressBar style={styles.progressbar} progress={0.3} color="#6DA7F6" />
         <Text style={styles.remainXp}>100.000 xp</Text>
       </View>
-      <Button name="Deslogar" onPress={() => handleStart()} />
+      <Button name="Deslogar" onPress={() => handleNavigation('UserIdentification')} />
 
     </View>
   );

@@ -5,7 +5,12 @@ import colors from '../styles/colors';
 import AuthRoutes from './tab.routes';
 
 import {
-  UserIdentification, Activity, Messaging, Grade, CreateAccount
+  UserIdentification, 
+  Activity, 
+  Messaging, 
+  Grade, 
+  CreateAccount,
+  EditAccount
 } from '../pages';
 
 const StackRoutes = createStackNavigator();
@@ -21,6 +26,7 @@ const AppRoutes = () => (
   >
     <StackRoutes.Screen name="UserIdentification" component={UserIdentification} />
     <StackRoutes.Screen name="CreateAccount" component={CreateAccount} />
+    <StackRoutes.Screen name="EditAccount" component={EditAccount} />
     <StackRoutes.Screen name="Activity" component={Activity} />
     <StackRoutes.Screen name="Calendar" component={AuthRoutes} />
     <StackRoutes.Screen name="Messaging" component={Messaging} />

@@ -19,7 +19,7 @@ export default StyleSheet.create({
   title: {
     flex: 1,
     marginLeft: 20,
-    fontFamily: fonts.title700,
+    fontFamily: fonts.complement,
     fontSize: 25,
     color: colors.heading,
   },
