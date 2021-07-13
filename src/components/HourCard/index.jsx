@@ -18,6 +18,7 @@ import styles from './styles';
 export default function HourCard({
   lesons, classe, selected, isActivity, ...rest
 }) {
+
   const [isSelected, setSelected] = useState(false);
   const [emojiColor, setEmojiColor] = useState(false);
 
@@ -46,9 +47,9 @@ export default function HourCard({
         {
           isActivity
           && <View style={styles.hours}>
-                <Text style={styles.startHour}>{Moment(new Date(lesons.timestamp).getTime()).format('HH:​mm')}</Text>
-                <Text style={styles.finishHour}>{Moment(new Date(lesons.deadline).getTime()).format('HH:​mm')}</Text>
-              </View>
+            <Text style={styles.startHour}>{Moment(new Date(lesons.timestamp).getTime()).format('HH:​mm')}</Text>
+            <Text style={styles.finishHour}>{Moment(new Date(lesons.deadline).getTime()).format('HH:​mm')}</Text>
+          </View>
         }
         <RectButton
           style={
@@ -104,16 +105,19 @@ export default function HourCard({
           </View>
           <View style={styles.data}>
             {
-              classe.teacher.profilePic
-                ? (
-                  <Image
-                    source={{
-                      uri: classe.teacher.profilePic,
-                    }}
-                    style={styles.teacherPic}
-                  />
-                )
-                : <FontAwesome name="user-circle-o" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />
+              !classe.teacher.profilePic
+                ? <FontAwesome
+                  name="user-circle-o"
+                  size={24}
+                  color={emojiColor ? 'white' : 'black'}
+                  style={styles.icons}
+                />
+                : <Image
+                  source={{
+                    uri: classe.teacher.profilePic,
+                  }}
+                  style={styles.teacherPic}
+                />
             }
             <Text style={
               isActivity

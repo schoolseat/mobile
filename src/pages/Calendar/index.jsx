@@ -47,13 +47,10 @@ const months = [
 
 export default function Calendar() {
   const {
-    user: userReq,
-    classes: classesReq,
     lessons: lessonsReq,
     content: contentReq,
     loading
   } = useApi();
-
   const [content, setContent] = useState(false);
   const [lessons, setLessons] = useState(false);
   const [parsedLessons, setParsedLessons] = useState(false);
@@ -101,7 +98,6 @@ export default function Calendar() {
   useEffect(() => {
     fetchClasses();
   }, []);
-
 
   if (loading || !content) {
     return <Loading />;
@@ -215,7 +211,6 @@ export default function Calendar() {
               <HourCard
                 lesons={item}
                 classe={item.classe}
-                key={item._id}
                 selected={item.isActive}
                 isActivity={isActivity}
                 showsVericalScrollIndicator={false}

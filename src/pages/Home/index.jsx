@@ -6,9 +6,10 @@ import {
   FlatList,
   Image,
   ScrollView,
+  StatusBar,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-
+import { useIsFocused } from '@react-navigation/native';
 import styles from './styles';
 import { ActivitiesCard, Loading } from '../../components';
 import book from '../../assets/book.png';
@@ -40,6 +41,11 @@ export default function home() {
   }
   return (
     <View style={styles.container}>
+      <FocusAwareStatusBar
+        barStyle="white-content"
+        backgroundColor="transparent"
+        translucent
+      />
       <View style={styles.image}>
         <Image style={styles.image} source={book} />
       </View>
@@ -65,4 +71,9 @@ export default function home() {
       </ScrollView>
     </View>
   );
+}
+function FocusAwareStatusBar(props) {
+  const isFocused = useIsFocused();
+
+  return isFocused ? <StatusBar {...props} /> : null;
 }
