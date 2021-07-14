@@ -1,20 +1,22 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-control-regex */
 import React, { useState } from 'react';
+
 import { FontAwesome, Feather } from '@expo/vector-icons';
 
 import {
   Text,
-  SafeAreaView,
   View,
+  Image,
+  Linking,
+  Keyboard,
   TextInput,
+  SafeAreaView,
+  TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard,
-  Linking,
-  TouchableOpacity,
-  Image,
 } from 'react-native';
+
 
 import { useNavigation } from '@react-navigation/core';
 
@@ -23,7 +25,7 @@ import styles from './styles';
 import { Button } from '../../components';
 import img from '../../assets/loginimg.png';
 
-const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
 
 import { useApi } from '../../hooks/auth';
 
@@ -57,6 +59,7 @@ export default function Welcome() {
               <TextInput
                 style={styles.inputs}
                 placeholder="insira o seu e-mail"
+                type="email"
                 onChangeText={
                   (text) => (expression.test(String(text).toLowerCase())
                     ? setVerified(true)
@@ -113,7 +116,7 @@ export default function Welcome() {
 
             <Text
               style={styles.forgotPass}
-              onPress={() => Linking.openURL('http://google.com')}
+              onPress={() => handleNavigate('RecoverPassword')}
             >
               Esqueceu a senha ?
             </Text>

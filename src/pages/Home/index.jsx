@@ -8,8 +8,10 @@ import {
   ScrollView,
   StatusBar,
 } from 'react-native';
+
 import { useNavigation } from '@react-navigation/core';
 import { useIsFocused } from '@react-navigation/native';
+
 import styles from './styles';
 import { ActivitiesCard, Loading } from '../../components';
 import book from '../../assets/book.png';

@@ -5,12 +5,13 @@ import colors from '../styles/colors';
 import AuthRoutes from './tab.routes';
 
 import {
-  UserIdentification, 
-  Activity, 
-  Messaging, 
-  Grade, 
+  Grade,
+  Activity,
+  Messaging,
+  EditAccount,
   CreateAccount,
-  EditAccount
+  RecoverPassword,
+  UserIdentification,
 } from '../pages';
 
 const StackRoutes = createStackNavigator();
@@ -25,12 +26,15 @@ const AppRoutes = () => (
     }}
   >
     <StackRoutes.Screen name="UserIdentification" component={UserIdentification} />
-    <StackRoutes.Screen name="CreateAccount" component={CreateAccount} />
-    <StackRoutes.Screen name="EditAccount" component={EditAccount} />
+
+  
+    <StackRoutes.Screen name="Grade" component={Grade} />
     <StackRoutes.Screen name="Activity" component={Activity} />
     <StackRoutes.Screen name="Calendar" component={AuthRoutes} />
     <StackRoutes.Screen name="Messaging" component={Messaging} />
-    <StackRoutes.Screen name="Grade" component={Grade} />
+    <StackRoutes.Screen name="EditAccount" component={EditAccount} />
+    <StackRoutes.Screen name="CreateAccount" component={CreateAccount} />
+    <StackRoutes.Screen name="RecoverPassword" component={RecoverPassword} />
   </StackRoutes.Navigator>
 );
 
