@@ -13,17 +13,28 @@ export default StyleSheet.create({
         height: 104,
         paddingTop: getStatusBarHeight(),
         flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    title: {
+        fontFamily: fonts.complement,
+        alignSelf: 'center',
+        fontSize: 25,
+        color: colors.heading,
+    },
+    titleView: {
+        width: '100%',
+        textAlign: 'center',
+        alignItems: 'center',
+    },
+    icon: {
+        alignSelf: 'flex-start',
+    },
+    image: {
+        textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    title: {
-        flex: 1,
-        marginLeft: 20,
-        fontFamily: fonts.complement,
-        fontSize: 25,
-        color: colors.heading,
-      },
-    image: {
+    profilePic: {
         width: 150,
         height: 150,
         borderRadius: 75,

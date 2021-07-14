@@ -16,12 +16,13 @@ function ApiProvider({ children }) {
         const { data: lessonsReq } = await api.get('lessons');
         const { data: contentReq } = await api.get('content');
 
-        if (!useReq || !lessonsReq || !classesReq || !contentReq) return;
         const userObj = useReq[0];
-        setUser(userObj)
-        setClasses(classesReq)
-        setLessons(lessonsReq)
-        setContent(contentReq)
+        
+        setUser(userObj);
+        setClasses(classesReq);
+        setLessons(lessonsReq);
+        setContent(contentReq);
+        
         if (user && classes && lessons && content) return setLoading(false);
     }
 

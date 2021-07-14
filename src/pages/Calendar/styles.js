@@ -1,4 +1,5 @@
 import StyleSheet from 'react-native-extended-stylesheet';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
@@ -10,7 +11,7 @@ export default StyleSheet.create({
   header: {
     flexDirection: 'row',
     margin: '1rem',
-    marginTop: '1.5rem',
+    marginTop: getStatusBarHeight(),
 
     alignItems: 'center',
     textAlign: 'center',

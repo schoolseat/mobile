@@ -199,7 +199,7 @@ export default function Calendar() {
                   ? content.reverse()
                   : content
             }
-            keyExtractor={(item) => String(item._id)}
+            //keyExtractor={(item) => String(item._id)}
             ListEmptyComponent={(
               <View style={styles.noClass}>
                 <Text style={styles.noClassText}>

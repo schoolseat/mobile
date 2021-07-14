@@ -4,10 +4,10 @@ import {
   Text,
   View,
   ScrollView,
-  TouchableOpacity,
   StatusBar,
 } from 'react-native';
 
+import { BorderlessButton } from 'react-native-gesture-handler';
 import { useRoute, useNavigation } from '@react-navigation/core';
 import { AntDesign } from '@expo/vector-icons';
 import book from '../../assets/book.png';
@@ -28,12 +28,12 @@ export default function Activity() {
         backgroundColor="transparent"
         translucent
       />
-      <TouchableOpacity
+      <BorderlessButton
         style={styles.backButton}
         onPress={handleStart}
       >
         <AntDesign name="arrowleft" size={30} color="white" />
-      </TouchableOpacity>
+      </BorderlessButton>
 
       <Image style={styles.image} source={book} />
       <ScrollView>

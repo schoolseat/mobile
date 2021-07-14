@@ -54,19 +54,21 @@ export default function home() {
           <Text style={styles.title}>
             Classes
           </Text>
-          <FlatList
-            data={classes}
-            keyExtractor={(item) => String(item._id)}
-            numColumns="2"
-            renderItem={({ item }) => (
-              <ActivitiesCard
-                name={item.discipline}
-                icon={item.icon}
-                color={item.color}
-                onPress={() => handleClassSelect(item)}
-              />
-            )}
-          />
+          <View>
+            <FlatList
+              data={classes}
+              keyExtractor={(item) => String(item._id)}
+              numColumns="2"
+              renderItem={({ item }) => (
+                <ActivitiesCard
+                  name={item.discipline}
+                  icon={item.icon}
+                  color={item.color}
+                  onPress={() => handleClassSelect(item)}
+                />
+              )}
+            />
+          </View>
         </View>
       </ScrollView>
     </View>

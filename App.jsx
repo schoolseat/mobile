@@ -3,7 +3,6 @@ import React , { useEffect } from 'react';
 import AppLoading from 'expo-app-loading';
 
 import { ApiProvider } from './src/hooks/auth';
-import { LogBox } from 'react-native';
 
 import {
   useFonts,
@@ -26,9 +25,6 @@ export default function App() {
     Poppins_500Medium,
   });
   
-  useEffect(() => {
-      LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-  }, [])
   if (!fontsLoaded) return <AppLoading />;
   return (
     <ApiProvider>

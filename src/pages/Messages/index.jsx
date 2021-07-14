@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
-  ScrollView,
   FlatList,
+  SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
@@ -74,7 +74,7 @@ export default function Messages() {
           Alunos
         </Text>
       </View>
-      <ScrollView>
+      <SafeAreaView>
         <FlatList
           data={lastMessage}
           keyExtractor={(item) => String(item._id)}
@@ -88,7 +88,7 @@ export default function Messages() {
             />
           )}
         />
-      </ScrollView>
+      </SafeAreaView>
 
       <View style={Styles.button}>
         <TouchableOpacity>

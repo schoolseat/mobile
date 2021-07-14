@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
@@ -7,6 +8,7 @@ export default StyleSheet.create({
     flex: 1,
     textAlign: 'center',
     backgroundColor: colors.green,
+
   },
   image: {
     marginTop: 35,
@@ -50,7 +52,7 @@ export default StyleSheet.create({
     marginBottom: 30,
   },
   backButton: {
-    marginTop: 20,
+    marginTop: getStatusBarHeight(),
     margin: 10,
     width: 30,
   },
