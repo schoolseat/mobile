@@ -11,19 +11,19 @@ function ApiProvider({ children }) {
     const [content, setContent] = useState(false)
 
     async function getApiData() {
-        const { data: useReq } = await api.get('users?id=0');
+        const { data: userReq } = await api.get(`users`);
         const { data: classesReq } = await api.get('classes');
         const { data: lessonsReq } = await api.get('lessons');
         const { data: contentReq } = await api.get('content');
 
-        const userObj = useReq[0];
+        const userObj = userReq[0];
         
         setUser(userObj);
         setClasses(classesReq);
         setLessons(lessonsReq);
         setContent(contentReq);
         
-        if (user && classes && lessons && content) return setLoading(false);
+        setLoading(false);
     }
 
     return (
