@@ -4,7 +4,7 @@ export default {
   green_light: '#DAF2E4',
   border_color: '#dadce0',
   yellow: "#FEF51F",
-  heading: '#BCC1CD',
+  heading: '#7B859D',
   title: '#545871',
   body_dark: '#738078',
   body_light: '#AAB2AD',

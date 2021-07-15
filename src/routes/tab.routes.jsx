@@ -9,7 +9,7 @@ import {
   Calendar,
   Home,
   Profile,
-  Messages,
+  Notifications,
 } from '../pages';
 
 const AppTab = createBottomTabNavigator();
@@ -55,11 +55,11 @@ const AuthRoutes = () => (
     />
     <AppTab.Screen
       name="   "
-      component={Messages}
+      component={Notifications}
       options={{
         tabBarIcon: ({ size, color }) => (
-          <FontAwesome
-            name="comment-o"
+            <AntDesign
+            name="notification"
             size={size}
             color={color}
           />
