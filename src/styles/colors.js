@@ -18,4 +18,5 @@ export default {
   blue_light: '#EBF6FF',
   red: '#E83F5B',
   orange: '#FF7648',
+  overlay: 'rgba(0,0,0,0.7)'
 };

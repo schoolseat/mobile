@@ -11,25 +11,24 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-import { BorderlessButton } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/core';
 import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
-import { useApi } from '../../hooks/auth';
-
-import { Button, Loading } from '../../components';
 import colors from '../../styles/colors';
+import { useApi } from '../../hooks/auth';
+import { Button, Loading } from '../../components';
 
 export default function EditAccount() {
     const { user: data, loading } = useApi();
     const [user, setUser] = useState(false);
 
+    const navigation = useNavigation();
+
     async function fetchUser() {
         if (loading) return
         setUser(data)
     }
-
-    const navigation = useNavigation();
 
     function handleGoBack() {
         navigation.goBack();

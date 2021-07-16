@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,13 @@ import {
   ScrollView,
 } from 'react-native';
 
+import { Feather, FontAwesome } from '@expo/vector-icons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { useRoute, useNavigation } from '@react-navigation/core';
-import { Feather, FontAwesome } from '@expo/vector-icons';
 
-import { MessagesCard } from '../../components';
-import colors from '../../styles/colors';
 import styles from './styles';
+import colors from '../../styles/colors';
+import { MessagesCard } from '../../components';
 
 export default function Grade() {
   const [isMural, setIsMural] = useState(true);
@@ -43,10 +43,10 @@ export default function Grade() {
       </View>
       <View style={styles.teacherView}>
         {
-            grade.teacher.profilePic
-              ? <Image style={styles.teacherPfp} source={{ uri: grade.teacher.profilePic }} />
-              : <FontAwesome name="user-circle-o" size={24} color="black" style={styles.teacherPfp} />
-                }
+          grade.teacher.profilePic
+            ? <Image style={styles.teacherPfp} source={{ uri: grade.teacher.profilePic }} />
+            : <FontAwesome name="user-circle-o" size={24} color="black" style={styles.teacherPfp} />
+        }
         <Text style={styles.teacherName}>
           {grade.teacher}
         </Text>

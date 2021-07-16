@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import api from '../services/api';
 
 export const ApiContext = createContext({})
@@ -10,16 +12,6 @@ function ApiProvider({ children }) {
     const [classes, setClasses] = useState(false)
     const [lessons, setLessons] = useState(false)
     const [content, setContent] = useState(false)
-
-
-    const storeData = async (value) => {
-        try {
-         
-        } catch (e) {
-          throw new Error(E)
-        }
-      }
-
 
     async function getApiData() {
         const { data: userReq } = await api.get(`users`);

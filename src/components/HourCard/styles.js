@@ -19,6 +19,19 @@ export default StyleSheet.create({
       marginTop: '1rem',
       marginBottom: '-13rem',
     },
+    firstLine: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+    },
+    TouchableOpacity: {
+      height: '100%',
+      width: 20,
+    },
+    dots: {
+      color: colors.heading,
+      fontFamily: fonts.heading,
+      fontSize: 25,
+    },
     hours: {
       top: '20%',
       right: '20%',
@@ -34,48 +47,17 @@ export default StyleSheet.create({
       borderRadius: 20,
       width: '50%',
       height: '40%',
-    },
-    SelectedClasses: {
-      backgroundColor: colors.cards_selected_background,
-      borderRadius: 20,
-      width: '50%',
-      height: '40%',
-    },
-    SelectedHeading: {
-      color: colors.white,
-      fontFamily: fonts.heading,
-
-      marginLeft: '10%',
-      marginTop: '5%',
-    },
-    SelectedContent: {
-      color: colors.white,
-      fontSize: 12,
-      fontFamily: fonts.text,
-
-      marginLeft: '10%'
+      paddingHorizontal: 30,
     },
     classesName: {
-      marginLeft: '10%',
-      marginRight: '10%',
       marginTop: '5%',
       fontFamily: fonts.heading
     },
     classesContent: {
       fontSize: 12,
       fontFamily: fonts.text,
-      marginLeft: '10%'
-    },
-    SelectedData: {
-      marginTop: '5%',
-      marginLeft: '10%',
-
-      fontFamily: fonts.complement,
-      color: colors.white,
-      fontSize: 12,
     },
     classesNumber: {
-      marginLeft: '10%',
       fontFamily: fonts.complement,
       fontSize: 12,
     },
@@ -84,10 +66,7 @@ export default StyleSheet.create({
       marginLeft: '10%',
       fontFamily: fonts.complement,
       fontSize: 12,
-    },
-    icons: {
-      marginLeft: '5%',
-    },  
+    }, 
     data: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -110,13 +89,4 @@ export default StyleSheet.create({
       position: 'relative',
       right: 20,
   },
-  noActivity: {
-    color: colors.blue,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative',
-  },
-  noActivityText: {
-    fontSize: 999
-  }
 })

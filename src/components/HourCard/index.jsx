@@ -5,18 +5,19 @@ import {
   View,
   Text,
   Image,
-  Animated,
+  TouchableOpacity,
 } from 'react-native';
-import { Ionicons, FontAwesome } from '@expo/vector-icons';
 
 import Moment from 'moment';
 import PropTypes from 'prop-types';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
+import { RectButton } from 'react-native-gesture-handler';
 
-import { RectButton, Swipeable } from 'react-native-gesture-handler';
 import styles from './styles';
+import colors from '../../styles/colors';
 
 export default function HourCard({
-  lesons, classe, selected, isActivity, ...rest
+  lesons, classe, selected, isActivity, openModal, ...rest
 }) {
 
   const [isSelected, setSelected] = useState(false);
@@ -33,107 +34,138 @@ export default function HourCard({
     }
   }, []);
   return (
-    <Swipeable
-      overshootRight={false}
-      renderRightActions={() => (
-        <Animated.View>
-          <View>
-            <Text style={styles.options}>Olá internet</Text>
-          </View>
-        </Animated.View>
-      )}
-    >
-      <View style={isActivity ? styles.card : styles.longCard}>
-        {
+    <View style={isActivity ? styles.card : styles.longCard}>
+      {
+        isActivity
+        && <View style={styles.hours}>
+          <Text style={styles.startHour}>{Moment(new Date(lesons.timestamp).getTime()).format('HH:​mm')}</Text>
+          <Text style={styles.finishHour}>{Moment(new Date(lesons.deadline).getTime()).format('HH:​mm')}</Text>
+        </View>
+      }
+      <RectButton
+        style={
           isActivity
-          && <View style={styles.hours}>
-            <Text style={styles.startHour}>{Moment(new Date(lesons.timestamp).getTime()).format('HH:​mm')}</Text>
-            <Text style={styles.finishHour}>{Moment(new Date(lesons.deadline).getTime()).format('HH:​mm')}</Text>
-          </View>
+            ? (
+              isSelected
+                ? [styles.classes, {
+                  backgroundColor: colors.cards_selected_background
+                }]
+                : styles.classes
+            )
+            : [styles.classes, {
+              backgroundColor: colors.cards_selected_background
+            }]
         }
-        <RectButton
-          style={
-            isActivity
-              ? (
-                isSelected
-                  ? styles.SelectedClasses
-                  : styles.classes
-              )
-              : styles.SelectedClasses
-          }
-          {...rest}
-        >
+        {...rest}
+      >
+        <View style={styles.firstLine}>
+          <View>
+            <Text style={
+              isActivity
+                ? (
+                  isSelected
+                    ? [styles.classesName, {
+                      color: colors.white,
+                    }]
+                    : styles.classesName
+                )
+                : [styles.classesName, {
+                  color: colors.white,
+                }]
+            }
+            >
+              {lesons.title}
+            </Text>
+            <Text
+              style={
+                isActivity
+                  ? (
+                    isSelected
+                      ? [styles.classesContent, {
+                        color: colors.white,
+                      }]
+                      : styles.classesContent
+                  )
+                  : [styles.classesContent, {
+                    color: colors.white,
+                  }]
+              }
+            >
+              {lesons.content}
+            </Text>
+          </View>
+          <TouchableOpacity onPress={openModal} style={styles.TouchableOpacity}>
+          <Text  style={
+                isActivity
+                  ? (
+                    isSelected
+                      ? [styles.dots, {
+                        color: colors.white,
+                      }]
+                      : styles.dots
+                  )
+                  : [styles.dots, {
+                    color: colors.white,
+                  }]
+              }>
+            . .
+          </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.data}>
+          <Ionicons name="location-outline" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />
           <Text style={
             isActivity
               ? (
                 isSelected
-                  ? styles.SelectedHeading
-                  : styles.classesName
+                  ? [styles.classesNumber, {
+                    color: colors.white,
+                  }]
+                  : styles.classesNumber
               )
-              : styles.SelectedHeading
+              : [styles.classesNumber, {
+                color: colors.white,
+              }]
           }
           >
-            {lesons.title}
+            {classe.class}
           </Text>
-          <Text
-            style={
-              isActivity
-                ? (
-                  isSelected
-                    ? styles.SelectedContent
-                    : styles.classesContent
-                )
-                : styles.SelectedContent
-            }
+        </View>
+        <View style={styles.data}>
+          {
+            true
+              ? <FontAwesome
+                name="user-circle-o"
+                size={24}
+                color={emojiColor ? 'white' : 'black'}
+                style={styles.icons}
+              />
+              : <Image
+                source={{
+                  uri: classe.teacher.profilePic,
+                }}
+                style={styles.teacherPic}
+              />
+          }
+          <Text style={
+            isActivity
+              ? (
+                isSelected
+                  ? [styles.classesTName, {
+                    color: colors.white,
+                  }]
+                  : styles.classesTName
+              )
+              : [styles.classesTName, {
+                color: colors.white,
+              }]
+          }
           >
-            {lesons.content}
+            {/* {classe.teacher.name} */}
           </Text>
-          <View style={styles.data}>
-            <Ionicons name="location-outline" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />
-            <Text style={
-              isActivity
-                ? (
-                  isSelected
-                    ? styles.SelectedContent
-                    : styles.classesNumber
-                )
-                : styles.SelectedContent
-            }
-            >
-              {classe.class}
-            </Text>
-          </View>
-          <View style={styles.data}>
-            {
-              !classe.teacher.profilePic
-                ? <FontAwesome
-                  name="user-circle-o"
-                  size={24}
-                  color={emojiColor ? 'white' : 'black'}
-                  style={styles.icons}
-                />
-                : <Image
-                  source={{
-                    uri: classe.teacher.profilePic,
-                  }}
-                  style={styles.teacherPic}
-                />
-            }
-            <Text style={
-              isActivity
-                ? (
-                  isSelected
-                    ? styles.SelectedData
-                    : styles.classesTName
-                ) : styles.SelectedData
-            }
-            >
-              {classe.teacher.name}
-            </Text>
-          </View>
-        </RectButton>
-      </View>
-    </Swipeable>
+        </View>
+      </RectButton>
+    </View>
   );
 }
 HourCard.propTypes = {

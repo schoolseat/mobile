@@ -1,24 +1,26 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
-import Moment from 'moment';
-import { FontAwesome5 } from '@expo/vector-icons';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   View,
   Text,
+  FlatList,
   ScrollView,
   TouchableOpacity,
-  FlatList,
+
 } from 'react-native';
 
+import Moment from 'moment';
 import PropTypes from 'prop-types';
-
-import { useApi } from '../../hooks/auth';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
-import styles from './styles';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
-import { HourCard, Loading } from '../../components';
+import styles from './styles';
+import fonts from '../../styles/fonts';
+import colors from '../../styles/colors';
+import { useApi } from '../../hooks/auth';
+import { HourCard, ModalView, Loading } from '../../components';
 
 const today = new Date();
 const days = [
@@ -46,11 +48,6 @@ const months = [
 ];
 
 export default function Calendar() {
-  const {
-    lessons: lessonsReq,
-    content: contentReq,
-    loading
-  } = useApi();
   const [content, setContent] = useState(false);
   const [lessons, setLessons] = useState(false);
   const [parsedLessons, setParsedLessons] = useState(false);
@@ -58,6 +55,13 @@ export default function Calendar() {
   const [isActivity, setIsActivity] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
+  const [openModal, setOpenModal] = useState(false);
+
+  const {
+    lessons: lessonsReq,
+    content: contentReq,
+    loading
+  } = useApi();
 
   const navigation = useNavigation();
 
@@ -67,6 +71,13 @@ export default function Calendar() {
     setLessons(lessonsReq);
     setParsedLessons(lessonsReq);
     setContent(contentReq);
+  }
+
+  function handleOpenModal() {
+    setOpenModal(true);
+  }
+  function handleCloseModal() {
+    setOpenModal(false);
   }
 
   function handleReverse() {
@@ -161,7 +172,15 @@ export default function Calendar() {
           <Text
             onPress={() => setIsActivity(false)}
             style={
-              isActivity ? styles.ScrollViewText : styles.SelectedScrollViewText
+              !isActivity
+                ? [
+                  styles.ScrollViewText,
+                  {
+                    borderBottomWidth: 1,
+                    borderBottomColor: colors.heading
+                  }
+                ]
+                : styles.ScrollViewText
             }
           >
             Materia
@@ -171,7 +190,13 @@ export default function Calendar() {
               onPress={() => setIsActivity(true)}
               style={
                 isActivity
-                  ? styles.SelectedScrollViewText
+                  ? [
+                    styles.ScrollViewText,
+                    {
+                      borderBottomWidth: 1,
+                      borderBottomColor: colors.heading
+                    }
+                  ]
                   : styles.ScrollViewText
               }
             >
@@ -213,8 +238,9 @@ export default function Calendar() {
                 classe={item.classe}
                 selected={item.isActive}
                 isActivity={isActivity}
-                showsVericalScrollIndicator={false}
+                openModal={handleOpenModal}
                 onEndReachedThreshold={0.1}
+                showsVericalScrollIndicator={false}
                 onPress={() => handleActivitySelect(item)}
               />
             )}
@@ -222,6 +248,9 @@ export default function Calendar() {
           />
         </View>
       </ScrollView>
+      <ModalView visible={openModal} closeModal={handleCloseModal}>
+        <Text> Quem mora em tilambuco</Text>
+      </ModalView>
     </View>
   );
 }
@@ -230,20 +259,30 @@ export function DaysOfWeek({ day, dayInitial }) {
   return (
     <View style={
       today.getDay() === day
-        ? styles.SelectedDay
+        ? [styles.days, {
+          borderRadius: 8,
+          margin: 5,
+          padding: 10,
+          backgroundColor: colors.orange
+        }]
         : styles.days
     }
     >
       <Text style={
         today.getDay() === day
-          ? styles.SelectedDaysText
+          ? [styles.daysText, { color: colors.white }]
           : styles.daysText
       }
       >
         {dayInitial}
       </Text>
       <Text
-        style={today.getDay() === day ? styles.SelectedDaysDay : styles.daysDay}
+        style={today.getDay() === day
+          ? {
+            color: colors.white,
+            fontFamily: fonts.heading
+          }
+          : styles.daysDay}
       >
         {Moment().day(day).format('DD')}
       </Text>

@@ -7,12 +7,13 @@ import {
   StatusBar,
 } from 'react-native';
 
+import { AntDesign } from '@expo/vector-icons';
 import { BorderlessButton } from 'react-native-gesture-handler';
 import { useRoute, useNavigation } from '@react-navigation/core';
-import { AntDesign } from '@expo/vector-icons';
+
+import styles from './styles';
 import book from '../../assets/book.png';
 import { Button } from '../../components';
-import styles from './styles';
 
 export default function Activity() {
   const navigation = useNavigation();
@@ -44,10 +45,10 @@ export default function Activity() {
           </View>
           <View>
             <Text style={styles.text}>
-                    {activity.content}
+              {activity.content}
             </Text>
             {
-              activity.activityLink && 
+              activity.activityLink &&
               <Text>
                 {activity.activityLink}
               </Text>

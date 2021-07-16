@@ -5,11 +5,11 @@ import {
   View,
   Dimensions,
 } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
 
 import PropTypes from 'prop-types';
-
+import { FontAwesome } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
+
 import styles from './styles';
 import colors from '../../styles/colors';
 

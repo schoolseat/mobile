@@ -9,17 +9,15 @@ import {
     TouchableWithoutFeedback,
 } from 'react-native';
 
-
 import { useNavigation } from '@react-navigation/core';
 import { FontAwesome, Feather } from '@expo/vector-icons';
-
-import img from '../../assets/loginimg.png';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
 
 import styles from './styles'
 import colors from '../../styles/colors';
 import { Button } from '../../components';
+import img from '../../assets/loginimg.png';
 
 export default function RecoverPassword() {
     const [verified, setVerified] = useState(false);

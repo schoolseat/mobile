@@ -13,12 +13,13 @@ import { useNavigation } from '@react-navigation/core';
 import { useIsFocused } from '@react-navigation/native';
 
 import styles from './styles';
-import { ActivitiesCard, Loading } from '../../components';
 import book from '../../assets/book.png';
 import { useApi } from '../../hooks/auth';
+import { ActivitiesCard, Loading } from '../../components';
 
 export default function home() {
   const [classes, setClasses] = useState(false);
+  
   const {
     classes: classesReq,
     getApiData,
@@ -26,14 +27,17 @@ export default function home() {
   } = useApi();
 
   const navigation = useNavigation();
+
   async function fetchClasses() {
     await getApiData()
     if (loading) return;
     setClasses(classesReq);
   }
+
   function handleClassSelect(grade) {
     navigation.navigate('Grade', { grade });
   }
+
   useEffect(() => {
     fetchClasses();
   }, [classes, classesReq, loading]);

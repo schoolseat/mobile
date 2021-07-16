@@ -2,13 +2,10 @@
 /* eslint-disable no-control-regex */
 import React, { useState } from 'react';
 
-import { FontAwesome, Feather } from '@expo/vector-icons';
-
 import {
   Text,
   View,
   Image,
-  Linking,
   Keyboard,
   TextInput,
   SafeAreaView,
@@ -17,29 +14,29 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-
 import { useNavigation } from '@react-navigation/core';
+import { FontAwesome, Feather } from '@expo/vector-icons';
 
-import colors from '../../styles/colors';
 import styles from './styles';
+import colors from '../../styles/colors';
+import { useApi } from '../../hooks/auth';
 import { Button } from '../../components';
 import img from '../../assets/loginimg.png';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
 
-import { useApi } from '../../hooks/auth';
-
 export default function Welcome() {
-  const {
-    getApiData
-  } = useApi();
   const [hide, setHide] = useState(true);
   const [verified, setVerified] = useState(false);
+  
+  const { getApiData } = useApi();
 
   function handlePassword() {
     setHide(!hide);
   }
+
   const navigation = useNavigation();
+
   async function handleNavigate(place) {
     await getApiData();
     navigation.navigate(place);

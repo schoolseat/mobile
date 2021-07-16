@@ -57,31 +57,6 @@ export default StyleSheet.create({
     margin: '1rem',
     borderRadius:  '1rem',
   },
-  daysText: {
-    fontSize:  '.7rem',
-    color: colors.heading,
-    fontFamily: fonts.text,
-  },
-  daysDay: {
-    fontSize: '1rem',
-    fontFamily: fonts.heading,
-  },
-  SelectedDay: {
-    fontSize: '1rem',
-    borderRadius:  '.8rem',
-    margin: 5,
-    padding: 10,
-    backgroundColor: colors.orange,
-  },
-  SelectedDaysText: {
-    fontSize:  '.7rem',
-    color: colors.white,
-    fontFamily: fonts.text,
-  },
-  SelectedDaysDay: {
-    color: colors.white,
-    fontFamily: fonts.heading,
-  },
   Cards: {
     flexDirection: 'column',
     marginTop: '-2rem',
@@ -94,19 +69,20 @@ export default StyleSheet.create({
   ScrollViewTexts: {
     flexDirection: 'row',
   },
-  SelectedScrollViewText: {
-    marginLeft: '3rem',
-    marginBottom: '1rem',
-    fontFamily: fonts.complement,
-    color: colors.heading,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.heading
-  },
   ScrollViewText: {
     marginLeft: '3rem',
     marginBottom: '1rem',
     fontFamily: fonts.complement,
     color: colors.heading
+  },
+  daysText: {
+    fontSize:  '.7rem',
+    color: colors.heading,
+    fontFamily: fonts.text,
+  },
+  daysDay: {
+    fontSize: '1rem',
+    fontFamily: fonts.heading,
   },
   noClass: {
     alignContent: 'center',

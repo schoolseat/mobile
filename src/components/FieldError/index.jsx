@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import Balloon from "react-native-balloon";
+
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
