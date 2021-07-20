@@ -12,11 +12,12 @@ import { useNavigation } from '@react-navigation/core';
 import styles from './styles';
 import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
-import { Button, Loading } from '../../components';
+import { Button, Loading, EditAccount, ModalView } from '../../components';
 
 export default function profile() {
   const { user:data, loading } = useApi();
   const [user, setUser] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   async function fetchUser() {
         if(loading) return 
@@ -24,6 +25,9 @@ export default function profile() {
   }
   const navigation = useNavigation();
 
+  function handleModal() {
+    setOpenModal(!openModal);
+  }
   function handleNavigation(place) {
     navigation.navigate(place);
   }
@@ -62,7 +66,7 @@ export default function profile() {
               {stars(Number(user.stars))}
             </View>
           <View style={styles.editprofile}>
-            <Button name="Editar perfil" onPress={() => handleNavigation('EditAccount')} />
+            <Button name="Editar perfil" onPress={handleModal} />
           </View>
         </View>
       </View>
@@ -83,7 +87,11 @@ export default function profile() {
         <Text style={styles.remainXp}>100.000 xp</Text>
       </View>
       <Button name="Deslogar" onPress={() => handleNavigation('UserIdentification')} />
-
+      <View style={styles.modal}>
+        <ModalView visible={openModal} closeModal={handleModal}>
+          <EditAccount user={user} handleModal={handleModal} />
+        </ModalView>
+      </View>
     </View>
   );
 }

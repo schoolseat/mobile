@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import Moment from 'moment';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
@@ -38,8 +38,8 @@ export default function HourCard({
       {
         isActivity
         && <View style={styles.hours}>
-          <Text style={styles.startHour}>{Moment(new Date(lesons.timestamp).getTime()).format('HH:​mm')}</Text>
-          <Text style={styles.finishHour}>{Moment(new Date(lesons.deadline).getTime()).format('HH:​mm')}</Text>
+          <Text style={styles.startHour}>{dayjs(lesons.timestamp).format('HH:​mm')}</Text>
+          <Text style={styles.finishHour}>{dayjs(lesons.deadline).format('HH:​mm')}</Text>
         </View>
       }
       <RectButton
@@ -128,7 +128,7 @@ export default function HourCard({
               }]
           }
           >
-            {classe.class}
+            {/* {classe.class} */}
           </Text>
         </View>
         <View style={styles.data}>

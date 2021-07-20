@@ -1,0 +1,27 @@
+{
+    "pt-br": {
+        "days": [
+            "Domingo",
+            "Segunda",
+            "Terca",
+            "Quarta",
+            "Quinta",
+            "Sexta",
+            "Sabado"
+        ],
+        "months": [
+            "Janeiro",
+            "Fevereiro",
+            "Marco",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro"
+        ]
+    }
+}

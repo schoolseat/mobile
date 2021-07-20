@@ -14,7 +14,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import Moment from 'moment';
+import dayjs from 'dayjs';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/core';
 import { FontAwesome, Feather } from '@expo/vector-icons';
@@ -218,13 +218,13 @@ export default function Welcome() {
                 showPicker && (
                   <DateTimePicker
                     testID="dateTimePicker"
-                    value={new Date(Moment(today).format('YYYY-MM-DD'))}
+                    value={new Date(dayjs(today).format('YYYY-MM-DD'))}
                     mode="date"
                     is24Hour
                     display="default"
                     onChange={(event, data) => {
                       handleDatePicker();
-                      setSelectedDay(Moment(data).format('YYYY-MM-DD'));
+                      setSelectedDay(dayjs(data).format('YYYY-MM-DD'));
                     }}
                     maximumDate={today}
                     minimumDate={new Date(1950, 1, 1)}

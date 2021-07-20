@@ -10,42 +10,25 @@ import {
 
 } from 'react-native';
 
-import Moment from 'moment';
-import PropTypes from 'prop-types';
+import dayjs from 'dayjs';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/core';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import styles from './styles';
-import fonts from '../../styles/fonts';
 import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
-import { HourCard, ModalView, Loading } from '../../components';
+import dates from '../../locales/dates.json';
+
+import { 
+  HourCard, 
+  ModalView, 
+  Loading, 
+  DaysOfWeek
+} from '../../components';
 
 const today = new Date();
-const days = [
-  'Domingo',
-  'Segunda',
-  'Terca',
-  'Quarta',
-  'Quinta',
-  'Sexta',
-  'Sabado',
-];
-const months = [
-  'Janeiro',
-  'Fevereiro',
-  'Marco',
-  'Abril',
-  'Maio',
-  'Junho',
-  'Julho',
-  'Agosto',
-  'Setembro',
-  'Outubro',
-  'Novembro',
-  'Dezembro',
-];
+const { days, months } = dates['pt-br'];
 
 export default function Calendar() {
   const [content, setContent] = useState(false);
@@ -73,11 +56,8 @@ export default function Calendar() {
     setContent(contentReq);
   }
 
-  function handleOpenModal() {
-    setOpenModal(true);
-  }
-  function handleCloseModal() {
-    setOpenModal(false);
+  function handleModal() {
+    setOpenModal(!openModal);
   }
 
   function handleReverse() {
@@ -98,7 +78,7 @@ export default function Calendar() {
 
     const parsed = lessons.filter(
       (lesson) => {
-        Moment(lesson.deadline).format('YYYY-MM-DD') === Moment(selectedDay).format('YYYY-MM-DD')
+        dayjs(lesson.deadline).format('YYYY-MM-DD') === dayjs(selectedDay).format('YYYY-MM-DD')
       }
     );
 
@@ -131,8 +111,8 @@ export default function Calendar() {
         <View style={styles.text}>
           <Text onPress={() => handleDatePicker()} style={styles.text}>
             {
-              Moment(selectedDay).format('YYYY-MM-DD') !== Moment(today).format('YYYY-MM-DD')
-                ? Moment(selectedDay).format('ll')
+              dayjs(selectedDay).format('YYYY-MM-DD') !== dayjs(today).format('YYYY-MM-DD')
+                ? dayjs(selectedDay).format('ll')
                 : 'Hoje'
             }
           </Text>
@@ -208,7 +188,7 @@ export default function Calendar() {
               <FontAwesome5
                 name="sort-amount-down-alt"
                 size={24}
-                color="#BCC1CD"
+                color={colors.heading}
               />
             </TouchableOpacity>
           </View>
@@ -238,7 +218,7 @@ export default function Calendar() {
                 classe={item.classe}
                 selected={item.isActive}
                 isActivity={isActivity}
-                openModal={handleOpenModal}
+                openModal={handleModal}
                 onEndReachedThreshold={0.1}
                 showsVericalScrollIndicator={false}
                 onPress={() => handleActivitySelect(item)}
@@ -248,49 +228,9 @@ export default function Calendar() {
           />
         </View>
       </ScrollView>
-      <ModalView visible={openModal} closeModal={handleCloseModal}>
+      <ModalView visible={openModal} closeModal={handleModal}>
         <Text> Quem mora em tilambuco</Text>
       </ModalView>
     </View>
   );
 }
-
-export function DaysOfWeek({ day, dayInitial }) {
-  return (
-    <View style={
-      today.getDay() === day
-        ? [styles.days, {
-          borderRadius: 8,
-          margin: 5,
-          padding: 10,
-          backgroundColor: colors.orange
-        }]
-        : styles.days
-    }
-    >
-      <Text style={
-        today.getDay() === day
-          ? [styles.daysText, { color: colors.white }]
-          : styles.daysText
-      }
-      >
-        {dayInitial}
-      </Text>
-      <Text
-        style={today.getDay() === day
-          ? {
-            color: colors.white,
-            fontFamily: fonts.heading
-          }
-          : styles.daysDay}
-      >
-        {Moment().day(day).format('DD')}
-      </Text>
-    </View>
-  );
-}
-
-DaysOfWeek.propTypes = {
-  day: PropTypes.number.isRequired,
-  dayInitial: PropTypes.string.isRequired,
-};

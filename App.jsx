@@ -1,5 +1,4 @@
-/* eslint-disable camelcase */
-import React , { useEffect } from 'react';
+import React from 'react';
 import AppLoading from 'expo-app-loading';
 
 import { ApiProvider } from './src/hooks/auth';
@@ -11,12 +10,14 @@ import {
   Poppins_600SemiBold,
 } from '@expo-google-fonts/poppins';
 
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
 import EStyleSheet from 'react-native-extended-stylesheet';
+
 import Routes from './src/routes';
 
-EStyleSheet.build({ // always call EStyleSheet.build() even if you don't use global variables!
-$textColor: '#0275d8',
-});
+dayjs.locale('pt-br');
+EStyleSheet.build();
 
 export default function App() {
   const [fontsLoaded] = useFonts({

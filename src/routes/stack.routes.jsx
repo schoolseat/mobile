@@ -7,7 +7,6 @@ import AuthRoutes from './tab.routes';
 import {
   Grade,
   Activity,
-  EditAccount,
   CreateAccount,
   Notifications,
   RecoverPassword,
@@ -31,7 +30,6 @@ const AppRoutes = () => (
     <StackRoutes.Screen name="Grade" component={Grade} />
     <StackRoutes.Screen name="Activity" component={Activity} />
     <StackRoutes.Screen name="Calendar" component={AuthRoutes} />
-    <StackRoutes.Screen name="EditAccount" component={EditAccount} />
     <StackRoutes.Screen name="Notifications" component={Notifications} />
     <StackRoutes.Screen name="CreateAccount" component={CreateAccount} />
     <StackRoutes.Screen name="RecoverPassword" component={RecoverPassword} />

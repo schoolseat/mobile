@@ -53,10 +53,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     marginTop:  '-1rem',
   },
-  days: {
-    margin: '1rem',
-    borderRadius:  '1rem',
-  },
   Cards: {
     flexDirection: 'column',
     marginTop: '-2rem',
@@ -74,15 +70,6 @@ export default StyleSheet.create({
     marginBottom: '1rem',
     fontFamily: fonts.complement,
     color: colors.heading
-  },
-  daysText: {
-    fontSize:  '.7rem',
-    color: colors.heading,
-    fontFamily: fonts.text,
-  },
-  daysDay: {
-    fontSize: '1rem',
-    fontFamily: fonts.heading,
   },
   noClass: {
     alignContent: 'center',

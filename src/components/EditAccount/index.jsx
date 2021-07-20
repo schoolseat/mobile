@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     View,
     Text,
@@ -9,51 +9,19 @@ import {
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
 } from 'react-native';
+
 import styles from './styles';
 
-import { Feather } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/core';
-import { BorderlessButton } from 'react-native-gesture-handler';
-
+import Button from '../button';
 import colors from '../../styles/colors';
-import { useApi } from '../../hooks/auth';
-import { Button, Loading } from '../../components';
 
-export default function EditAccount() {
-    const { user: data, loading } = useApi();
-    const [user, setUser] = useState(false);
-
-    const navigation = useNavigation();
-
-    async function fetchUser() {
-        if (loading) return
-        setUser(data)
-    }
-
-    function handleGoBack() {
-        navigation.goBack();
-    }
-    useState(() => {
-        fetchUser();
-    })
-
-    if (loading || !user) {
-        return <Loading />
-    }
+export default function EditAccount({ user, handleModal }) {
     return (
         <ScrollView>
             <KeyboardAvoidingView>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.container}>
                         <View style={styles.headerContent}>
-                            <BorderlessButton style={styles.icon} onPress={handleGoBack}>
-                                <Feather
-                                    name="arrow-left"
-                                    size={24}
-                                    color={colors.heading}
-                                    
-                                />
-                            </BorderlessButton>
                             <View style={styles.titleView}>
                                 <Text style={styles.title}>Editar Perfil</Text>
                             </View>
@@ -98,7 +66,10 @@ export default function EditAccount() {
                             </View>
                         </View>
                         <View style={styles.button}>
-                            <Button name="Pronto" onPress={handleGoBack} />
+                            <Button name="Pronto" onPress={handleModal} />
+                            <Button name="Cancelar" color={colors.white} textColor={colors.title} onPress={handleModal} />
+                            <Button name="Sair" color={colors.red} onPress={handleModal} />
+                            <Button name="Deletar conta" color={colors.red} onPress={handleModal} />
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

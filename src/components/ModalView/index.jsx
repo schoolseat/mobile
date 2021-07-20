@@ -7,7 +7,6 @@ export default function ModalView({children,closeModal, ...rest}) {
 return (
     <Modal
     transparent
-    statusBarTranslucent
     animationType="slide"
     onSwipe={closeModal}
     onSwipeThreshold={20}

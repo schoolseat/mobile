@@ -72,4 +72,7 @@ export default StyleSheet.create({
     fontFamily: fonts.text,
     color: colors.title,
   },
+  modal: {
+    marginTop: 40,
+  }
 });

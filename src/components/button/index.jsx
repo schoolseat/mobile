@@ -4,14 +4,29 @@ import { TouchableOpacity, Text } from 'react-native';
 
 import styles from './styles';
 
-export default function button({ name, ...rest }) {
+export default function button({ name, color, textColor, ...rest }) {
   return (
     <TouchableOpacity
-      style={styles.container}
+      style={
+        color
+          ? [
+            styles.container, {
+              backgroundColor: color
+            }]
+          : styles.container
+      }
       activeOpacity={0.7}
       {...rest}
     >
-      <Text style={styles.text}>
+      <Text style={
+        textColor
+          ? [
+            styles.text, {
+              color: textColor
+            }]
+          : styles.text
+
+      }>
         {name}
       </Text>
     </TouchableOpacity>

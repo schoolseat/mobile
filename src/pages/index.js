@@ -3,7 +3,6 @@ import Grade from './Grade';
 import Profile from './Profile';
 import Activity from './Activity';
 import Calendar from './Calendar';
-import EditAccount from './EditAccount';
 import CreateAccount from './CreateAccount';
 import Notifications from './Notifications';
 import RecoverPassword from './RecoverPassword';
@@ -15,7 +14,6 @@ export {
   Profile,
   Calendar,
   Activity,
-  EditAccount,
   CreateAccount,
   Notifications,
   RecoverPassword,

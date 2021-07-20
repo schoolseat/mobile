@@ -1,17 +1,16 @@
 import { StyleSheet } from 'react-native';
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
 export default StyleSheet.create({
     container: {
+        marginTop: 20,
         marginHorizontal: 20,
         textAlign: 'center',
     },
     headerContent: {
         width: '100%',
         height: 104,
-        paddingTop: getStatusBarHeight(),
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
@@ -19,17 +18,15 @@ export default StyleSheet.create({
         fontFamily: fonts.complement,
         alignSelf: 'center',
         fontSize: 25,
-        color: colors.heading,
+        color: colors.white,
     },
     titleView: {
         width: '100%',
         textAlign: 'center',
         alignItems: 'center',
     },
-    icon: {
-        alignSelf: 'flex-start',
-    },
     image: {
+        marginTop: -30,
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
@@ -47,12 +44,13 @@ export default StyleSheet.create({
         width: '100%',
     },
     texts: {
-        color: colors.heading,
+        color: colors.white,
         fontFamily: fonts.complement
     },
     textsinput: {
         fontFamily: fonts.text,
-        borderBottomColor: colors.heading,
+        color: colors.white,
+        borderBottomColor: colors.white,
         borderBottomWidth: 1,
     },
     button: {
