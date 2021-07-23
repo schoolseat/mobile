@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Image,
+  Platform,
   Keyboard,
   TextInput,
   SafeAreaView,
@@ -28,7 +29,9 @@ const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
 export default function Welcome() {
   const [hide, setHide] = useState(true);
   const [verified, setVerified] = useState(false);
-  
+  const [email, setEmail] = useState(false);
+  const [password, setPassword] = useState(false);
+
   const { getApiData } = useApi();
 
   function handlePassword() {
@@ -38,14 +41,15 @@ export default function Welcome() {
   const navigation = useNavigation();
 
   async function handleNavigate(place) {
-    await getApiData();
-    navigation.navigate(place);
+
+    const login = { email, password };
+
+     await getApiData({login});
+     navigation.navigate(place);
   }
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={styles.container}
-      >
+      <KeyboardAvoidingView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.wrapper}>
             <Text style={styles.title}>Faça Login</Text>
@@ -59,7 +63,10 @@ export default function Welcome() {
                 type="email"
                 onChangeText={
                   (text) => (expression.test(String(text).toLowerCase())
-                    ? setVerified(true)
+                    ? (
+                      setVerified(true),
+                      setEmail(text)
+                      )
                     : setVerified(false)
                   )
                 }
@@ -86,7 +93,12 @@ export default function Welcome() {
             </View>
             <View style={styles.views}>
               <Feather name="lock" size={24} color={colors.blue} style={styles.icons} />
-              <TextInput style={styles.inputs} secureTextEntry={hide} placeholder="insira a sua senha" />
+              <TextInput 
+              style={styles.inputs} 
+              secureTextEntry={hide} 
+              placeholder="insira a sua senha"
+              onChangeText={ (text) => setPassword(text) }
+              />
 
               <TouchableOpacity onPress={() => handlePassword()}>
                 {

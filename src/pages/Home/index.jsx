@@ -3,10 +3,9 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  FlatList,
   Image,
-  ScrollView,
   StatusBar,
+  ScrollView,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
@@ -19,7 +18,7 @@ import { ActivitiesCard, Loading } from '../../components';
 
 export default function home() {
   const [classes, setClasses] = useState(false);
-  
+
   const {
     classes: classesReq,
     getApiData,
@@ -29,7 +28,6 @@ export default function home() {
   const navigation = useNavigation();
 
   async function fetchClasses() {
-    await getApiData()
     if (loading) return;
     setClasses(classesReq);
   }
@@ -60,20 +58,18 @@ export default function home() {
           <Text style={styles.title}>
             Classes
           </Text>
-          <View>
-            <FlatList
-              data={classes}
-              keyExtractor={(item) => String(item._id)}
-              numColumns="2"
-              renderItem={({ item }) => (
-                <ActivitiesCard
+          <View style={styles.classesCards}>
+            {
+              Object.values(classes).map((item) => {
+               return <ActivitiesCard
+                  key={item._id}
                   name={item.discipline}
                   icon={item.icon}
                   color={item.color}
                   onPress={() => handleClassSelect(item)}
                 />
-              )}
-            />
+              })
+            }
           </View>
         </View>
       </ScrollView>

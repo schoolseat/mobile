@@ -12,15 +12,26 @@ function ApiProvider({ children }) {
     const [content, setContent] = useState(false)
 
     //{userId, classeId, lessonId, contentId}
-    async function getApiData() {
-        const { data: userReq } = await api.get(`users`);
-        const { data: classesReq } = await api.get('classes');
-        const { data: lessonsReq } = await api.get('lessons');
-        const { data: contentReq } = await api.get('content');
+    async function getApiData({login}) {
+        const { data: userReq } = await api.post(`auth`, login);
+        
+        const { data: classesReq } = await api.get('classes', {
+            headers: {
+                'x-access-token': userReq.token
+            }
+        });
+        const { data: lessonsReq } = await api.get('lessons', {
+            headers: {
+                'x-access-token': userReq.token
+            }
+        });
+        const { data: contentReq } = await api.get('content', {
+            headers: {
+                'x-access-token': userReq.token
+            }
+        });
 
-        const userObj = userReq[0];
-
-        setUser(userObj);
+        setUser(userReq);
         setClasses(classesReq);
         setLessons(lessonsReq);
         setContent(contentReq);

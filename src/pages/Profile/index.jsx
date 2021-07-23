@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -15,14 +15,9 @@ import { useApi } from '../../hooks/auth';
 import { Button, Loading, EditAccount, ModalView } from '../../components';
 
 export default function profile() {
-  const { user:data, loading } = useApi();
-  const [user, setUser] = useState(false);
+  const { user, loading } = useApi();
   const [openModal, setOpenModal] = useState(false);
 
-  async function fetchUser() {
-        if(loading) return 
-        setUser(data)
-  }
   const navigation = useNavigation();
 
   function handleModal() {
@@ -42,10 +37,6 @@ export default function profile() {
         </View>
       );
   }
-
-  useEffect(() => {
-    fetchUser();
-  }, [user]);
 
   if (loading || !user) {
     return <Loading />;
@@ -83,7 +74,7 @@ export default function profile() {
             XP
           </Text>
         </View>
-        <ProgressBar style={styles.progressbar} progress={0.3} color="#6DA7F6" />
+        <ProgressBar style={styles.progressbar} progress={user.xp / 1000} color="#6DA7F6" />
         <Text style={styles.remainXp}>100.000 xp</Text>
       </View>
       <Button name="Deslogar" onPress={() => handleNavigation('UserIdentification')} />

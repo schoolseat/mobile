@@ -27,4 +27,8 @@ export default StyleSheet.create({
     marginTop: 20,
     marginLeft: 10,
   },
+  classesCards: {
+    flexDirection: 'row',
+    maxWidth: Dimensions.get('window').width * 0.8,
+  }
 });
