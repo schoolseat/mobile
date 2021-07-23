@@ -26,6 +26,7 @@ import img from '../../assets/loginimg.png';
 import { Button, FieldError } from '../../components';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
+const passwordVerifyer = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
 const today = new Date();
 
@@ -33,6 +34,7 @@ export default function Welcome() {
   const [hide, setHide] = useState(true);
   const [image, setImage] = useState(null);
   const [verified, setVerified] = useState(false);
+  const [password, setPassword] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [dateVerified, setDateVerified] = useState(false);
   const [nameVerified, setNameVerified] = useState(false);
@@ -161,7 +163,11 @@ export default function Welcome() {
               }
             <View style={styles.views}>
               <Feather name="lock" size={24} color={colors.blue} style={styles.icons} />
-              <TextInput style={styles.inputs} secureTextEntry={hide} placeholder="insira a sua senha" />
+              <TextInput 
+              style={styles.inputs} 
+              secureTextEntry={hide} 
+              placeholder="insira uma senha com pelo menos 6 caracteres um numero e uma letra maiuscula"  
+              onChangeText={(text) => passwordVerifyer.test(text) ? setPassword(text) : setPassword(false)}/>
 
               <TouchableOpacity onPress={() => handlePassword()}>
                 {
@@ -185,11 +191,13 @@ export default function Welcome() {
                 }
               </TouchableOpacity>
             </View>
-                {
-                sendLoginChecker 
-                && !nameVerified 
-                && <FieldError error='você precisa inserir uma senha'/>
-              }
+            {
+              sendLoginChecker
+              && !password
+              && <View style={styles.FieldError}>
+                <FieldError error='Você precisa inserir uma senha com pelo menos 6 caracteres um numero e uma letra maiuscula' />
+              </View>
+            }
             <View style={styles.views}>
               <Feather name="calendar" size={24} color={colors.blue} style={styles.icons} />
               <TouchableOpacity onPress={() => setShowPicker(true)}>

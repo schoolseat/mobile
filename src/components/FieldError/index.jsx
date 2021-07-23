@@ -15,7 +15,7 @@ export default function FieldError({error}) {
     triangleDirection='top'
     >
         <Text style={{
-          color: colors.heading,
+          color: colors.white,
           fontFamily: fonts.text,
           textAlign: 'center'
         }}>

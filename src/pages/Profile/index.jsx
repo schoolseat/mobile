@@ -15,8 +15,8 @@ import { useApi } from '../../hooks/auth';
 import { Button, Loading, EditAccount, ModalView } from '../../components';
 
 export default function profile() {
-  const { user, loading } = useApi();
   const [openModal, setOpenModal] = useState(false);
+  const { user, loading } = useApi();
 
   const navigation = useNavigation();
 

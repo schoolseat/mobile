@@ -21,7 +21,6 @@ export default function home() {
 
   const {
     classes: classesReq,
-    getApiData,
     loading
   } = useApi();
 

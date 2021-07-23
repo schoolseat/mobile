@@ -6,7 +6,6 @@ import {
   Text,
   View,
   Image,
-  Platform,
   Keyboard,
   TextInput,
   SafeAreaView,
@@ -21,18 +20,20 @@ import { FontAwesome, Feather } from '@expo/vector-icons';
 import styles from './styles';
 import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
-import { Button } from '../../components';
 import img from '../../assets/loginimg.png';
+import { Button, FieldError } from '../../components';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
+const passwordVerifyer = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})");
 
 export default function Welcome() {
   const [hide, setHide] = useState(true);
-  const [verified, setVerified] = useState(false);
   const [email, setEmail] = useState(false);
+  const [verified, setVerified] = useState(false);
   const [password, setPassword] = useState(false);
+  const [sendLoginChecker, setSendLoginChecker] = useState(false);
 
-  const { getApiData } = useApi();
+  const { getApiData, userReq } = useApi();
 
   function handlePassword() {
     setHide(!hide);
@@ -41,11 +42,13 @@ export default function Welcome() {
   const navigation = useNavigation();
 
   async function handleNavigate(place) {
-
+    if(!email || !password) return setSendLoginChecker(true);
+  
     const login = { email, password };
 
-     await getApiData({login});
-     navigation.navigate(place);
+    await getApiData({ login });
+
+    navigation.navigate(place);
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -66,7 +69,7 @@ export default function Welcome() {
                     ? (
                       setVerified(true),
                       setEmail(text)
-                      )
+                    )
                     : setVerified(false)
                   )
                 }
@@ -91,38 +94,51 @@ export default function Welcome() {
                   )
               }
             </View>
+            {
+              sendLoginChecker
+              && !verified
+              && <View style={styles.FieldError}>
+                <FieldError error='Você precisa inserir um e-mail valido !' />
+              </View>
+            }
             <View style={styles.views}>
               <Feather name="lock" size={24} color={colors.blue} style={styles.icons} />
-              <TextInput 
-              style={styles.inputs} 
-              secureTextEntry={hide} 
-              placeholder="insira a sua senha"
-              onChangeText={ (text) => setPassword(text) }
+              <TextInput
+                style={styles.inputs}
+                secureTextEntry={hide}
+                placeholder="insira a sua senha"
+                onChangeText={(text) => passwordVerifyer.test(text) ? setPassword(text) : setPassword(false)}
               />
-
               <TouchableOpacity onPress={() => handlePassword()}>
                 {
-                hide
-                  ? (
-                    <Feather
-                      name="eye"
-                      size={24}
-                      color="#A2A2A2"
-                      style={styles.lefticons}
-                    />
-                  )
-                  : (
-                    <Feather
-                      name="eye-off"
-                      size={24}
-                      color="#A2A2A2"
-                      style={styles.lefticons}
-                    />
-                  )
+                  hide
+                    ? (
+                      <Feather
+                        name="eye"
+                        size={24}
+                        color="#A2A2A2"
+                        style={styles.lefticons}
+                      />
+                    )
+                    : (
+                      <Feather
+                        name="eye-off"
+                        size={24}
+                        color="#A2A2A2"
+                        style={styles.lefticons}
+                      />
+                    )
                 }
               </TouchableOpacity>
             </View>
 
+            {
+              sendLoginChecker
+              && !password
+              && <View style={styles.FieldError}>
+                <FieldError error='Você precisa inserir uma senha com pelo menos 6 caracteres, uma letra maiuscula e um numero!' />
+              </View>
+            }
             <Text
               style={styles.forgotPass}
               onPress={() => handleNavigate('RecoverPassword')}
@@ -133,8 +149,8 @@ export default function Welcome() {
               style={styles.forgotPass}
               onPress={() => handleNavigate('CreateAccount')}
             >
-               Não é cadastrado ? {`\n`}
-               Cadastre-se agora.
+              Não é cadastrado ? {`\n`}
+              Cadastre-se agora.
             </Text>
             <View style={styles.button}>
               <Button name="Logar" onPress={() => handleNavigate('Calendar')} />

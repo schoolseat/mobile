@@ -50,4 +50,7 @@ export default StyleSheet.create({
   button: {
     marginTop: '2.5rem',
   },
+  FieldError: {
+    marginTop: '2rem',
+  }
 });
