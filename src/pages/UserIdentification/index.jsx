@@ -33,7 +33,7 @@ export default function Welcome() {
   const [password, setPassword] = useState(false);
   const [sendLoginChecker, setSendLoginChecker] = useState(false);
 
-  const { getApiData, userReq } = useApi();
+  const { getApiData } = useApi();
 
   function handlePassword() {
     setHide(!hide);
@@ -41,13 +41,16 @@ export default function Welcome() {
 
   const navigation = useNavigation();
 
-  async function handleNavigate(place) {
-    if(!email || !password) return setSendLoginChecker(true);
-  
+  async function handleLogin() {
+    if (!email || !password) return setSendLoginChecker(true);
+
     const login = { email, password };
 
-    await getApiData({ login });
+    await getApiData({ login })
 
+    navigation.navigate('Calendar');
+  }
+  function handleNavigate(place) {
     navigation.navigate(place);
   }
   return (
@@ -153,7 +156,7 @@ export default function Welcome() {
               Cadastre-se agora.
             </Text>
             <View style={styles.button}>
-              <Button name="Logar" onPress={() => handleNavigate('Calendar')} />
+              <Button name="Logar" onPress={() => handleLogin()} />
             </View>
           </View>
         </TouchableWithoutFeedback>

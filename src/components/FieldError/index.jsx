@@ -11,7 +11,7 @@ export default function FieldError({error}) {
     backgroundColor={colors.red}
     borderRadius={20}
     triangleSize={15}
-    triangleOffset={50}
+    triangleOffset="12%"
     triangleDirection='top'
     >
         <Text style={{

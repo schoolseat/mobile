@@ -28,7 +28,9 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   classesCards: {
+    flex: 1,
     flexDirection: 'row',
-    maxWidth: Dimensions.get('window').width * 0.8,
+    flexWrap: 'wrap',
+    alignItems: 'flex-start' 
   }
 });
