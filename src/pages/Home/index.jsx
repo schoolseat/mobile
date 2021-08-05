@@ -21,12 +21,13 @@ export default function home() {
 
   const {
     classes: classesReq,
+    getApiData,
     loading
   } = useApi();
-
   const navigation = useNavigation();
 
   async function fetchClasses() {
+    getApiData();
     if (loading) return;
     setClasses(classesReq);
   }

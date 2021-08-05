@@ -215,7 +215,6 @@ export default function Calendar() {
             renderItem={({ item }) => (
               <HourCard
                 lesons={item}
-                classe={item.classe}
                 selected={item.isActive}
                 isActivity={isActivity}
                 openModal={handleModal}

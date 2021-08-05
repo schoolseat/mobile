@@ -17,9 +17,8 @@ import styles from './styles';
 import colors from '../../styles/colors';
 
 export default function HourCard({
-  lesons, classe, selected, isActivity, openModal, ...rest
+  lesons, selected, isActivity, openModal, ...rest
 }) {
-
   const [isSelected, setSelected] = useState(false);
   const [emojiColor, setEmojiColor] = useState(false);
 
@@ -128,7 +127,7 @@ export default function HourCard({
               }]
           }
           >
-            {/* {classe.class} */}
+            {lesons.classe}
           </Text>
         </View>
         <View style={styles.data}>

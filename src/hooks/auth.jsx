@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Alert, Platform, ToastAndroid } from 'react-native'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import api from '../services/api';
 
 export const ApiContext = createContext({})
@@ -15,41 +18,57 @@ function alert(data) {
 }
 function ApiProvider({ children }) {
     const [user, setUser] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [classes, setClasses] = useState(false);
     const [lessons, setLessons] = useState(false);
     const [content, setContent] = useState(false);
 
-    //{userId, classeId, lessonId, contentId}
-    async function getApiData({ login }) {
-        const {data: userReq} = await api.post(`auth`, login).catch((e) => {
-            alert(["Ops", 'Seu e-mail ou senha parecem estar errados!'])
-            }
-        )
+    function getStorageData() {
+        AsyncStorage.getItem('@school_seat/user')
+            .then((userr) => userr != null ? setUser(JSON.parse(userr)) : false)
+        AsyncStorage.getItem('@school_seat/classes')
+            .then((classess) => classess != null ? setClasses(JSON.parse(classess)) : false)
+        AsyncStorage.getItem('@school_seat/lessons')
+            .then((lessonss) => lessonss != null ? setLessons(JSON.parse(lessonss)) : false)
+        AsyncStorage.getItem('@school_seat/content')
+            .then((contentt) => contentt != null ? setContent(JSON.parse(contentt)) : false)
+    }
+    async function getApiData({ login = {} }) {
+        getStorageData();
+        if (!user) {
+            const { data: userReq } = await api.post(`auth`, login).catch((e) => {
+                alert(["Ops", 'Seu e-mail ou senha parecem estar errados!'])
+            })
+            setUser(userReq);
+        }
         const { data: classesReq } = await api.get('classes', {
             headers: {
-                'x-access-token': userReq.token
+                'x-access-token': user.token
             }
         });
+        setClasses(classesReq);
+
         const { data: lessonsReq } = await api.get('lessons', {
             headers: {
-                'x-access-token': userReq.token
+                'x-access-token': user.token
             }
         });
+        setLessons(lessonsReq);
+
         const { data: contentReq } = await api.get('content', {
             headers: {
-                'x-access-token': userReq.token
+                'x-access-token': user.token
             }
         });
-
-        setUser(userReq);
-        setClasses(classesReq);
-        setLessons(lessonsReq);
         setContent(contentReq);
 
         setLoading(false);
-    }
 
+        await AsyncStorage.setItem('@school_seat/user', JSON.stringify(userReq))
+        await AsyncStorage.setItem('@school_seat/classes', JSON.stringify(classesReq))
+        await AsyncStorage.setItem('@school_seat/lessons', JSON.stringify(lessonsReq))
+        await AsyncStorage.setItem('@school_seat/content', JSON.stringify(contentReq))
+    }
 
     return (
         <ApiContext.Provider value={{ user, classes, lessons, content, getApiData, loading }}>
