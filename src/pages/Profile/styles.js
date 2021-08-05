@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import StyleSheet from 'react-native-extended-stylesheet';
+import {Dimensions} from 'react-native'
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
@@ -8,29 +9,24 @@ export default StyleSheet.create({
   },
   header: {
     flexDirection: 'row',
-    marginTop: '10%',
+    marginTop: '2rem',
     alignItems: 'center',
   },
   headerTexts: {
     flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   image: {
-    width: 80,
-    height: 80,
-    borderRadius: 100,
-    margin: 10,
-    bottom: 20
-  },
-  imagePicker: {
-    marginLeft: 70,
-    bottom: 70,
-    zIndex: 1,
-    position: 'absolute'
+    width: '5rem',
+    height: '5rem',
+    borderRadius: '2.5rem',
+    margin: '1rem',
+    bottom: '1rem'
   },
   title: {
     fontFamily: fonts.text,
     color: colors.title,
-    fontSize: 20,
+    fontSize: '1.5rem',
   },
   data: {
     flexDirection: 'row',
@@ -38,14 +34,21 @@ export default StyleSheet.create({
   stars: {
     flexDirection: 'row',
     left: '100%',
+    top: '1rem',
     position: 'absolute'
   },
   editprofile: {
-    left: '90%',
-    bottom: 50
+    left: Dimensions.get('window').width* 0.6,
+    bottom: '4rem'
+  },
+  dots: {
+    fontFamily: fonts.heading,
+    color: colors.heading,
+    fontSize: '2rem',
   },
   level: {
-    margin: 10,
+    margin: '1rem',
+    marginTop: '2rem',
     bottom: 50,
   },
   levelTexts: {
@@ -73,6 +76,10 @@ export default StyleSheet.create({
     color: colors.title,
   },
   modal: {
-    marginTop: 40,
+    
+  },
+  modalButtons: {
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });

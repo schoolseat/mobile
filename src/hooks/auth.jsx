@@ -40,6 +40,7 @@ function ApiProvider({ children }) {
                 alert(["Ops", 'Seu e-mail ou senha parecem estar errados!'])
             })
             setUser(userReq);
+            await AsyncStorage.setItem('@school_seat/user', JSON.stringify(userReq))
         }
         const { data: classesReq } = await api.get('classes', {
             headers: {
@@ -64,7 +65,6 @@ function ApiProvider({ children }) {
 
         setLoading(false);
 
-        await AsyncStorage.setItem('@school_seat/user', JSON.stringify(userReq))
         await AsyncStorage.setItem('@school_seat/classes', JSON.stringify(classesReq))
         await AsyncStorage.setItem('@school_seat/lessons', JSON.stringify(lessonsReq))
         await AsyncStorage.setItem('@school_seat/content', JSON.stringify(contentReq))

@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
@@ -16,7 +17,10 @@ import { Button, Loading, EditAccount, ModalView } from '../../components';
 
 export default function profile() {
   const [openModal, setOpenModal] = useState(false);
-  const { user, loading } = useApi();
+  const [openEditAccount, setOpenEditAccount] = useState(false);
+  const [halfModal, setHalfModal] = useState(false);
+  const { user: Data, loading } = useApi();
+  const user = Data.user;
 
   const navigation = useNavigation();
 
@@ -27,15 +31,15 @@ export default function profile() {
     navigation.navigate(place);
   }
   function stars(total) {
-      return (
-        <View style={styles.stars}>
-          <AntDesign name={total >= 1 ? "star" : "staro"} size={24} color={total >= 1 ? colors.yellow : colors.heading} />
-          <AntDesign name={total >= 2 ? "star" : "staro"} size={24} color={total >= 2 ? colors.yellow : colors.heading} />
-          <AntDesign name={total >= 3 ? "star" : "staro"} size={24} color={total >= 3 ? colors.yellow : colors.heading} />
-          <AntDesign name={total >= 4 ? "star" : "staro"} size={24} color={total >= 4 ? colors.yellow : colors.heading} />
-          <AntDesign name={total >= 5 ? "star" : "staro"} size={24} color={total == 5 ? colors.yellow : colors.heading} />
-        </View>
-      );
+    return (
+      <View style={styles.stars}>
+        <AntDesign name={total >= 1 ? "star" : "staro"} size={24} color={total >= 1 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 2 ? "star" : "staro"} size={24} color={total >= 2 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 3 ? "star" : "staro"} size={24} color={total >= 3 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 4 ? "star" : "staro"} size={24} color={total >= 4 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 5 ? "star" : "staro"} size={24} color={total == 5 ? colors.yellow : colors.heading} />
+      </View>
+    );
   }
 
   if (loading || !user) {
@@ -51,13 +55,17 @@ export default function profile() {
           }}
         />
         <View style={styles.headerTexts}>
+          <View>
             <Text style={styles.title}>{user.name}</Text>
             <View style={styles.data}>
               <Text style={styles.text}>{user.bio}</Text>
               {stars(Number(user.stars))}
             </View>
+          </View>
           <View style={styles.editprofile}>
-            <Button name="Editar perfil" onPress={handleModal} />
+            <TouchableOpacity onPress={handleModal}>
+              <Text style={styles.dots}>...</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -77,10 +85,28 @@ export default function profile() {
         <ProgressBar style={styles.progressbar} progress={user.xp / 1000} color="#6DA7F6" />
         <Text style={styles.remainXp}>100.000 xp</Text>
       </View>
-      <Button name="Deslogar" onPress={() => handleNavigation('UserIdentification')} />
       <View style={styles.modal}>
-        <ModalView visible={openModal} closeModal={handleModal}>
-          <EditAccount user={user} handleModal={handleModal} />
+        <ModalView visible={openModal} closeModal={handleModal}  half={halfModal}>
+          {
+            !openEditAccount &&
+            <View style={styles.modalButtons}>
+              <Button name="Editar Perfil" onPress={() => {
+                setOpenEditAccount(!openEditAccount),
+                setHalfModal(!halfModal);
+                }} 
+              />
+              <Button name="Editar Conta" onPress={() => {
+                setOpenEditAccount(!openEditAccount),
+                setHalfModal(!halfModal);
+                }} 
+              />
+              <Button name="Sair" color={colors.red} onPress={() => handleNavigation('UserIdentification')} />
+            </View>
+          }
+          {
+          openEditAccount &&
+           <EditAccount user={user} handleModal={handleModal} />
+          }
         </ModalView>
       </View>
     </View>
