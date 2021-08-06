@@ -13,10 +13,18 @@ import { useNavigation } from '@react-navigation/core';
 import styles from './styles';
 import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
-import { Button, Loading, EditAccount, ModalView } from '../../components';
+
+import {
+  Button,
+  Loading,
+  ModalView,
+  EditAccount,
+  EditProfile,
+} from '../../components';
 
 export default function profile() {
   const [openModal, setOpenModal] = useState(false);
+  const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openEditAccount, setOpenEditAccount] = useState(false);
   const [halfModal, setHalfModal] = useState(false);
   const { user: Data, loading } = useApi();
@@ -26,6 +34,7 @@ export default function profile() {
 
   function handleModal() {
     setOpenModal(!openModal);
+    setHalfModal(!halfModal);
   }
   function handleNavigation(place) {
     navigation.navigate(place);
@@ -86,26 +95,30 @@ export default function profile() {
         <Text style={styles.remainXp}>100.000 xp</Text>
       </View>
       <View style={styles.modal}>
-        <ModalView visible={openModal} closeModal={handleModal}  half={halfModal}>
+        <ModalView visible={openModal} closeModal={handleModal} half={halfModal}>
           {
-            !openEditAccount &&
+           (!openEditAccount || !openEditProfile)  &&
             <View style={styles.modalButtons}>
               <Button name="Editar Perfil" onPress={() => {
-                setOpenEditAccount(!openEditAccount),
+                setOpenEditProfile(!openEditProfile),
                 setHalfModal(!halfModal);
-                }} 
+              }}
               />
               <Button name="Editar Conta" onPress={() => {
                 setOpenEditAccount(!openEditAccount),
                 setHalfModal(!halfModal);
-                }} 
+              }}
               />
               <Button name="Sair" color={colors.red} onPress={() => handleNavigation('UserIdentification')} />
             </View>
           }
           {
-          openEditAccount &&
-           <EditAccount user={user} handleModal={handleModal} />
+            openEditAccount &&
+            <EditAccount user={user} handleModal={handleModal} />
+          }
+          {
+            openEditProfile &&
+            <EditProfile user={user} handleModal={handleModal} />
           }
         </ModalView>
       </View>

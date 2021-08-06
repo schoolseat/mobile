@@ -17,7 +17,7 @@ export default function ModalView({ children, closeModal, half = false, ...rest 
         <View style={
           half
           ? [styles.overlay, {
-            marginTop: Dimensions.get('window').height * 0.7
+            marginTop: Dimensions.get('window').height * 0.66
           }]
           : styles.overlay
         }>

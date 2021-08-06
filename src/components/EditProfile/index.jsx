@@ -21,36 +21,32 @@ export default function EditAccount({ user, handleModal }) {
             <KeyboardAvoidingView>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.container}>
+                        <View style={styles.headerContent}>
                             <View style={styles.titleView}>
-                                <Text style={styles.title}>Editar Conta</Text>
+                                <Text style={styles.title}>Editar Perfil</Text>
                             </View>
+                        </View>
                         <View style={styles.data}>
-                            <Text style={styles.titles}>
-                                Editar o e-mail da sua conta
-                            </Text>
+                            <View style={styles.image}>
+                                <Image style={styles.profilePic} source={{ uri: user.profilePic }} />
+                            </View>
                             <View style={styles.inputsView}>
                                 <Text style={styles.texts}>
-                                    E-mail
+                                    Nome
                                 </Text>
                                 <TextInput
                                     style={styles.textsinput}
-                                    value={user.email}
+                                    value={user.name}
                                     numberOfLines={1}
                                     editable
                                 />
-                                <Text style={styles.texts}>
-                                    Ao editar o e-mail uma verificação será enviada para o novo e-mail
-                                </Text>
                             </View>
-                            <Text style={styles.titles}>
-                                    Editar a senha
-                                </Text>
                             <View style={styles.inputsView}>
                                 <Text style={styles.texts}>
-                                    Senha atual
+                                    Apelido
                                 </Text>
                                 <TextInput
-                                    value='****'
+                                    value={user.nickname}
                                     style={styles.textsinput}
                                     numberOfLines={1}
                                     editable
@@ -58,20 +54,20 @@ export default function EditAccount({ user, handleModal }) {
                             </View>
                             <View style={styles.inputsView}>
                                 <Text style={styles.texts}>
-                                    Nova senha
+                                    Bio
                                 </Text>
                                 <TextInput
-                                    value='****'
+                                    value={user.bio}
                                     style={styles.textsinput}
-                                    numberOfLines={1}
                                     editable
+                                    multiline={true}
+                                    maxLength={190}
                                 />
                             </View>
                         </View>
                         <View style={styles.button}>
                             <Button name="Pronto" onPress={handleModal} />
                             <Button name="Cancelar" color={colors.white} textColor={colors.title} onPress={handleModal} />
-                            <Button name="Deletar conta" color={colors.red} onPress={handleModal} />
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import StyleSheet from 'react-native-extended-stylesheet';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import colors from '../../styles/colors';
 
@@ -7,15 +7,17 @@ export default StyleSheet.create({
     marginTop: getStatusBarHeight(),
   },
   container: {
-    backgroundColor: colors.overlay
+    borderTopLeftRadius: '2rem',
+    borderTopRightRadius: '2rem',
+    backgroundColor: colors.orange
   },
   bar: {
-    width: 39,
-    height: 2,
-    borderRadius: 2,
+    width: '7rem',
+    height: '.2rem',
+    borderRadius: '3.5rem',
     backgroundColor: colors.white,
     alignSelf: 'center',
-    marginTop: 10,
+    marginTop: '2rem',
     marginBottom: 10
   }
 });

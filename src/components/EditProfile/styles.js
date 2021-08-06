@@ -8,23 +8,34 @@ export default StyleSheet.create({
         marginHorizontal: 20,
         textAlign: 'center',
     },
+    headerContent: {
+        width: '100%',
+        height: 104,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
     title: {
         fontFamily: fonts.heading,
         alignSelf: 'center',
         fontSize: 25,
         color: colors.white,
     },
-    titles: {
-        fontFamily: fonts.heading,
-        alignSelf: 'center',
-        fontSize: 20,
-        color: colors.white,
-    },
     titleView: {
         width: '100%',
         textAlign: 'center',
         alignItems: 'center',
-        marginBottom: 25
+    },
+    image: {
+        marginTop: -30,
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    profilePic: {
+        width: 150,
+        height: 150,
+        borderRadius: 75,
+        marginBottom: 20,
     },
     inputsView: {
         textAlign: 'center',
@@ -33,21 +44,19 @@ export default StyleSheet.create({
         width: '100%',
     },
     texts: {
-        fontSize: 15,
         color: colors.white,
-        fontFamily: fonts.text
+        fontFamily: fonts.heading
     },
     textsinput: {
         fontFamily: fonts.text,
         color: colors.white,
         borderBottomColor: colors.white,
         borderBottomWidth: 1,
-        marginBottom: 10
+        marginBottom: 10,
     },
     button: {
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 11
     }
 });
