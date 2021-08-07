@@ -8,10 +8,12 @@ import EditAccount from './EditAccount';
 import EditProfile from './EditProfile';
 import ActivitiesCard from './ActivitiesCard';
 import NotificationsCard from './NotificationsCard';
+import Classes from './Classes';
 
 export {
   Button,
   Loading,
+  Classes,
   HourCard,
   ModalView,
   FieldError,

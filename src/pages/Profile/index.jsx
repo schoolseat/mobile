@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 
@@ -17,6 +18,7 @@ import { useApi } from '../../hooks/auth';
 import {
   Button,
   Loading,
+  Classes,
   ModalView,
   EditAccount,
   EditProfile,
@@ -27,7 +29,7 @@ export default function profile() {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [openEditAccount, setOpenEditAccount] = useState(false);
   const [halfModal, setHalfModal] = useState(false);
-  const { user: Data, loading } = useApi();
+  const { user: Data, classes, loading } = useApi();
   const user = Data.user;
 
   const navigation = useNavigation();
@@ -42,11 +44,11 @@ export default function profile() {
   function stars(total) {
     return (
       <View style={styles.stars}>
-        <AntDesign name={total >= 1 ? "star" : "staro"} size={24} color={total >= 1 ? colors.yellow : colors.heading} />
-        <AntDesign name={total >= 2 ? "star" : "staro"} size={24} color={total >= 2 ? colors.yellow : colors.heading} />
-        <AntDesign name={total >= 3 ? "star" : "staro"} size={24} color={total >= 3 ? colors.yellow : colors.heading} />
-        <AntDesign name={total >= 4 ? "star" : "staro"} size={24} color={total >= 4 ? colors.yellow : colors.heading} />
-        <AntDesign name={total >= 5 ? "star" : "staro"} size={24} color={total == 5 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 1 ? "star" : "staro"} size={20} color={total >= 1 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 2 ? "star" : "staro"} size={20} color={total >= 2 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 3 ? "star" : "staro"} size={20} color={total >= 3 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 4 ? "star" : "staro"} size={20} color={total >= 4 ? colors.yellow : colors.heading} />
+        <AntDesign name={total >= 5 ? "star" : "staro"} size={20} color={total == 5 ? colors.yellow : colors.heading} />
       </View>
     );
   }
@@ -55,7 +57,9 @@ export default function profile() {
     return <Loading />;
   }
   return (
+    
     <View style={styles.container}>
+      <ScrollView style={{flex: 1}}>
       <View style={styles.header}>
         <Image
           style={styles.image}
@@ -94,19 +98,29 @@ export default function profile() {
         <ProgressBar style={styles.progressbar} progress={user.xp / 1000} color="#6DA7F6" />
         <Text style={styles.remainXp}>100.000 xp</Text>
       </View>
+        
+      <View style={styles.classesView}>
+          <Text style={styles.classesTitle}>Minhas turmas</Text>
+          {
+            Object.values(classes).map((item) => {
+              return <Classes />
+            })
+          }
+      </View>
+        </ScrollView >
       <View style={styles.modal}>
         <ModalView visible={openModal} closeModal={handleModal} half={halfModal}>
           {
-           (!openEditAccount || !openEditProfile)  &&
+            (!openEditAccount && !openEditProfile) &&
             <View style={styles.modalButtons}>
               <Button name="Editar Perfil" onPress={() => {
                 setOpenEditProfile(!openEditProfile),
-                setHalfModal(!halfModal);
+                  setHalfModal(!halfModal);
               }}
               />
               <Button name="Editar Conta" onPress={() => {
                 setOpenEditAccount(!openEditAccount),
-                setHalfModal(!halfModal);
+                  setHalfModal(!halfModal);
               }}
               />
               <Button name="Sair" color={colors.red} onPress={() => handleNavigation('UserIdentification')} />

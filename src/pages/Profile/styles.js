@@ -75,11 +75,19 @@ export default StyleSheet.create({
     fontFamily: fonts.text,
     color: colors.title,
   },
-  modal: {
-    
-  },
   modalButtons: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  classesView: {
+    marginTop: -150,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  classesTitle: {
+    fontSize: 25,
+    marginBottom: 10,
+    color: colors.heading,
+    fontFamily: fonts.text,
   }
 });
