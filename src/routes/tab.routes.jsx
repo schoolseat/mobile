@@ -9,7 +9,7 @@ import {
   Calendar,
   Home,
   Profile,
-  Notifications,
+  CreateClass,
 } from '../pages';
 
 const AppTab = createBottomTabNavigator();
@@ -55,11 +55,11 @@ const AuthRoutes = () => (
     />
     <AppTab.Screen
       name="   "
-      component={Notifications}
+      component={CreateClass}
       options={{
         tabBarIcon: ({ size, color }) => (
             <AntDesign
-            name="notification"
+            name="addusergroup"
             size={size}
             color={color}
           />

@@ -8,8 +8,8 @@ import { useApi } from '../hooks/auth';
 import {
   Grade,
   Activity,
+  CreateClass,
   CreateAccount,
-  Notifications,
   RecoverPassword,
   UserIdentification,
 } from '../pages';
@@ -34,7 +34,7 @@ const AppRoutes = () => {
 
               <StackRoutes.Screen name="Grade" component={Grade} />
               <StackRoutes.Screen name="Activity" component={Activity} />
-              <StackRoutes.Screen name="Notifications" component={Notifications} />
+              <StackRoutes.Screen name="CreateClass" component={CreateClass} />
             </>
           )
           : (

@@ -16,6 +16,7 @@ __If you use windows you need remove sudo word from package.json dev [script](ht
 ## 📝 TODO
 
 - [ ] Verify grammar.
+- [ ] Add i18next.
 - [ ] Login with Google.
 - [ ] Fix keyboard bugs.
 - [ ] Improve responsivity.

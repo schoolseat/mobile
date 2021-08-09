@@ -4,7 +4,7 @@ import Profile from './Profile';
 import Activity from './Activity';
 import Calendar from './Calendar';
 import CreateAccount from './CreateAccount';
-import Notifications from './Notifications';
+import CreateClass from './CreateClass';
 import RecoverPassword from './RecoverPassword';
 import UserIdentification from './UserIdentification';
 
@@ -14,8 +14,8 @@ export {
   Profile,
   Calendar,
   Activity,
+  CreateClass,
   CreateAccount,
-  Notifications,
   RecoverPassword,
   UserIdentification,
 };
