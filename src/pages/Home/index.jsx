@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  Image,
   StatusBar,
+  Dimensions,
   ScrollView,
 } from 'react-native';
 
@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/core';
 import { useIsFocused } from '@react-navigation/native';
 
 import styles from './styles';
-import book from '../../assets/book.png';
+import Book from '../../assets/book.svg';
 import { useApi } from '../../hooks/auth';
 import { ActivitiesCard, Loading } from '../../components';
 
@@ -51,7 +51,10 @@ export default function home() {
         translucent
       />
       <View style={styles.image}>
-        <Image style={styles.image} source={book} />
+        <Book  
+        width={Dimensions.get('window').width * 0.9}
+        height={Dimensions.get('window').height * 0.4}
+        />
       </View>
       <ScrollView >
         <View style={styles.classes}>

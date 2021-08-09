@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import {
   Text,
   View,
-  Image,
   Keyboard,
   TextInput,
+  Dimensions,
   SafeAreaView,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -20,7 +20,7 @@ import { FontAwesome, Feather } from '@expo/vector-icons';
 import styles from './styles';
 import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
-import img from '../../assets/loginimg.png';
+import Img from '../../assets/loginimg.svg';
 import { Button, FieldError } from '../../components';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
@@ -60,7 +60,10 @@ export default function Welcome() {
           <View style={styles.wrapper}>
             <Text style={styles.title}>Faça Login</Text>
 
-            <Image style={styles.image} source={img} />
+            <Img
+              width={Dimensions.get('window').width * 0.8}
+              height={Dimensions.get('window').height * 0.4} 
+            />
             <View style={styles.views}>
               <Feather name="mail" size={24} style={styles.icons} color={colors.blue} />
               <TextInput

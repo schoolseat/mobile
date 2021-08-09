@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
-    Image,
     Keyboard,
     TextInput,
+    Dimensions,
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
 } from 'react-native';
@@ -17,7 +17,7 @@ const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
 import styles from './styles'
 import colors from '../../styles/colors';
 import { Button } from '../../components';
-import img from '../../assets/loginimg.png';
+import Img from '../../assets/loginimg.svg';
 
 export default function RecoverPassword() {
     const [verified, setVerified] = useState(false);
@@ -29,12 +29,15 @@ export default function RecoverPassword() {
     }
 
     return (
-        <View style={styles.container}> 
+        <View style={styles.container}>
             <KeyboardAvoidingView>
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.wrapper}>
                         <Text style={styles.title}>Recupere a senha</Text>
-                        <Image style={styles.image} source={img} />
+                        <Img
+                            width={Dimensions.get('window').width * 0.9}
+                            height={Dimensions.get('window').height * 0.4}
+                        />
                         <View style={styles.views}>
                             <Feather name="mail" size={24} style={styles.icons} color={colors.blue} />
                             <TextInput

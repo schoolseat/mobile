@@ -8,10 +8,9 @@ export default StyleSheet.create({
     backgroundColor: colors.green,
   },
   image: {
+    left: 15,
     marginTop: 20,
     marginBottom: 20,
-    width: Dimensions.get('window').width * 0.9,
-    height: Dimensions.get('window').height * 0.4,
     position: 'absolute',
   },
   classes: {

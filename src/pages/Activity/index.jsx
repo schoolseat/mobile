@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  Image,
   Text,
   View,
-  ScrollView,
   StatusBar,
+  ScrollView,
+  Dimensions,
 } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
@@ -12,7 +12,7 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 import { useRoute, useNavigation } from '@react-navigation/core';
 
 import styles from './styles';
-import book from '../../assets/book.png';
+import Book from '../../assets/book.svg';
 import { Button } from '../../components';
 
 export default function Activity() {
@@ -36,7 +36,12 @@ export default function Activity() {
         <AntDesign name="arrowleft" size={30} color="white" />
       </BorderlessButton>
 
-      <Image style={styles.image} source={book} />
+      <View style={styles.image}>
+        <Book
+          width={Dimensions.get('window').width * 0.9}
+          height={Dimensions.get('window').height * 0.4}
+        />
+      </View>
       <ScrollView>
         <View style={styles.scrollContainer}>
           <View style={styles.titlesContainer}>

@@ -9,6 +9,7 @@ import {
   Keyboard,
   TextInput,
   ScrollView,
+  Dimensions,
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -22,7 +23,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import styles from './styles';
 import colors from '../../styles/colors';
-import img from '../../assets/loginimg.png';
+import Img from '../../assets/loginimg.svg';
 import { Button, FieldError } from '../../components';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
@@ -48,7 +49,7 @@ export default function Welcome() {
   function handlePassword() {
     setHide(!hide);
   }
-  
+
   function handleStart() {
     navigation.navigate('Calendar');
   }
@@ -57,7 +58,7 @@ export default function Welcome() {
     setShowPicker(!showPicker);
     setDateVerified(true);
   }
-  
+
   useEffect(() => {
     (async () => {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -88,7 +89,10 @@ export default function Welcome() {
           <View style={styles.wrapper}>
             <Text style={styles.title}>Cadastro</Text>
 
-            <Image style={styles.image} source={img} />
+            <Img
+              width={Dimensions.get('window').width * 0.9}
+              height={Dimensions.get('window').height * 0.4}
+            />
             <View style={styles.views}>
               <Feather name="mail" size={24} style={styles.icons} color={colors.blue} />
               <TextInput
@@ -120,11 +124,11 @@ export default function Welcome() {
                   )
               }
             </View>
-              {
-                sendLoginChecker 
-                && !verified 
-                && <FieldError error='Você precisa inserir o seu e-mail'/>
-              }
+            {
+              sendLoginChecker
+              && !verified
+              && <FieldError error='Você precisa inserir o seu e-mail' />
+            }
             <View style={styles.views}>
               <FontAwesome name="pencil-square-o" size={24} style={styles.icons} color={colors.blue} />
               <TextInput
@@ -156,18 +160,18 @@ export default function Welcome() {
                   )
               }
             </View>
-              {
-                sendLoginChecker 
-                && !nameVerified 
-                && <FieldError error='você precisa inserir o seu nome'/>
-              }
+            {
+              sendLoginChecker
+              && !nameVerified
+              && <FieldError error='você precisa inserir o seu nome' />
+            }
             <View style={styles.views}>
               <Feather name="lock" size={24} color={colors.blue} style={styles.icons} />
-              <TextInput 
-              style={styles.inputs} 
-              secureTextEntry={hide} 
-              placeholder="insira uma senha com pelo menos 6 caracteres um numero e uma letra maiuscula"  
-              onChangeText={(text) => passwordVerifyer.test(text) ? setPassword(text) : setPassword(false)}/>
+              <TextInput
+                style={styles.inputs}
+                secureTextEntry={hide}
+                placeholder="insira uma senha com pelo menos 6 caracteres um numero e uma letra maiuscula"
+                onChangeText={(text) => passwordVerifyer.test(text) ? setPassword(text) : setPassword(false)} />
 
               <TouchableOpacity onPress={() => handlePassword()}>
                 {
@@ -240,11 +244,11 @@ export default function Welcome() {
                 )
               }
             </View>
-              {
-                sendLoginChecker 
-                && !dateVerified 
-                && <FieldError error='você precisa inserir uma senha'/>
-              }
+            {
+              sendLoginChecker
+              && !dateVerified
+              && <FieldError error='você precisa inserir uma senha' />
+            }
             <View style={styles.views}>
               <Feather name="camera" size={24} color={colors.blue} style={styles.icons} />
               <TouchableOpacity onPress={pickImage}>
@@ -280,7 +284,7 @@ export default function Welcome() {
               }
             </View>
             <View style={styles.button}>
-              <Button name="Criar Conta" onPress={() => (verified && dateVerified && nameVerified) ? handleStart() : setSendLoginChecker(true) } />
+              <Button name="Criar Conta" onPress={() => (verified && dateVerified && nameVerified) ? handleStart() : setSendLoginChecker(true)} />
             </View>
             <View style={styles.lowerView}>
               <Text style={styles.little}>

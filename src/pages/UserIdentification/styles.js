@@ -19,9 +19,7 @@ export default StyleSheet.create({
     fontFamily: fonts.heading,
     lineHeight: '2rem',
   },
-  image: {
-    marginTop: '1rem',
-  },
+
   views: {
     flexDirection: 'row',
     alignItems: 'center',

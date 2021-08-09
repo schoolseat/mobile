@@ -11,10 +11,9 @@ export default StyleSheet.create({
 
   },
   image: {
-    marginTop: 35,
+    left: 15,
+    marginTop: 20,
     marginBottom: 20,
-    width: Dimensions.get('window').width * 0.9,
-    height: Dimensions.get('window').height * 0.4,
     position: 'absolute',
   },
   scrollContainer: {
