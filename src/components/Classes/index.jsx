@@ -1,19 +1,22 @@
 import React from 'react';
 import { View, Text } from 'react-native'
 import { Feather } from '@expo/vector-icons';
+import { RectButton } from 'react-native-gesture-handler';
 
 import colors from '../../styles/colors';
 import styles from './styles';
 
-export default function Classes({ data, isTeacher }) {
+export default function Classes({ data, isTeacher, ...rest }) {
     return (
-        <View style={isTeacher
+        <RectButton style={isTeacher
             ? [
                 styles.container, {
                     backgroundColor: colors.green
                 }]
             : styles.container
-        }>
+        }
+        {...rest}
+        >
             <Text style={isTeacher
                 ? [
                     styles.title, {
@@ -21,7 +24,7 @@ export default function Classes({ data, isTeacher }) {
                     }]
                 : styles.title
             }>
-                Matematica
+               {data.discipline}
             </Text>
             <View style={styles.view}>
                 <Text style={isTeacher
@@ -31,7 +34,7 @@ export default function Classes({ data, isTeacher }) {
                         }]
                     : styles.text
                 }>
-                    Professor
+                   {isTeacher ? 'Professor' : 'Aluno'}
                 </Text>
                 <Text style={isTeacher
                     ? [
@@ -40,9 +43,9 @@ export default function Classes({ data, isTeacher }) {
                         }]
                     : styles.text
                 }>
-                    25 <Feather name="users" size={20} color={isTeacher ? "white": colors.heading} />
+                    {data.users.length} <Feather name="users" size={20} color={isTeacher ? "white": colors.heading} />
                 </Text>
             </View>
-        </View>
+        </RectButton>
     );
 }
