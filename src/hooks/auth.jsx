@@ -69,13 +69,13 @@ function ApiProvider({ children }) {
         await AsyncStorage.setItem('@school_seat/lessons', JSON.stringify(lessonsReq))
         await AsyncStorage.setItem('@school_seat/content', JSON.stringify(contentReq))
     }
-    async function postApiData({ data, isClasses, isLessons, isContent }) {
+    async function postApiData({ data, isClasses, isLessons, isContent, isCreateAccount }) {
         if (isClasses) {
             const classesPost = await api.post("classes", data, {
                 headers: {
                     'x-access-token': user.token
                 }
-            }).catch((e) => console.error(e));
+            })
 
             return classesPost;
         }
@@ -84,7 +84,7 @@ function ApiProvider({ children }) {
                 headers: {
                     'x-access-token': user.token
                 }
-            }).catch((e) => console.error(e));
+            })
 
             return lessonsPost;
         }
@@ -93,11 +93,16 @@ function ApiProvider({ children }) {
                 headers: {
                     'x-access-token': user.token
                 }
-            }).catch((e) => console.error(e));
+            })
 
             return contentPost;
         }
-        return new Error("You must provide the type of post using isClasses, isLessons or isContent variable")
+        if (isCreateAccount) {
+            const { data: userReq } = await api.post("users", data).catch((e) => console.error(e));
+
+            setUser(userReq);
+        }
+        return new Error("You must provide the type of post !")
     }
     return (
         <ApiContext.Provider value={{ user, classes, lessons, content, getApiData, postApiData, loading }}>

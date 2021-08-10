@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
-  Image,
+  Alert,
   Linking,
   Keyboard,
+  Platform,
   TextInput,
   ScrollView,
   Dimensions,
+  ToastAndroid,
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -23,6 +25,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 import styles from './styles';
 import colors from '../../styles/colors';
+import { useApi } from '../../hooks/auth';
 import Img from '../../assets/loginimg.svg';
 import { Button, FieldError } from '../../components';
 
@@ -34,7 +37,7 @@ const today = new Date();
 export default function Welcome() {
   const [hide, setHide] = useState(true);
   const [image, setImage] = useState(null);
-  const [verified, setVerified] = useState(false);
+  const [email, setEmail] = useState(false);
   const [password, setPassword] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [dateVerified, setDateVerified] = useState(false);
@@ -45,12 +48,23 @@ export default function Welcome() {
   );
 
   const navigation = useNavigation();
+  const { postApiData } = useApi();
 
   function handlePassword() {
     setHide(!hide);
   }
 
-  function handleStart() {
+  async function handleClassSelect() {
+    const parsedPostData = {
+      password: password,
+      email: email,
+      name: nameVerified,
+      nickname: nameVerified,
+      profilePic: image.uri,
+      bornDate: dateVerified,
+      bio: "Sem bio!"
+    }
+    await postApiData({ data: parsedPostData, isCreateAccount: true })
     navigation.navigate('Calendar');
   }
 
@@ -58,12 +72,20 @@ export default function Welcome() {
     setShowPicker(!showPicker);
     setDateVerified(true);
   }
-
+  function alert(data) {
+    Platform.OS === "ios"
+        ? Alert.alert(data[0], data[1])
+        : ToastAndroid.show(
+            data[1],
+            ToastAndroid.LONG,
+            ToastAndroid.BOTTOM
+        );
+}
   useEffect(() => {
     (async () => {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
-        alert('Preciso dessa permissão!');
+        alert('Preciso da permissão', 'Preciso dá permissão de gerenciar arquivos para que você escolha uma foto de perfil 😀');
       }
     })();
   }, []);
@@ -72,7 +94,6 @@ export default function Welcome() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
       quality: 1,
     });
 
@@ -83,7 +104,7 @@ export default function Welcome() {
   return (
     <ScrollView style={styles.container}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        behavior="padding"
         style={styles.container}
       >
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -101,12 +122,12 @@ export default function Welcome() {
                 placeholder="insira o seu e-mail"
                 onChangeText={
                   (text) => expression.test(String(text).toLowerCase())
-                    ? setVerified(text)
-                    : setVerified(false)
+                    ? setEmail(text)
+                    : setEmail(false)
                 }
               />
               {
-                verified
+                email
                   ? (
                     <FontAwesome
                       name="check-circle"
@@ -285,7 +306,7 @@ export default function Welcome() {
               }
             </View>
             <View style={styles.button}>
-              <Button name="Criar Conta" onPress={() => (verified && dateVerified && nameVerified) ? handleStart() : setSendLoginChecker(true)} />
+              <Button name="Criar Conta" onPress={() => (email && password && dateVerified && nameVerified) ? handleClassSelect() : setSendLoginChecker(true)} />
             </View>
             <View style={styles.lowerView}>
               <Text style={styles.little}>

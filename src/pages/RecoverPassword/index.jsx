@@ -6,12 +6,14 @@ import {
     Keyboard,
     TextInput,
     Dimensions,
+    ScrollView,
     KeyboardAvoidingView,
     TouchableWithoutFeedback,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
 import { FontAwesome, Feather } from '@expo/vector-icons';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
 
@@ -28,16 +30,27 @@ export default function RecoverPassword() {
     function handleStart() {
         navigation.navigate('UserIdentification');
     }
-
+    function handleGoBack() {
+        navigation.goBack();
+    }
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}>
             <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                style={{flex: 1}}
+                behavior="padding"
+                style={styles.container}
             >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.wrapper}>
-                        <Text style={styles.title}>Recupere a senha</Text>
+                        <View style={styles.header}>
+                            <BorderlessButton style={styles.backButton} onPress={handleGoBack}>
+                                <Feather
+                                    name="arrow-left"
+                                    size={24}
+                                    color={colors.heading}
+                                />
+                            </BorderlessButton>
+                            <Text style={styles.title}>Recupere a senha</Text>
+                        </View>
                         <Img
                             width={Dimensions.get('window').width * 0.9}
                             height={Dimensions.get('window').height * 0.4}
@@ -83,6 +96,6 @@ export default function RecoverPassword() {
                     </View>
                 </TouchableWithoutFeedback>
             </KeyboardAvoidingView>
-        </View>
+        </ScrollView>
     );
 }
