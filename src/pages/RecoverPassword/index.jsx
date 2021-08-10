@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     View,
     Text,
+    Platform,
     Keyboard,
     TextInput,
     Dimensions,
@@ -30,7 +31,10 @@ export default function RecoverPassword() {
 
     return (
         <View style={styles.container}>
-            <KeyboardAvoidingView>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{flex: 1}}
+            >
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                     <View style={styles.wrapper}>
                         <Text style={styles.title}>Recupere a senha</Text>

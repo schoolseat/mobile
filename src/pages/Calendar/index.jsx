@@ -20,10 +20,10 @@ import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
 import dates from '../../locales/dates.json';
 
-import { 
-  HourCard, 
-  ModalView, 
-  Loading, 
+import {
+  HourCard,
+  ModalView,
+  Loading,
   DaysOfWeek
 } from '../../components';
 
@@ -197,13 +197,10 @@ export default function Calendar() {
           <FlatList
             data={
               isActivity
-                ? reverse
-                  ? parsedLessons.reverse()
-                  : parsedLessons
-                : reverse
-                  ? content.reverse()
-                  : content
+                ? parsedLessons
+                : content
             }
+            inverted={reverse}
             keyExtractor={(item) => String(item._id)}
             ListEmptyComponent={(
               <View style={styles.noClass}>

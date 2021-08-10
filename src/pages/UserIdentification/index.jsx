@@ -5,9 +5,11 @@ import React, { useState } from 'react';
 import {
   Text,
   View,
+  Platform,
   Keyboard,
   TextInput,
   Dimensions,
+  ScrollView,
   SafeAreaView,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -55,15 +57,19 @@ export default function Welcome() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <ScrollView>
           <View style={styles.wrapper}>
             <Text style={styles.title}>Faça Login</Text>
 
             <Img
               width={Dimensions.get('window').width * 0.8}
               height={Dimensions.get('window').height * 0.4} 
-            />
+              />
             <View style={styles.views}>
               <Feather name="mail" size={24} style={styles.icons} color={colors.blue} />
               <TextInput
@@ -162,6 +168,7 @@ export default function Welcome() {
               <Button name="Logar" onPress={() => handleLogin()} />
             </View>
           </View>
+          </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
     </SafeAreaView>

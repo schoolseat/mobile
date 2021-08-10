@@ -27,7 +27,7 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   classesCards: {
-    flex: 1,
+    height: 200,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start' 

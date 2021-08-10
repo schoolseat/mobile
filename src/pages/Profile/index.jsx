@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  FlatList,
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
@@ -62,7 +63,7 @@ export default function profile() {
   return (
 
     <View style={styles.container}>
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={styles.container}>
         <View style={styles.header}>
           <Image
             style={styles.image}
@@ -101,19 +102,19 @@ export default function profile() {
           <ProgressBar style={styles.progressbar} progress={user.xp / 1000} color="#6DA7F6" />
           <Text style={styles.remainXp}>100.000 xp</Text>
         </View>
-
         <View style={styles.classesView}>
           <Text style={styles.classesTitle}>Minhas turmas</Text>
-          {
-            Object.values(classes).map((item) => {
-              return <Classes
+          <FlatList
+            data={classes}
+            renderItem={({ item }) => (
+              <Classes
                 data={item}
-                key={item._id}
                 isTeacher={item.teacher === user._id ? true : false}
                 onPress={() => handleClassSelect(item)}
               />
-            })
-          }
+            )}
+            keyExtractor={item => item.id}
+          />
         </View>
       </ScrollView >
       <View style={styles.modal}>

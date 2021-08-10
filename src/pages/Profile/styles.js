@@ -80,7 +80,7 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   classesView: {
-    marginTop: -150,
+    marginTop: '-15rem',
     alignItems: 'center',
     justifyContent: 'center',
   },

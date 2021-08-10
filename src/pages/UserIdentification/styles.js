@@ -46,7 +46,7 @@ export default StyleSheet.create({
     marginRight: '5rem',
   },
   button: {
-    marginTop: '2.5rem',
+    marginTop: '1rem',
   },
   FieldError: {
     marginTop: '2rem',

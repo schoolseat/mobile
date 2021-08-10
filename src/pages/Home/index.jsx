@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
+  FlatList,
   StatusBar,
   Dimensions,
   ScrollView,
@@ -51,9 +52,9 @@ export default function home() {
         translucent
       />
       <View style={styles.image}>
-        <Book  
-        width={Dimensions.get('window').width * 0.9}
-        height={Dimensions.get('window').height * 0.4}
+        <Book
+          width={Dimensions.get('window').width * 0.9}
+          height={Dimensions.get('window').height * 0.4}
         />
       </View>
       <ScrollView >
@@ -61,19 +62,19 @@ export default function home() {
           <Text style={styles.title}>
             Classes
           </Text>
-          <View style={styles.classesCards}>
-            {
-              Object.values(classes).map((item) => {
-               return <ActivitiesCard
-                  key={item._id}
-                  name={item.discipline}
-                  icon={item.icon}
-                  color={item.color}
-                  onPress={() => handleClassSelect(item)}
-                />
-              })
-            }
-          </View>
+          <FlatList
+            data={classes}
+            numColumns={2}
+            renderItem={({ item }) => (
+               <ActivitiesCard
+                name={item.discipline}
+                icon={item.icon}
+                color={item.color}
+                onPress={() => handleClassSelect(item)}
+              />
+            )}
+            keyExtractor={item => item._id}
+          />
         </View>
       </ScrollView>
     </View>
