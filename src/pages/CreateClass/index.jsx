@@ -4,8 +4,10 @@ import {
   View,
   Text,
   Keyboard,
+  Platform,
   TextInput,
   StatusBar,
+  ScrollView,
   KeyboardAvoidingView,
   TouchableWithoutFeedback
 } from 'react-native';
@@ -41,49 +43,56 @@ export default function Notifications() {
   }
 
   return (
-    <View style={styles.container}>
-        <FocusAwareStatusBar
-          barStyle="white-content"
-          backgroundColor="transparent"
-          translucent
-        />
-        <View style={styles.greenContainer}>
-          <Text style={styles.title}>Criar turma</Text>
-          <Class_Stuck_at_Home_Monitor width={300} height={150} />
-        </View>
-        <View style={styles.data}>
-          <Text style={styles.texts}>
-            Nome da turma
-          </Text>
-          <TextInput
-            style={styles.textsinput}
-            onChangeText={(text) => setClassName(text)}
-            numberOfLines={1}
-            editable
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <ScrollView style={styles.container}>
+          <FocusAwareStatusBar
+            barStyle="white-content"
+            backgroundColor="transparent"
+            translucent
           />
-          <Text style={styles.texts}>
-            Nome da escola
-          </Text>
-          <TextInput
-            style={styles.textsinput}
-            onChangeText={(text) => setSchoolName(text)}
-            numberOfLines={1}
-            editable
-          />
-          <Text style={styles.texts}>
-            Bio da turma
-          </Text>
-          <TextInput
-            style={styles.textsinput}
-            onChangeText={(text) => setClassBio(text)}
-            numberOfLines={1}
-            editable
-          />
-        </View>
-        <View style={{ alignItems: 'center', marginTop: 25 }}>
-          <Button name="Entendido" onPress={handleClassSelect} />
-        </View>
-    </View>
+          <View style={styles.greenContainer}>
+            <Text style={styles.title}>Criar turma</Text>
+            <Class_Stuck_at_Home_Monitor width={300} height={150} />
+          </View>
+          <View style={styles.data}>
+            <Text style={styles.texts}>
+              Nome da turma
+            </Text>
+            <TextInput
+              style={styles.textsinput}
+              onChangeText={(text) => setClassName(text)}
+              numberOfLines={1}
+              editable
+            />
+            <Text style={styles.texts}>
+              Nome da escola
+            </Text>
+            <TextInput
+              style={styles.textsinput}
+              onChangeText={(text) => setSchoolName(text)}
+              numberOfLines={1}
+              editable
+            />
+            <Text style={styles.texts}>
+              Bio da turma
+            </Text>
+            <TextInput
+              style={styles.textsinput}
+              onChangeText={(text) => setClassBio(text)}
+              numberOfLines={1}
+              editable
+            />
+          </View>
+          <View style={{ alignItems: 'center', marginTop: 25 }}>
+            <Button name="Entendido" onPress={handleClassSelect} />
+          </View>
+        </ScrollView>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 function FocusAwareStatusBar(props) {
