@@ -41,8 +41,8 @@ export default function profile() {
   function handleNavigation(place) {
     navigation.navigate(place);
   }
-  function handleClassSelect(grade) {
-    navigation.navigate('Grade', { grade });
+  function handleClassSelect(data) {
+    navigation.navigate('Grade', { data });
   }
   function stars(total) {
     return (

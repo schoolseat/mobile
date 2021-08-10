@@ -26,8 +26,7 @@ export default function Grade() {
     navigation.goBack();
   }
 
-  const { grade } = route.params;
-
+  const { data:grade } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.headerContent}>

@@ -11,7 +11,7 @@
 1. Clone this repository.
 2. Install all dependencies with `yarn install` or `npm install`.
 3. Start development server with `yarn start` or `npm run start`.</br>
-__If you use windows you need remove sudo word from package.json dev [script](https://github.com/schoolseat/mobile/blob/19848cbfa4144535a2a41d7c0d23ba8f98dec357/package.json#L6)__ 
+__If you use windows you may remove sudo word from package.json dev [script](https://github.com/schoolseat/mobile/blob/19848cbfa4144535a2a41d7c0d23ba8f98dec357/package.json#L6)__ 
 
 ## 📝 TODO
 

@@ -69,9 +69,38 @@ function ApiProvider({ children }) {
         await AsyncStorage.setItem('@school_seat/lessons', JSON.stringify(lessonsReq))
         await AsyncStorage.setItem('@school_seat/content', JSON.stringify(contentReq))
     }
+    async function postApiData({ data, isClasses, isLessons, isContent }) {
+        if (isClasses) {
+            const classesPost = await api.post("classes", data, {
+                headers: {
+                    'x-access-token': user.token
+                }
+            }).catch((e) => console.error(e));
 
+            return classesPost;
+        }
+        if (isLessons) {
+            const lessonsPost = await api.post("lessons", data, {
+                headers: {
+                    'x-access-token': user.token
+                }
+            }).catch((e) => console.error(e));
+
+            return lessonsPost;
+        }
+        if (isContent) {
+            const contentPost = await api.post("content", data, {
+                headers: {
+                    'x-access-token': user.token
+                }
+            }).catch((e) => console.error(e));
+
+            return contentPost;
+        }
+        return new Error("You must provide the type of post using isClasses, isLessons or isContent variable")
+    }
     return (
-        <ApiContext.Provider value={{ user, classes, lessons, content, getApiData, loading }}>
+        <ApiContext.Provider value={{ user, classes, lessons, content, getApiData, postApiData, loading }}>
             {children}
         </ApiContext.Provider>
     )

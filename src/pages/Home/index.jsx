@@ -32,8 +32,8 @@ export default function home() {
     setClasses(classesReq);
   }
 
-  function handleClassSelect(grade) {
-    navigation.navigate('Grade', { grade });
+  function handleClassSelect(data) {
+    navigation.navigate('Grade', { data });
   }
 
   useEffect(() => {
