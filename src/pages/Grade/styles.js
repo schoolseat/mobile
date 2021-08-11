@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import StyleSheet from 'react-native-extended-stylesheet';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
@@ -9,19 +9,29 @@ export default StyleSheet.create({
   },
   headerContent: {
     width: '100%',
-    height: 104,
-    paddingHorizontal: 15,
-    paddingTop: getStatusBarHeight(),
+    height: '5rem',
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
+    paddingHorizontal: '1rem',
+    paddingTop: getStatusBarHeight(),
   },
   title: {
     flex: 1,
     marginLeft: 20,
-    fontFamily: fonts.complement,
-    fontSize: 25,
+    fontSize: '2rem',
     color: colors.heading,
+    fontFamily: fonts.complement,
+  },
+  dots: {
+    fontSize: '2.5rem',
+    color: colors.heading,
+    fontFamily: fonts.complement,
+  },
+  headerDataView: {
+    marginTop: '.5rem',
+    flexDirection: 'column',
+    paddingHorizontal: '1.5rem'
   },
   teacherView: {
     flexDirection: 'row',
@@ -29,20 +39,21 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   teacherPfp: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    marginLeft: 10,
-    marginRight: 5,
+    width: '3rem',
+    height: '3rem',
+    borderRadius: '1.5rem',
+    marginRight: '1rem'
   },
   teacherName: {
+    fontSize: '1.2rem',
     color: colors.heading,
     fontFamily: fonts.text,
   },
   schoolName: {
+    marginTop: '.5rem',
+    fontSize: '1.2rem',
     color: colors.heading,
     fontFamily: fonts.text,
-    marginLeft: 45.5,
   },
   buttons: {
     flexDirection: 'row',
@@ -62,4 +73,9 @@ export default StyleSheet.create({
     color: colors.heading,
     marginRight: 180,
   },
+  modalButtons: {
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+  }
 });

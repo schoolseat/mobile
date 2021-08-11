@@ -18,7 +18,7 @@ export default function Button({ name, color, textColor, ...rest }) {
       activeOpacity={0.7}
       {...rest}
     >
-      <Text style={
+      <Text numberOfLines={1} style={
         textColor
           ? [
             styles.text, {

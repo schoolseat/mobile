@@ -118,7 +118,7 @@ export default function profile() {
         </View>
       </ScrollView >
       <View style={styles.modal}>
-        <ModalView visible={openModal} closeModal={handleModal} half={halfModal}>
+        <ModalView visible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.66}>
           {
             (!openEditAccount && !openEditProfile) &&
             <View style={styles.modalButtons}>

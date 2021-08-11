@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Modal, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import styles from './styles';
 
-export default function ModalView({ children, closeModal, half = false, ...rest }) {
+export default function ModalView({ children, closeModal, half = false, marginOfTop, ...rest }) {
 
   return (
     <Modal
@@ -17,7 +17,7 @@ export default function ModalView({ children, closeModal, half = false, ...rest 
         <View style={
           half
           ? [styles.overlay, {
-            marginTop: Dimensions.get('window').height * 0.66
+            marginTop: Dimensions.get('window').height * marginOfTop
           }]
           : styles.overlay
         }>
