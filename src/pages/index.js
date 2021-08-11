@@ -6,7 +6,7 @@ import Calendar from './Calendar';
 import CreateAccount from './CreateAccount';
 import CreateClass from './CreateClass';
 import RecoverPassword from './RecoverPassword';
-import UserIdentification from './UserIdentification';
+import Login from './Login';
 
 export {
   Home,
@@ -17,5 +17,5 @@ export {
   CreateClass,
   CreateAccount,
   RecoverPassword,
-  UserIdentification,
+  Login,
 };

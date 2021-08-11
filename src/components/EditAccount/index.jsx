@@ -12,7 +12,7 @@ import {
 
 import styles from './styles';
 
-import Button from '../button';
+import Button from '../Button';
 import colors from '../../styles/colors';
 
 export default function EditAccount({ user, handleModal }) {

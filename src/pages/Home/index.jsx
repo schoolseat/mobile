@@ -15,7 +15,7 @@ import { useIsFocused } from '@react-navigation/native';
 import styles from './styles';
 import Book from '../../assets/book.svg';
 import { useApi } from '../../hooks/auth';
-import { ActivitiesCard, Loading } from '../../components';
+import { LittleClassesCard, Loading } from '../../components';
 
 export default function home() {
   const [classes, setClasses] = useState(false);
@@ -66,7 +66,7 @@ export default function home() {
             data={classes}
             numColumns={2}
             renderItem={({ item }) => (
-               <ActivitiesCard
+               <LittleClassesCard
                 name={item.discipline}
                 icon={item.icon}
                 color={item.color}

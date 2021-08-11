@@ -7,11 +7,11 @@ import { useApi } from '../hooks/auth';
 
 import {
   Grade,
+  Login,
   Activity,
   CreateClass,
   CreateAccount,
   RecoverPassword,
-  UserIdentification,
 } from '../pages';
 const StackRoutes = createStackNavigator();
 
@@ -40,7 +40,7 @@ const AppRoutes = () => {
           : (
 
             <>
-              <StackRoutes.Screen name="UserIdentification" component={UserIdentification} />
+              <StackRoutes.Screen name="Login" component={Login} />
               <StackRoutes.Screen name="CreateAccount" component={CreateAccount} />
               <StackRoutes.Screen name="RecoverPassword" component={RecoverPassword} />
             </>

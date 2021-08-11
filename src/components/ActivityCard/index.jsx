@@ -16,7 +16,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 import colors from '../../styles/colors';
 
-export default function HourCard({
+export default function ActivityCard({
   lesons, selected, isActivity, openModal, ...rest
 }) {
   const [isSelected, setSelected] = useState(false);

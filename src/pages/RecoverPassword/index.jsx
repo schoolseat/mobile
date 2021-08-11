@@ -27,9 +27,6 @@ export default function RecoverPassword() {
 
     const navigation = useNavigation();
 
-    function handleStart() {
-        navigation.navigate('UserIdentification');
-    }
     function handleGoBack() {
         navigation.goBack();
     }
@@ -88,7 +85,7 @@ export default function RecoverPassword() {
                                     )
                             }
                         </View>
-                        <Button name="Enviar" onPress={handleStart} />
+                        <Button name="Enviar" onPress={handleGoBack} />
                         <Text style={styles.little}>
                             Um e-mail com o processo para {'\n'}
                             recuperação a senha será enviado

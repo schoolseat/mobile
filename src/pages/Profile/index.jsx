@@ -19,9 +19,9 @@ import { useApi } from '../../hooks/auth';
 import {
   Button,
   Loading,
-  Classes,
   ModalView,
   EditAccount,
+  ClassesCard,
   EditProfile,
 } from '../../components';
 
@@ -107,7 +107,7 @@ export default function profile() {
           <FlatList
             data={classes}
             renderItem={({ item }) => (
-              <Classes
+              <ClassesCard
                 data={item}
                 isTeacher={item.teacher === user._id ? true : false}
                 onPress={() => handleClassSelect(item)}

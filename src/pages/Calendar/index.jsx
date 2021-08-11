@@ -21,10 +21,10 @@ import { useApi } from '../../hooks/auth';
 import dates from '../../locales/dates.json';
 
 import {
-  HourCard,
-  ModalView,
   Loading,
-  DaysOfWeek
+  ModalView,
+  DaysOfWeek,
+  ActivityCard
 } from '../../components';
 
 const today = new Date();
@@ -210,7 +210,7 @@ export default function Calendar() {
               </View>
             )}
             renderItem={({ item }) => (
-              <HourCard
+              <ActivityCard
                 lesons={item}
                 selected={item.isActive}
                 isActivity={isActivity}

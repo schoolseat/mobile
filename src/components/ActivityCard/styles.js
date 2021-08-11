@@ -22,6 +22,7 @@ export default StyleSheet.create({
     firstLine: {
       flexDirection: 'row',
       justifyContent: 'space-between',
+      paddingVertical: 10
     },
     TouchableOpacity: {
       height: '100%',
@@ -56,6 +57,7 @@ export default StyleSheet.create({
     classesContent: {
       fontSize: 12,
       fontFamily: fonts.text,
+      marginBottom: '-1rem'
     },
     classesNumber: {
       fontFamily: fonts.complement,
@@ -71,6 +73,7 @@ export default StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       textAlign: 'center',
+      marginTop: '.5rem'
     },
     teacherPic: {
       width: 30,

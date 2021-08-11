@@ -6,7 +6,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import colors from '../../styles/colors';
 import styles from './styles';
 
-export default function Classes({ data, isTeacher, ...rest }) {
+export default function ClassesCard({ data, isTeacher, ...rest }) {
     return (
         <RectButton style={isTeacher
             ? [

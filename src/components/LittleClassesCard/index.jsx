@@ -13,7 +13,7 @@ import { RectButton } from 'react-native-gesture-handler';
 import styles from './styles';
 import colors from '../../styles/colors';
 
-export default function ActivitiesCard({
+export default function LittleClassesCard({
   name, icon, color, ...rest
 }) {
   return (

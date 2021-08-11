@@ -18,9 +18,11 @@ import { Button } from '../../components';
 export default function Activity() {
   const navigation = useNavigation();
   const route = useRoute();
+
   function handleStart() {
     navigation.navigate('Calendar');
   }
+  
   const { activity } = route.params;
   return (
     <View style={styles.container}>
