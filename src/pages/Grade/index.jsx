@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,20 +13,37 @@ import { useRoute, useNavigation } from '@react-navigation/core';
 
 import styles from './styles';
 import colors from '../../styles/colors';
-import { GradeCard } from '../../components';
+import { GradeCard, Loading } from '../../components';
+import { useApi } from '../../hooks/auth';
 
 export default function Grade() {
   const [isMural, setIsMural] = useState(true);
   const [students, setStudents] = useState([]);
+  const [teacher, setTeacher] = useState(false);
 
   const navigation = useNavigation();
+  const { getDataById, loading } = useApi();
   const route = useRoute();
 
   function handleGoBack() {
     navigation.goBack();
   }
 
-  const { data:grade } = route.params;
+  const { data: grade } = route.params;
+
+  async function getTeacherData() {
+    const id = grade.teacher;
+    if (loading) return;
+    const data = await getDataById({ id, isUser: true })
+    setTeacher(data);
+  }
+
+  useEffect(() => {
+    getTeacherData();
+  }, [])
+  if (loading || !teacher) {
+    return <Loading />;
+  }
   return (
     <View style={styles.container}>
       <View style={styles.headerContent}>
@@ -42,12 +59,12 @@ export default function Grade() {
       </View>
       <View style={styles.teacherView}>
         {
-          grade.teacher.profilePic
-            ? <Image style={styles.teacherPfp} source={{ uri: grade.teacher.profilePic }} />
+          teacher.profilePic
+            ? <Image style={styles.teacherPfp} source={{ uri: teacher.profilePic }} />
             : <FontAwesome name="user-circle-o" size={24} color="black" style={styles.teacherPfp} />
         }
         <Text style={styles.teacherName}>
-          {grade.teacher}
+          {teacher.name}
         </Text>
       </View>
       <Text style={styles.schoolName}>
