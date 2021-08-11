@@ -95,17 +95,14 @@ export default function Grade() {
           Alunos
         </Text>
       </View>
-      <ScrollView>
         <FlatList
-          data={isMural ? [] : students}
-          keyExtractor={(item) => String(item.id)}
+          data={grade.users}
           renderItem={({ item }) => (
             <GradeCard
               data={item}
             />
           )}
         />
-      </ScrollView>
       <ModalView visible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.59}>
         <View style={styles.modalButtons}>
           <Button name="Criar nova atividade" />

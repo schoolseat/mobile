@@ -11,7 +11,7 @@ export default {
   cards_background: "#e7e7e4",
   cards_selected_background: '#4DC591',
   background: '#FFFFFF',
-  shape: '#F0F0F0',
+  shape: '#F6F6F5',
   white: '#FFFFFF',
   gray: '#CFCFCF',
   blue: '#007EFF',
