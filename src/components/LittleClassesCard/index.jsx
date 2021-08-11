@@ -34,7 +34,7 @@ export default function LittleClassesCard({
     </RectButton>
   );
 }
-ActivitiesCard.propTypes = {
+LittleClassesCard.propTypes = {
   name: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,

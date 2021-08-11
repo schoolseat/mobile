@@ -13,7 +13,7 @@ import { useRoute, useNavigation } from '@react-navigation/core';
 
 import styles from './styles';
 import colors from '../../styles/colors';
-import { MessagesCard } from '../../components';
+import { GradeCard } from '../../components';
 
 export default function Grade() {
   const [isMural, setIsMural] = useState(true);
@@ -72,9 +72,8 @@ export default function Grade() {
           data={isMural ? [] : students}
           keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (
-            <MessagesCard
-              name={item.name}
-              profilePic={item.profilePic}
+            <GradeCard
+              data={item}
             />
           )}
         />

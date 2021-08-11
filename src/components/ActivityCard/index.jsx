@@ -167,13 +167,13 @@ export default function ActivityCard({
     </View>
   );
 }
-HourCard.propTypes = {
+ActivityCard.propTypes = {
   lesons: PropTypes.oneOfType([PropTypes.object]).isRequired,
   classe: PropTypes.oneOfType([PropTypes.object]).isRequired,
   isActivity: PropTypes.bool,
   selected: PropTypes.bool,
 };
-HourCard.defaultProps = {
+ActivityCard.defaultProps = {
   isActivity: false,
   selected: false,
 };
