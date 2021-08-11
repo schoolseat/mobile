@@ -95,19 +95,23 @@ export default function Grade() {
           Alunos
         </Text>
       </View>
+      {
+        !isMural &&
         <FlatList
           data={grade.users}
+          keyExtractor={item => item}
           renderItem={({ item }) => (
             <GradeCard
               data={item}
             />
           )}
         />
+      }
       <ModalView visible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.59}>
         <View style={styles.modalButtons}>
           <Button name="Criar nova atividade" />
           <Button name="Criar novo conteudo" />
-          <Button name="Editar turma" color='white' textColor='black'/>
+          <Button name="Editar turma" color='white' textColor='black' />
           <Button name="Apagar turma" color='red' />
         </View>
       </ModalView>
