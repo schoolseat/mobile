@@ -63,28 +63,30 @@ export default function Notifications() {
               Nome da turma
             </Text>
             <TextInput
+              editable
+              maxLength={15}
+              numberOfLines={1}
               style={styles.textsinput}
               onChangeText={(text) => setClassName(text)}
-              numberOfLines={1}
-              editable
             />
             <Text style={styles.texts}>
               Nome da escola
             </Text>
             <TextInput
+              editable
+              maxLength={40}
+              numberOfLines={1}
               style={styles.textsinput}
               onChangeText={(text) => setSchoolName(text)}
-              numberOfLines={1}
-              editable
             />
             <Text style={styles.texts}>
               Bio da turma
             </Text>
             <TextInput
+              editable
+              maxLength={140}
               style={styles.textsinput}
               onChangeText={(text) => setClassBio(text)}
-              numberOfLines={1}
-              editable
             />
           </View>
           <View style={{ alignItems: 'center', marginTop: 25 }}>

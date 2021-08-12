@@ -18,69 +18,69 @@ export default StyleSheet.create({
   },
   image: {
     width: '5rem',
+    bottom: '1rem',
     height: '5rem',
-    borderRadius: '2.5rem',
     margin: '1rem',
-    bottom: '1rem'
+    borderRadius: '2.5rem',
   },
   title: {
-    fontFamily: fonts.text,
-    color: colors.title,
     fontSize: '1.5rem',
+    color: colors.title,
+    fontFamily: fonts.text,
   },
   data: {
     flexDirection: 'row',
   },
   stars: {
-    flexDirection: 'row',
-    left: '100%',
     top: '1rem',
-    position: 'absolute'
+    left: '100%',
+    position: 'absolute',
+    flexDirection: 'row',
   },
   editprofile: {
+    bottom: '4rem',
     left: Dimensions.get('window').width* 0.6,
-    bottom: '4rem'
   },
   dots: {
-    fontFamily: fonts.heading,
-    color: colors.heading,
     fontSize: '2rem',
+    color: colors.heading,
+    fontFamily: fonts.heading,
   },
   level: {
+    bottom: 50,
     margin: '1rem',
     marginTop: '2rem',
-    bottom: 50,
   },
   levelTexts: {
     flexDirection: 'row',
   },
   text: {
-    fontFamily: fonts.text,
-    color: colors.title,
+    width: 150,
     fontSize: 10,
-    width: 150
+    color: colors.title,
+    fontFamily: fonts.text,
   },
   userXp: {
     marginLeft: '15%',
-    fontFamily: fonts.text,
     color: colors.title,
+    fontFamily: fonts.text,
   },
   progressbar: {
-    borderRadius: 10,
     height: '20%',
+    borderRadius: 10,
   },
   remainXp: {
     left: '80%',
     bottom: '10%',
-    fontFamily: fonts.text,
     color: colors.title,
+    fontFamily: fonts.text,
   },
   modalButtons: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   classesView: {
-    marginTop: '-15rem',
+    marginTop: '-10rem',
     alignItems: 'center',
     justifyContent: 'center',
   },

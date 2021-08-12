@@ -55,6 +55,16 @@ export default StyleSheet.create({
     color: colors.heading,
     fontFamily: fonts.text,
   },
+  bio: {
+    width: '10rem',
+    flexWrap: 'wrap',
+    fontSize: '1rem',
+    marginTop: '.5rem',
+    flexDirection: 'row',
+    color: colors.heading,
+    alignItems: 'flex-start', 
+    fontFamily: fonts.complement,
+  },
   buttons: {
     flexDirection: 'row',
     marginLeft: 45,

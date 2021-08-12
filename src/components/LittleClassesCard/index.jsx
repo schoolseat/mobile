@@ -19,11 +19,11 @@ export default function LittleClassesCard({
   return (
     <RectButton
       style={{
-        backgroundColor: color,
-        width: Dimensions.get('window').width * 0.4,
         margin: 10,
         borderRadius: 15,
         alignItems: 'center',
+        backgroundColor: color,
+        width: Dimensions.get('window').width * 0.44,
       }}
       {...rest}
     >

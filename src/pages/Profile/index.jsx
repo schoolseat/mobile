@@ -61,62 +61,60 @@ export default function profile() {
     return <Loading />;
   }
   return (
-
     <View style={styles.container}>
-      <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: user.profilePic,
-            }}
-          />
-          <View style={styles.headerTexts}>
-            <View>
-              <Text style={styles.title}>{user.name}</Text>
-              <View style={styles.data}>
-                <Text style={styles.text}>{user.bio}</Text>
-                {stars(Number(user.stars))}
-              </View>
-            </View>
-            <View style={styles.editprofile}>
-              <TouchableOpacity onPress={handleModal}>
-                <Text style={styles.dots}>...</Text>
-              </TouchableOpacity>
+      <View style={styles.header}>
+        <Image
+          style={styles.image}
+          source={{
+            uri: user.profilePic,
+          }}
+        />
+        <View style={styles.headerTexts}>
+          <View>
+            <Text style={styles.title}>{user.name}</Text>
+            <View style={styles.data}>
+              <Text style={styles.text}>{user.bio}</Text>
+              {stars(Number(user.stars))}
             </View>
           </View>
+          <View style={styles.editprofile}>
+            <TouchableOpacity onPress={handleModal}>
+              <Text style={styles.dots}>...</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.level}>
-          <Text style={styles.text}>
-            Nivel:{' '}
-            {user.level}
+      </View>
+      <View style={styles.level}>
+        <Text style={styles.text}>
+          Nivel:{' '}
+          {user.level}
+        </Text>
+        <View style={styles.levelTexts}>
+          <Text style={styles.text}>Experiencia atual</Text>
+          <Text style={styles.userXp}>
+            {user.xp}
+            {' '}
+            XP
           </Text>
-          <View style={styles.levelTexts}>
-            <Text style={styles.text}>Experiencia atual</Text>
-            <Text style={styles.userXp}>
-              {user.xp}
-              {' '}
-              XP
-            </Text>
-          </View>
-          <ProgressBar style={styles.progressbar} progress={user.xp / 1000} color="#6DA7F6" />
-          <Text style={styles.remainXp}>100.000 xp</Text>
         </View>
-        <View style={styles.classesView}>
-          <Text style={styles.classesTitle}>Minhas turmas</Text>
-          <FlatList
-            data={classes}
-            renderItem={({ item }) => (
-              <ClassesCard
-                data={item}
-                isTeacher={item.teacher === user._id ? true : false}
-                onPress={() => handleClassSelect(item)}
-              />
-            )}
-            keyExtractor={item => item.id}
-          />
-        </View>
-      </ScrollView >
+        <ProgressBar style={styles.progressbar} progress={user.xp / 1000} color="#6DA7F6" />
+        <Text style={styles.remainXp}>100.000 xp</Text>
+      </View>
+      <View style={styles.classesView}>
+        <Text style={styles.classesTitle}>Minhas turmas</Text>
+        <FlatList
+          data={classes}
+          keyExtractor={item => item.id}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <ClassesCard
+              data={item}
+              isTeacher={item.teacher === user._id ? true : false}
+              onPress={() => handleClassSelect(item)}
+            />
+          )}
+        />
+      </View>
       <View style={styles.modal}>
         <ModalView visible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.66}>
           {

@@ -21,15 +21,10 @@ export default StyleSheet.create({
     height: Dimensions.get('window').height * 0.43,
   },
   title: {
-    fontFamily: fonts.heading,
-    fontSize: 20,
+    fontSize: 25,
     marginTop: 20,
     marginLeft: 10,
+    color: colors.title,
+    fontFamily: fonts.heading,
   },
-  classesCards: {
-    height: 200,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'flex-start' 
-  }
 });

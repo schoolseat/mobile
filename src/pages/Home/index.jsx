@@ -6,19 +6,21 @@ import {
   FlatList,
   StatusBar,
   Dimensions,
-  ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 
 import { useNavigation } from '@react-navigation/core';
 import { useIsFocused } from '@react-navigation/native';
 
 import styles from './styles';
+import colors from '../../styles/colors';
 import Book from '../../assets/book.svg';
 import { useApi } from '../../hooks/auth';
 import { LittleClassesCard, Loading } from '../../components';
 
 export default function home() {
   const [classes, setClasses] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
 
   const {
     classes: classesReq,
@@ -31,6 +33,13 @@ export default function home() {
     getApiData();
     if (loading) return;
     setClasses(classesReq);
+    setLoadingMore(false);
+  }
+
+  function handleFetchMore(distance) {
+    if (distance < 1) return;
+    setLoadingMore(true)
+    fetchClasses()
   }
 
   function handleClassSelect(data) {
@@ -39,7 +48,7 @@ export default function home() {
 
   useEffect(() => {
     fetchClasses();
-  }, [classes, classesReq, loading]);
+  }, [classes, loadingMore,getApiData, loading]);
 
   if (loading || !classes) {
     return <Loading />;
@@ -57,26 +66,34 @@ export default function home() {
           height={Dimensions.get('window').height * 0.4}
         />
       </View>
-      <ScrollView >
-        <View style={styles.classes}>
-          <Text style={styles.title}>
-            Classes
-          </Text>
-          <FlatList
-            data={classes}
-            numColumns={2}
-            renderItem={({ item }) => (
-               <LittleClassesCard
-                name={item.discipline}
-                icon={item.icon}
-                color={item.color}
-                onPress={() => handleClassSelect(item)}
-              />
-            )}
-            keyExtractor={item => item._id}
-          />
-        </View>
-      </ScrollView>
+      <View style={styles.classes}>
+        <Text style={styles.title}>
+          Classes
+        </Text>
+        <FlatList
+          data={classes}
+          numColumns={2}
+          onEndReachedThreshold={0.1}
+          keyExtractor={item => item._id}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <LittleClassesCard
+              name={item.discipline}
+              icon={item.icon}
+              color={item.color}
+              onPress={() => handleClassSelect(item)}
+            />
+          )}
+          onEndReached={({ distanceFromEnd }) =>
+            handleFetchMore(distanceFromEnd)
+          }
+          ListFooterComponent={
+            loadingMore ?
+              <ActivityIndicator color={colors.green} />
+              : null
+          }
+        />
+      </View>
     </View>
   );
 }

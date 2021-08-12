@@ -80,6 +80,9 @@ export default function Grade() {
         <Text style={styles.schoolName}>
           {grade.school}
         </Text>
+        <Text style={styles.bio}>
+          {grade.bio}
+        </Text>
       </View>
       <View style={styles.buttons}>
         <Text
