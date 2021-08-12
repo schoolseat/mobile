@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, Modal, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { 
+  View, 
+  Dimensions,
+  TouchableWithoutFeedback,
+} from 'react-native';
+
+import Modal from 'react-native-modal';
+
 import styles from './styles';
 
 export default function ModalView({ children, closeModal, half = false, marginOfTop, ...rest }) {
@@ -7,8 +14,9 @@ export default function ModalView({ children, closeModal, half = false, marginOf
   return (
     <Modal
       transparent
+      coverScreen
       animationType="slide"
-      onSwipe={closeModal}
+      onSwipeComplete={closeModal}
       onSwipeThreshold={20}
       swipeDirection="down"
       {...rest}

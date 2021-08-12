@@ -14,6 +14,7 @@ import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import { RectButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
+import { useApi } from '../../hooks/auth';
 import colors from '../../styles/colors';
 
 export default function ActivityCard({
@@ -21,6 +22,21 @@ export default function ActivityCard({
 }) {
   const [isSelected, setSelected] = useState(false);
   const [emojiColor, setEmojiColor] = useState(false);
+  const [teacher, setTeacher] = useState(false);
+
+  const { getDataById } = useApi();
+
+  async function getTeacherData() {
+    const id = lesons.classe
+    const { teacher } = await getDataById({ id, isClasses: true });
+    const teacherId = teacher.id
+    const data = await getDataById({ teacherId, isUser: true });
+    setTeacher(data);
+  }
+
+  useEffect(() => {
+    getTeacherData();
+  }, [])
 
   useEffect(() => {
     if (selected || !isActivity) {
@@ -94,21 +110,21 @@ export default function ActivityCard({
             </Text>
           </View>
           <TouchableOpacity onPress={openModal} style={styles.TouchableOpacity}>
-          <Text  style={
-                isActivity
-                  ? (
-                    isSelected
-                      ? [styles.dots, {
-                        color: colors.white,
-                      }]
-                      : styles.dots
-                  )
-                  : [styles.dots, {
-                    color: colors.white,
-                  }]
-              }>
-            . .
-          </Text>
+            <Text style={
+              isActivity
+                ? (
+                  isSelected
+                    ? [styles.dots, {
+                      color: colors.white,
+                    }]
+                    : styles.dots
+                )
+                : [styles.dots, {
+                  color: colors.white,
+                }]
+            }>
+              . .
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.data}>
@@ -132,7 +148,7 @@ export default function ActivityCard({
         </View>
         <View style={styles.data}>
           {
-            true
+            teacher.profilePic
               ? <FontAwesome
                 name="user-circle-o"
                 size={24}
@@ -141,7 +157,7 @@ export default function ActivityCard({
               />
               : <Image
                 source={{
-                  uri: classe.teacher.profilePic,
+                  uri: teacher.profilePic,
                 }}
                 style={styles.teacherPic}
               />
@@ -160,7 +176,7 @@ export default function ActivityCard({
               }]
           }
           >
-            {/* {classe.teacher.name} */}
+            {teacher.name}
           </Text>
         </View>
       </RectButton>
@@ -169,7 +185,6 @@ export default function ActivityCard({
 }
 ActivityCard.propTypes = {
   lesons: PropTypes.oneOfType([PropTypes.object]).isRequired,
-  classe: PropTypes.oneOfType([PropTypes.object]).isRequired,
   isActivity: PropTypes.bool,
   selected: PropTypes.bool,
 };

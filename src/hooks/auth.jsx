@@ -107,7 +107,7 @@ function ApiProvider({ children }) {
         setLoading(false);
         return new Error("You must provide the type of post !")
     }
-    async function getDataById({id, isUser, isClasses,isContent,isLessons}) {
+    async function getDataById({id, isUser, isClasses ,isContent ,isLessons}) {
         if (isClasses) {
             const classesPost = await api.get(`classes/${id}`, {
                 headers: {

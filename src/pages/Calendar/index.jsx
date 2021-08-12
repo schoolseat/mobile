@@ -224,7 +224,7 @@ export default function Calendar() {
           />
         </View>
       </ScrollView>
-      <ModalView visible={openModal} closeModal={handleModal}>
+      <ModalView isVisible={openModal} closeModal={handleModal}>
         <Text> Quem mora em tilambuco</Text>
       </ModalView>
     </View>

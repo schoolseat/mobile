@@ -4,7 +4,6 @@ import {
   Text,
   Image,
   FlatList,
-  ScrollView,
   TouchableOpacity,
 } from 'react-native';
 
@@ -35,9 +34,15 @@ export default function profile() {
 
   const navigation = useNavigation();
 
-  function handleModal() {
-    setOpenModal(!openModal);
-    setHalfModal(!halfModal);
+  function handleOpenModal() {
+    setOpenModal(true);
+    setHalfModal(true);
+  }
+  function handleCloseModal() {
+    setOpenEditProfile(false);
+    setOpenEditAccount(false);
+    setHalfModal(false);
+    setOpenModal(false)
   }
   function handleNavigation(place) {
     navigation.navigate(place);
@@ -78,7 +83,7 @@ export default function profile() {
             </View>
           </View>
           <View style={styles.editprofile}>
-            <TouchableOpacity onPress={handleModal}>
+            <TouchableOpacity onPress={handleOpenModal}>
               <Text style={styles.dots}>...</Text>
             </TouchableOpacity>
           </View>
@@ -116,18 +121,18 @@ export default function profile() {
         />
       </View>
       <View style={styles.modal}>
-        <ModalView visible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.66}>
+        <ModalView isVisible={openModal} closeModal={handleCloseModal} onBackButtonPress={handleCloseModal} half={halfModal} marginOfTop={0.66}>
           {
             (!openEditAccount && !openEditProfile) &&
             <View style={styles.modalButtons}>
               <Button name="Editar Perfil" onPress={() => {
                 setOpenEditProfile(!openEditProfile),
-                  setHalfModal(!halfModal);
+                setHalfModal(false);
               }}
               />
               <Button name="Editar Conta" onPress={() => {
                 setOpenEditAccount(!openEditAccount),
-                  setHalfModal(!halfModal);
+                setHalfModal(false);
               }}
               />
               <Button name="Sair" color={colors.red} onPress={() => handleNavigation('UserIdentification')} />
@@ -135,11 +140,11 @@ export default function profile() {
           }
           {
             openEditAccount &&
-            <EditAccount user={user} handleModal={handleModal} />
+            <EditAccount user={user} handleModal={handleCloseModal} />
           }
           {
             openEditProfile &&
-            <EditProfile user={user} handleModal={handleModal} />
+            <EditProfile user={user} handleModal={handleCloseModal} />
           }
         </ModalView>
       </View>

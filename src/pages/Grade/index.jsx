@@ -110,7 +110,7 @@ export default function Grade() {
           )}
         />
       }
-      <ModalView visible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.59}>
+      <ModalView isVisible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.59}>
         <View style={styles.modalButtons}>
           <Button name="Criar nova atividade" />
           <Button name="Criar novo conteudo" />
