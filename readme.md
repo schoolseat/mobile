@@ -10,13 +10,13 @@
 
 1. Clone this repository.
 2. Install all dependencies with `yarn install` or `npm install`.
-3. Start development server with `yarn start` or `npm run start`.</br>
- 
+3. Start development server with `yarn start` or `npm run start`.
+4 (Optional). If you want to know how much storage packages are using in node_modules you may use `yarn bundle`</br>
 
 ## 📝 TODO
 
-- [ ] Verify grammar.
 - [ ] Add i18next.
+- [ ] Verify grammar.
 - [ ] Login with Google.
 - [ ] Fix keyboard bugs.
 - [ ] Improve responsivity.
