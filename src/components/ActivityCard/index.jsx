@@ -23,13 +23,15 @@ export default function ActivityCard({
   const [isSelected, setSelected] = useState(false);
   const [emojiColor, setEmojiColor] = useState(false);
   const [teacher, setTeacher] = useState(false);
+  const [classe, setClasse] = useState(false);
 
   const { getDataById } = useApi();
 
   async function getTeacherData() {
     const id = lesons.classe
-    const { teacher } = await getDataById({ id, isClasses: true });
-    const teacherId = teacher.id
+    const classeReq = await getDataById({ id, isClasses: true });
+    setClasse(classeReq)
+    const teacherId = classe.teacher.id
     const data = await getDataById({ teacherId, isUser: true });
     setTeacher(data);
   }
@@ -143,7 +145,7 @@ export default function ActivityCard({
               }]
           }
           >
-            {lesons.classe}
+            {classe.school}
           </Text>
         </View>
         <View style={styles.data}>
