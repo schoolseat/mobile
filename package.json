@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "sudo expo start",
-    "bundle": "sudo react-native-bundle-visualizer",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "start": "expo start",
+    "bundle": "react-native-bundle-visualizer"
   },
   "dependencies": {
     "@expo-google-fonts/jost": "^0.1.0",
