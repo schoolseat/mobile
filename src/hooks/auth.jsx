@@ -26,7 +26,7 @@ function ApiProvider({ children }) {
             alert(["Ops", 'Seu e-mail ou senha parecem estar errados!'])
         })
         setUser(userReq);
-        
+
         const { data: classesReq } = await api.get('classes', {
             headers: {
                 'x-access-token': user.token
@@ -49,34 +49,7 @@ function ApiProvider({ children }) {
         setContent(contentReq);
         setLoading(false);
     }
-    async function postApiData({ data, isClasses, isLessons, isContent, isCreateAccount }) {
-        if (isClasses) {
-            const classesPost = await api.post("classes", data, {
-                headers: {
-                    'x-access-token': user.token
-                }
-            })
-            setLoading(false);
-            return classesPost;
-        }
-        if (isLessons) {
-            const lessonsPost = await api.post("lessons", data, {
-                headers: {
-                    'x-access-token': user.token
-                }
-            })
-            setLoading(false);
-            return lessonsPost;
-        }
-        if (isContent) {
-            const contentPost = await api.post("content", data, {
-                headers: {
-                    'x-access-token': user.token
-                }
-            })
-            setLoading(false);
-            return contentPost;
-        }
+    async function postApiData({ data, path, isCreateAccount }) {
         if (isCreateAccount) {
             const { data: userReq } = await api.post("users", data)
 
@@ -84,44 +57,19 @@ function ApiProvider({ children }) {
             setUser(userReq);
         }
         setLoading(false);
-        return new Error("You must provide the type of post !")
-    }
-    async function getDataById({ id, isUser, isClasses, isContent, isLessons }) {
-        if (isClasses) {
-            const classesPost = await api.get(`classes/${id}`, {
-                headers: {
-                    'x-access-token': user.token
-                }
-            })
-            setLoading(false);
-            return classesPost;
-        }
-        if (isLessons) {
-            const lessonsPost = await api.get(`lessons/${id}`, {
-                headers: {
-                    'x-access-token': user.token
-                }
-            })
-            setLoading(false);
-            return lessonsPost;
-        }
-        if (isContent) {
-            const contentPost = await api.get(`content/${id}`, {
-                headers: {
-                    'x-access-token': user.token
-                }
-            })
-            setLoading(false);
-            return contentPost;
-        }
-        if (isUser) {
-            const { data: userReq } = await api.get(`users/${id}`)
-
-            setLoading(false);
-            return userReq;
-        }
+        const contentPost = await api.post(path, data, {
+            headers: {
+                'x-access-token': user.token
+            }
+        })
         setLoading(false);
-        return new Error("You must provide the type of request !")
+        return contentPost;
+    }
+    async function getDataById({ path, id }) {
+        const { data: userReq } = await api.get(`${path}/${id}`)
+
+        setLoading(false);
+        return userReq;
     }
     return (
         <ApiContext.Provider value={{ user, classes, lessons, content, getApiData, postApiData, getDataById, loading }}>

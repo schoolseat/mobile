@@ -38,7 +38,7 @@ export default function Notifications() {
       discipline: className,
     }
 
-    const { data } = await postApiData({ data: parsedPostData, isClasses: true })
+    const { data } = await postApiData({ data: parsedPostData, path: "classes" })
     navigation.navigate('Grade', { data });
   }
 

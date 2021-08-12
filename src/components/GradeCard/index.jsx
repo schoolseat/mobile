@@ -9,7 +9,7 @@ export default function GradeCard({ data }) {
     const { getDataById } = useApi();
     
     async function getTeacherData() {
-        const User = await getDataById({ id:data, isUser: true })
+        const User = await getDataById({ id:data, path: "users"  })
         setUser(User);
     }
 

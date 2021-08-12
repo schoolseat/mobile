@@ -43,7 +43,7 @@ export default function Grade() {
   async function getTeacherData() {
     const id = grade.teacher;
     if (loading) return;
-    const data = await getDataById({ id, isUser: true })
+    const data = await getDataById({ id, path: "users"})
     setTeacher(data);
   }
 
