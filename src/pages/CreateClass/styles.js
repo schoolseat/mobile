@@ -8,30 +8,30 @@ export default StyleSheet.create({
     flex: 1
   },
   greenContainer: {
-    backgroundColor: colors.green,
     alignItems: 'center',
+    backgroundColor: colors.green,
   },
   title: {
-    marginTop: getStatusBarHeight(),
-    fontFamily: fonts.heading,
     fontSize: 30,
     color: colors.white,
+    fontFamily: fonts.heading,
+    marginTop: getStatusBarHeight(),
   },
   data: {
     marginTop: '2rem',
     paddingHorizontal: '5rem',
   },
   texts: {
+    fontSize: 15,
     color: colors.heading,
     fontFamily: fonts.heading,
-    fontSize: 15,
   },
   textsinput: {
-    fontFamily: fonts.text,
-    color: colors.heading,
     width: '15rem',
-    borderBottomColor: colors.heading,
     borderBottomWidth: 1,
     marginBottom: '2rem',
+    color: colors.heading,
+    fontFamily: fonts.text,
+    borderBottomColor: colors.heading,
   },
 });

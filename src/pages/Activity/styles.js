@@ -19,9 +19,9 @@ export default StyleSheet.create({
   scrollContainer: {
     alignItems: 'center',
     textAlign: 'justify',
-    backgroundColor: colors.white,
-    borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: colors.white,
     height: Dimensions.get('window').height * 0.5,
     marginTop: Dimensions.get('window').width * 0.7,
   },
@@ -41,8 +41,8 @@ export default StyleSheet.create({
   },
   text: {
     marginTop: 10,
-    paddingHorizontal: 20,
     marginBottom: 20,
+    paddingHorizontal: 20,
     color: colors.heading,
     fontFamily: fonts.complement,
   },
@@ -51,8 +51,8 @@ export default StyleSheet.create({
     marginBottom: 30,
   },
   backButton: {
-    marginTop: getStatusBarHeight(),
-    margin: 10,
     width: 30,
+    margin: 10,
+    marginTop: getStatusBarHeight(),
   },
 });

@@ -4,34 +4,34 @@ import fonts from '../../styles/fonts';
 
 export default StyleSheet.create({
     card: {
-      alignContent: 'center',
+      margin: -40,
       left: '10rem',
       height: '22rem',
       marginTop: '-2rem',
-      margin: -40,
       marginBottom: -160,
+      alignContent: 'center',
     },
     longCard: {
-      alignContent: 'center',
       left: '2.5rem',
-      height: '22rem',
       width: '36rem',
+      height: '22rem',
       marginTop: '1rem',
+      alignContent: 'center',
       marginBottom: '-13rem',
     },
     firstLine: {
+      paddingVertical: 10,
       flexDirection: 'row',
       justifyContent: 'space-between',
-      paddingVertical: 10
     },
     TouchableOpacity: {
-      height: '100%',
       width: 20,
+      height: '100%',
     },
     dots: {
+      fontSize: 25,
       color: colors.heading,
       fontFamily: fonts.heading,
-      fontSize: 25,
     },
     hours: {
       top: '20%',
@@ -44,11 +44,11 @@ export default StyleSheet.create({
       color: colors.heading
     },
     classes: {
-      backgroundColor: colors.cards_background,
-      borderRadius: 20,
       width: '50%',
       height: '40%',
+      borderRadius: 20,
       paddingHorizontal: 30,
+      backgroundColor: colors.cards_background,
     },
     classesName: {
       marginTop: '5%',
@@ -60,20 +60,20 @@ export default StyleSheet.create({
       marginBottom: '-1rem'
     },
     classesNumber: {
-      fontFamily: fonts.complement,
       fontSize: 12,
+      fontFamily: fonts.complement,
     },
     classesTName: {
+      fontSize: 12,
       marginTop: '5%',
       marginLeft: '10%',
       fontFamily: fonts.complement,
-      fontSize: 12,
     }, 
     data: {
+      marginTop: '.5rem',
       flexDirection: 'row',
       alignItems: 'center',
       textAlign: 'center',
-      marginTop: '.5rem'
     },
     teacherPic: {
       width: 30,
@@ -83,13 +83,13 @@ export default StyleSheet.create({
       borderRadius: 50,
     },
     options: {
+      right: 20,
       height: 70,
-      backgroundColor: colors.red,
       marginTop: 30,
       borderRadius: 20,
-      justifyContent: 'center',
-      alignItems: 'center',
       position: 'relative',
-      right: 20,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.red,
   },
 })

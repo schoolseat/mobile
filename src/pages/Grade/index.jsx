@@ -13,12 +13,16 @@ import { useRoute, useNavigation } from '@react-navigation/core';
 
 import styles from './styles';
 import colors from '../../styles/colors';
-import { GradeCard, Loading, ModalView, Button } from '../../components';
+import {
+  GradeCard,
+  Loading,
+  ModalView,
+  Button
+} from '../../components';
 import { useApi } from '../../hooks/auth';
 
 export default function Grade() {
   const [isMural, setIsMural] = useState(true);
-  const [students, setStudents] = useState([]);
   const [teacher, setTeacher] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [halfModal, setHalfModal] = useState(false);
@@ -46,16 +50,18 @@ export default function Grade() {
   useEffect(() => {
     getTeacherData();
   }, [])
+
   if (loading || !teacher) {
     return <Loading />;
   }
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContent}>
         <BorderlessButton onPress={handleGoBack}>
           <Feather
-            name="arrow-left"
             size={24}
+            name="arrow-left"
             color={colors.heading}
           />
         </BorderlessButton>

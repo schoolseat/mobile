@@ -6,9 +6,9 @@ import StackRoutes from './stack.routes';
 const Routes = () => (
   <NavigationContainer>
     <StatusBar
+      translucent
       barStyle="dark-content"
       backgroundColor="transparent"
-      translucent
     />
     <StackRoutes />
   </NavigationContainer>

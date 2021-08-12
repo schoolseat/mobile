@@ -9,19 +9,19 @@ export default function Loading() {
   return (
     <View>
       <StatusBar
+        translucent
         barStyle="white-content"
         backgroundColor="transparent"
-        translucent
       />
       <AnimatedLoader
         visible
-        overlayColor="#4dc591"
+        speed={2}
         source={lottie}
+        overlayColor="#4dc591"
         animationStyle={{
           width: Dimensions.get('window').width,
           height: Dimensions.get('window').width * 1
         }}
-        speed={2}
       />
     </View>
   );

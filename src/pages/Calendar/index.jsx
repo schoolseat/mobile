@@ -41,9 +41,9 @@ export default function Calendar() {
   const [openModal, setOpenModal] = useState(false);
 
   const {
+    loading,
     lessons: lessonsReq,
-    content: contentReq,
-    loading
+    content: contentReq
   } = useApi();
 
   const navigation = useNavigation();
@@ -52,8 +52,8 @@ export default function Calendar() {
     if (loading) return;
 
     setLessons(lessonsReq);
-    setParsedLessons(lessonsReq);
     setContent(contentReq);
+    setParsedLessons(lessonsReq);
   }
 
   function handleModal() {
@@ -119,11 +119,11 @@ export default function Calendar() {
           {
             showPicker && (
               <DateTimePicker
+                is24Hour
+                mode="date"
+                display="default"
                 testID="dateTimePicker"
                 value={new Date(selectedDay)}
-                mode="date"
-                is24Hour
-                display="default"
                 onChange={(event, selectedDayDate) => {
                   handleDatePicker();
                   setSelectedDay(String(selectedDayDate));
@@ -186,9 +186,9 @@ export default function Calendar() {
           <View>
             <TouchableOpacity onPress={() => handleReverse()}>
               <FontAwesome5
-                name="sort-amount-down-alt"
                 size={24}
                 color={colors.heading}
+                name="sort-amount-down-alt"
               />
             </TouchableOpacity>
           </View>
@@ -201,6 +201,7 @@ export default function Calendar() {
                 : content
             }
             inverted={reverse}
+            style={styles.flatlist}
             keyExtractor={(item) => String(item._id)}
             ListEmptyComponent={(
               <View style={styles.noClass}>
@@ -220,7 +221,6 @@ export default function Calendar() {
                 onPress={() => handleActivitySelect(item)}
               />
             )}
-            style={styles.flatlist}
           />
         </View>
       </ScrollView>

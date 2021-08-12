@@ -4,23 +4,21 @@ import fonts from '../../styles/fonts';
 
 export default StyleSheet.create({
   container: {
-    backgroundColor: colors.blue,
-    borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
     margin: 10,
+    elevation: 5,
     width: '10rem',
     height: '2rem',
-
+    borderRadius: 16,
+    shadowRadius: 3.84,
     shadowColor: '#000',
+    shadowOpacity: 0.25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.blue,
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.50,
-    shadowRadius: 3.84,
-
-    elevation: 5,
   },
   text: {
     fontSize: 16,

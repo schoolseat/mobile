@@ -39,10 +39,10 @@ export default function profile() {
     setHalfModal(true);
   }
   function handleCloseModal() {
+    setOpenModal(false);
+    setHalfModal(false);
     setOpenEditProfile(false);
     setOpenEditAccount(false);
-    setHalfModal(false);
-    setOpenModal(false)
   }
   function handleNavigation(place) {
     navigation.navigate(place);
@@ -79,7 +79,7 @@ export default function profile() {
             <Text style={styles.title}>{user.name}</Text>
             <View style={styles.data}>
               <Text style={styles.text}>{user.bio}</Text>
-              {stars(Number(user.stars))}
+              { stars(Number(user.stars)) }
             </View>
           </View>
           <View style={styles.editprofile}>
@@ -126,13 +126,13 @@ export default function profile() {
             (!openEditAccount && !openEditProfile) &&
             <View style={styles.modalButtons}>
               <Button name="Editar Perfil" onPress={() => {
-                setOpenEditProfile(!openEditProfile),
-                setHalfModal(false);
+                setHalfModal(false),
+                setOpenEditProfile(!openEditProfile);
               }}
               />
               <Button name="Editar Conta" onPress={() => {
-                setOpenEditAccount(!openEditAccount),
-                setHalfModal(false);
+                setHalfModal(false),
+                setOpenEditAccount(!openEditAccount);
               }}
               />
               <Button name="Sair" color={colors.red} onPress={() => handleNavigation('UserIdentification')} />

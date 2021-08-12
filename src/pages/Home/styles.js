@@ -14,9 +14,9 @@ export default StyleSheet.create({
     position: 'absolute',
   },
   classes: {
-    backgroundColor: colors.background,
-    borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    backgroundColor: colors.background,
     marginTop: Dimensions.get('window').width * 0.8,
     height: Dimensions.get('window').height * 0.43,
   },

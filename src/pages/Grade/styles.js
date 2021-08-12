@@ -34,15 +34,15 @@ export default StyleSheet.create({
     paddingHorizontal: '1.5rem'
   },
   teacherView: {
+    textAlign: 'center',
     flexDirection: 'row',
     alignItems: 'center',
-    textAlign: 'center',
   },
   teacherPfp: {
     width: '3rem',
     height: '3rem',
+    marginRight: '1rem',
     borderRadius: '1.5rem',
-    marginRight: '1rem'
   },
   teacherName: {
     fontSize: '1.2rem',
@@ -66,22 +66,22 @@ export default StyleSheet.create({
     fontFamily: fonts.complement,
   },
   buttons: {
-    flexDirection: 'row',
+    marginTop: 20,
     marginLeft: 45,
     marginRight: 45,
-    marginTop: 20,
+    flexDirection: 'row',
   },
   selectedText: {
-    fontFamily: fonts.complement,
-    color: colors.heading,
     marginRight: 180,
-    borderBottomColor: colors.heading,
     borderBottomWidth: 1,
+    color: colors.heading,
+    fontFamily: fonts.complement,
+    borderBottomColor: colors.heading,
   },
   text: {
-    fontFamily: fonts.complement,
-    color: colors.heading,
     marginRight: 180,
+    color: colors.heading,
+    fontFamily: fonts.complement,
   },
   modalButtons: {
     alignItems: 'center',

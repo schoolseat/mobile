@@ -8,9 +8,9 @@ export default StyleSheet.create({
     flex: 1,
   },
   header: {
-    flexDirection: 'row',
     marginTop: '2rem',
     alignItems: 'center',
+    flexDirection: 'row',
   },
   headerTexts: {
     flexDirection: 'column',

@@ -13,9 +13,9 @@ export default StyleSheet.create({
         paddingHorizontal: '1.5rem',
     },
     imageView: {
-        marginRight: '1rem',
         width: '3rem',
         height: '3rem',
+        marginRight: '1rem',
         borderRadius: '1.5rem',
         backgroundColor: colors.shape,
     },

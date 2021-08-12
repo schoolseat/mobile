@@ -5,32 +5,32 @@ import fonts from '../../styles/fonts';
 export default StyleSheet.create({
     container: {
         marginTop: 20,
-        marginHorizontal: 20,
         textAlign: 'center',
+        marginHorizontal: 20,
     },
     title: {
-        fontFamily: fonts.heading,
-        alignSelf: 'center',
         fontSize: 25,
+        alignSelf: 'center',
         color: colors.white,
+        fontFamily: fonts.heading,
     },
     titles: {
-        fontFamily: fonts.heading,
-        alignSelf: 'center',
         fontSize: 20,
+        alignSelf: 'center',
         color: colors.white,
+        fontFamily: fonts.heading,
     },
     titleView: {
         width: '100%',
+        marginBottom: 25,
         textAlign: 'center',
         alignItems: 'center',
-        marginBottom: 25
     },
     inputsView: {
+        width: '100%',
+        marginBottom: 10,
         textAlign: 'center',
         flexDirection: 'column',
-        marginBottom: 10,
-        width: '100%',
     },
     texts: {
         fontSize: 15,
@@ -38,16 +38,16 @@ export default StyleSheet.create({
         fontFamily: fonts.text
     },
     textsinput: {
-        fontFamily: fonts.text,
+        marginBottom: 10,
         color: colors.white,
-        borderBottomColor: colors.white,
         borderBottomWidth: 1,
-        marginBottom: 10
+        fontFamily: fonts.text,
+        borderBottomColor: colors.white,
     },
     button: {
+        marginBottom: 11,
         textAlign: 'center',
-        justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 11
+        justifyContent: 'center',
     }
 });

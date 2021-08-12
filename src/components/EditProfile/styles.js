@@ -9,16 +9,16 @@ export default StyleSheet.create({
         textAlign: 'center',
     },
     headerContent: {
-        width: '100%',
         height: 104,
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     title: {
-        fontFamily: fonts.heading,
-        alignSelf: 'center',
         fontSize: 25,
+        alignSelf: 'center',
         color: colors.white,
+        fontFamily: fonts.heading,
     },
     titleView: {
         width: '100%',
@@ -38,25 +38,25 @@ export default StyleSheet.create({
         marginBottom: 20,
     },
     inputsView: {
+        width: '100%',
+        marginBottom: 10,
         textAlign: 'center',
         flexDirection: 'column',
-        marginBottom: 10,
-        width: '100%',
     },
     texts: {
         color: colors.white,
         fontFamily: fonts.heading
     },
     textsinput: {
-        fontFamily: fonts.text,
-        color: colors.white,
-        borderBottomColor: colors.white,
-        borderBottomWidth: 1,
         marginBottom: 10,
+        color: colors.white,
+        borderBottomWidth: 1,
+        fontFamily: fonts.text,
+        borderBottomColor: colors.white,
     },
     button: {
         textAlign: 'center',
-        justifyContent: 'center',
         alignItems: 'center',
+        justifyContent: 'center',
     }
 });

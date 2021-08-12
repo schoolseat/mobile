@@ -14,10 +14,10 @@ export default StyleSheet.create({
   bar: {
     width: '7rem',
     height: '.2rem',
+    marginTop: '2rem',
+    marginBottom: 10,
+    alignSelf: 'center',
     borderRadius: '3.5rem',
     backgroundColor: colors.white,
-    alignSelf: 'center',
-    marginTop: '2rem',
-    marginBottom: 10
   }
 });

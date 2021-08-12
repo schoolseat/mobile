@@ -30,12 +30,12 @@ export default function Notifications() {
 
   async function handleClassSelect() {
     const parsedPostData = {
-      discipline: className,
-      bio: classBio,
-      school: schoolName,
-      teacher: user.user,
       icon: 'book',
       color: 'blue',
+      bio: classBio,
+      teacher: user.user,
+      school: schoolName,
+      discipline: className,
     }
 
     const { data } = await postApiData({ data: parsedPostData, isClasses: true })
@@ -50,9 +50,9 @@ export default function Notifications() {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView style={styles.container}>
           <FocusAwareStatusBar
+            translucent
             barStyle="white-content"
             backgroundColor="transparent"
-            translucent
           />
           <View style={styles.greenContainer}>
             <Text style={styles.title}>Criar turma</Text>

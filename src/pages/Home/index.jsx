@@ -23,9 +23,9 @@ export default function home() {
   const [loadingMore, setLoadingMore] = useState(false);
 
   const {
-    classes: classesReq,
+    loading,
     getApiData,
-    loading
+    classes: classesReq,
   } = useApi();
   const navigation = useNavigation();
 
@@ -48,7 +48,7 @@ export default function home() {
 
   useEffect(() => {
     fetchClasses();
-  }, [classes, loadingMore,getApiData, loading]);
+  }, [classes, loadingMore, getApiData, loading]);
 
   if (loading || !classes) {
     return <Loading />;
@@ -56,14 +56,14 @@ export default function home() {
   return (
     <View style={styles.container}>
       <FocusAwareStatusBar
+        translucent
         barStyle="white-content"
         backgroundColor="transparent"
-        translucent
       />
       <View style={styles.image}>
         <Book
-          width={Dimensions.get('window').width * 0.9}
-          height={Dimensions.get('window').height * 0.4}
+          width={ Dimensions.get('window').width * 0.9 }
+          height={ Dimensions.get('window').height * 0.4 }
         />
       </View>
       <View style={styles.classes}>

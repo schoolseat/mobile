@@ -4,9 +4,9 @@ import fonts from '../../styles/fonts';
 
 export default StyleSheet.create({
   container: {
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
-    height: 60,
   },
   text: {
     margin: 10,

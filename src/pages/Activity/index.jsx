@@ -22,20 +22,24 @@ export default function Activity() {
   function handleStart() {
     navigation.navigate('Calendar');
   }
-  
+
   const { activity } = route.params;
   return (
     <View style={styles.container}>
       <StatusBar
+        translucent
         barStyle="white-content"
         backgroundColor="transparent"
-        translucent
       />
       <BorderlessButton
         style={styles.backButton}
         onPress={handleStart}
       >
-        <AntDesign name="arrowleft" size={30} color="white" />
+        <AntDesign
+          size={30}
+          color="white"
+          name="arrowleft"
+        />
       </BorderlessButton>
 
       <View style={styles.image}>

@@ -26,7 +26,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
-import Img from '../../assets/loginimg.svg';
+import LoginImage from '../../assets/loginimg.svg';
 import { Button, FieldError } from '../../components';
 
 const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
@@ -56,13 +56,13 @@ export default function Welcome() {
 
   async function handleClassSelect() {
     const parsedPostData = {
-      password: password,
       email: email,
+      bio: "Sem bio!",
+      password: password,
       name: nameVerified,
-      nickname: nameVerified,
       profilePic: image.uri,
+      nickname: nameVerified,
       bornDate: dateVerified,
-      bio: "Sem bio!"
     }
     await postApiData({ data: parsedPostData, isCreateAccount: true })
     navigation.navigate('Calendar');
@@ -74,32 +74,31 @@ export default function Welcome() {
   }
   function alert(data) {
     Platform.OS === "ios"
-        ? Alert.alert(data[0], data[1])
-        : ToastAndroid.show(
-            data[1],
-            ToastAndroid.LONG,
-            ToastAndroid.BOTTOM
-        );
-}
+      ? Alert.alert(data[0], data[1])
+      : ToastAndroid.show(
+        data[1],
+        ToastAndroid.LONG,
+        ToastAndroid.BOTTOM
+      );
+  }
+  async function getPerm() {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Preciso da permissão', 'Preciso dá permissão de gerenciar arquivos para que você escolha uma foto de perfil 😀');
+    }
+  }
   useEffect(() => {
-    (async () => {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Preciso da permissão', 'Preciso dá permissão de gerenciar arquivos para que você escolha uma foto de perfil 😀');
-      }
-    })();
+    getPerm()
   }, []);
 
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.cancelled) {
-      setImage(result);
-    }
+  async function pickImage() {
+    const result = await ImagePicker
+      .launchImageLibraryAsync({
+        quality: 1,
+        allowsEditing: true,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      });
+    if (!result.cancelled) setImage(result);
   };
   return (
     <ScrollView style={styles.container}>
@@ -111,7 +110,7 @@ export default function Welcome() {
           <View style={styles.wrapper}>
             <Text style={styles.title}>Cadastro</Text>
 
-            <Img
+            <LoginImage
               width={Dimensions.get('window').width * 0.9}
               height={Dimensions.get('window').height * 0.4}
             />
@@ -166,16 +165,16 @@ export default function Welcome() {
                 nameVerified
                   ? (
                     <FontAwesome
-                      name="check-circle"
                       size={32}
+                      name="check-circle"
                       color={colors.blue}
                       style={styles.lefticons}
                     />
                   )
                   : (
                     <FontAwesome
-                      name="close"
                       size={32}
+                      name="close"
                       color={colors.red}
                       style={styles.lefticons}
                     />
@@ -200,16 +199,16 @@ export default function Welcome() {
                   hide
                     ? (
                       <Feather
-                        name="eye"
                         size={24}
+                        name="eye"
                         color="#A2A2A2"
                         style={styles.lefticons}
                       />
                     )
                     : (
                       <Feather
-                        name="eye-off"
                         size={24}
+                        name="eye-off"
                         color="#A2A2A2"
                         style={styles.lefticons}
                       />
@@ -233,16 +232,16 @@ export default function Welcome() {
                 dateVerified
                   ? (
                     <FontAwesome
-                      name="check-circle"
                       size={32}
+                      name="check-circle"
                       color={colors.blue}
                       style={styles.lefticons}
                     />
                   )
                   : (
                     <FontAwesome
-                      name="close"
                       size={32}
+                      name="close"
                       color={colors.red}
                       style={styles.lefticons}
                     />
@@ -251,17 +250,17 @@ export default function Welcome() {
               {
                 showPicker && (
                   <DateTimePicker
-                    testID="dateTimePicker"
-                    value={new Date(dayjs(today).format('YYYY-MM-DD'))}
-                    mode="date"
                     is24Hour
+                    mode="date"
                     display="default"
+                    testID="dateTimePicker"
+                    maximumDate={new Date(today.getFullYear - 5, 1, 1)}
+                    minimumDate={new Date(today.getFullYear - 80, 1, 1)}
+                    value={new Date(dayjs(today).format('YYYY-MM-DD'))}
                     onChange={(event, data) => {
                       handleDatePicker();
                       setSelectedDay(dayjs(data).format('YYYY-MM-DD'));
                     }}
-                    maximumDate={today}
-                    minimumDate={new Date(1950, 1, 1)}
                   />
                 )
               }
@@ -275,8 +274,8 @@ export default function Welcome() {
               <Feather name="camera" size={24} color={colors.blue} style={styles.icons} />
               <TouchableOpacity onPress={pickImage}>
                 <TextInput
-                  style={styles.inputs}
                   editable={false}
+                  style={styles.inputs}
                   placeholder={
                     image
                       ? 'Prontinho 😊'
@@ -289,16 +288,16 @@ export default function Welcome() {
                 image
                   ? (
                     <FontAwesome
+                    size={32}
                       name="check-circle"
-                      size={32}
                       color={colors.blue}
                       style={styles.lefticons}
                     />
                   )
                   : (
                     <FontAwesome
+                    size={32}
                       name="close"
-                      size={32}
                       color={colors.red}
                       style={styles.lefticons}
                     />

@@ -20,7 +20,7 @@ const expression = /^[a-z0-9._%+-]+@[a-z0-9]+\.[a-z]+([a-z]{2,10})$/;
 import styles from './styles'
 import colors from '../../styles/colors';
 import { Button } from '../../components';
-import Img from '../../assets/loginimg.svg';
+import LoginImage from '../../assets/loginimg.svg';
 
 export default function RecoverPassword() {
     const [verified, setVerified] = useState(false);
@@ -41,14 +41,14 @@ export default function RecoverPassword() {
                         <View style={styles.header}>
                             <BorderlessButton style={styles.backButton} onPress={handleGoBack}>
                                 <Feather
-                                    name="arrow-left"
                                     size={24}
+                                    name="arrow-left"
                                     color={colors.heading}
                                 />
                             </BorderlessButton>
                             <Text style={styles.title}>Recupere a senha</Text>
                         </View>
-                        <Img
+                        <LoginImage
                             width={Dimensions.get('window').width * 0.9}
                             height={Dimensions.get('window').height * 0.4}
                         />
@@ -69,16 +69,16 @@ export default function RecoverPassword() {
                                 verified
                                     ? (
                                         <FontAwesome
-                                            name="check-circle"
                                             size={32}
+                                            name="check-circle"
                                             color={colors.blue}
                                             style={styles.lefticons}
                                         />
                                     )
                                     : (
                                         <FontAwesome
-                                            name="close"
                                             size={32}
+                                            name="close"
                                             color={colors.red}
                                             style={styles.lefticons}
                                         />
