@@ -4,6 +4,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "sudo expo start",
+    "bundle": "sudo react-native-bundle-visualizer",
     "eject": "expo eject"
   },
   "dependencies": {
