@@ -57,7 +57,7 @@ export default function Activity() {
           </View>
           <View>
             <Text style={styles.text}>
-              {data.content}
+              {data.text}
             </Text>
             {
               data.activityLink &&

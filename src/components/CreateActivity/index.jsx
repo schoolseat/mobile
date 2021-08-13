@@ -20,14 +20,14 @@ import colors from '../../styles/colors';
 import { useApi } from '../../hooks/auth';
 
 export default function CreateActivity({ isContent, classe, handleModal }) {
-
     const [texT, setText] = useState(false);
     const [Title, setTitle] = useState(false);
     const [Content, setContent] = useState(false);
     const [showPicker, setShowPicker] = useState(false);
     const [ActivityLink, setActivityLink] = useState(false);
     const [Deadline, setDeadline] = useState(false);
-
+    
+    const today = new Date();
     const { postApiData } = useApi();
     const navigation = useNavigation();
 
