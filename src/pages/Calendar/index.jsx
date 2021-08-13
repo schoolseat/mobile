@@ -69,8 +69,8 @@ export default function Calendar() {
     setShowPicker(!showPicker);
   }
 
-  function handleActivitySelect(activity) {
-    navigation.navigate('Activity', { activity });
+  function handleActivitySelect(data) {
+    navigation.navigate('Activity', { data });
   }
 
   function handleLessons() {

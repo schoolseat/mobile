@@ -50,7 +50,7 @@ export default function CreateActivity({ isContent, classe, handleModal }) {
         }
 
         const { data } = await postApiData({ data: isContent ? parsedPostContentData : parsedPostLessonsData, path: isContent ? "content" : "lessons" })
-        navigation.navigate('Grade', { data });
+        navigation.navigate('Activity', { data });
     }
     return (
         <ScrollView>
@@ -87,19 +87,14 @@ export default function CreateActivity({ isContent, classe, handleModal }) {
                             </View>
                             <View style={styles.inputsView}>
                                 <Text style={styles.texts}>
-                                    Link da atividade !
+                                    Texto
                                 </Text>
                                 <TextInput
                                     editable
-                                    maxLength={25}
+                                    maxLength={140}
                                     numberOfLines={1}
                                     style={styles.textsinput}
-                                    onChangeText={
-                                        (text) => {
-                                            verifyLink.test(String(text).toLowerCase())
-                                                ? setActivityLink(text)
-                                                : setActivityLink(false)
-                                        }}
+                                    onChangeText={(text) => setText(text)}
                                 />
                             </View>
                             {
@@ -122,14 +117,19 @@ export default function CreateActivity({ isContent, classe, handleModal }) {
                                 !isContent &&
                                 <View style={styles.inputsView}>
                                     <Text style={styles.texts}>
-                                        Texto
+                                        Link da atividade !
                                     </Text>
                                     <TextInput
                                         editable
-                                        maxLength={140}
+                                        maxLength={25}
                                         numberOfLines={1}
                                         style={styles.textsinput}
-                                        onChangeText={(text) => setText(text)}
+                                        onChangeText={
+                                            (text) => {
+                                                verifyLink.test(String(text).toLowerCase())
+                                                    ? setActivityLink(text)
+                                                    : setActivityLink(false)
+                                            }}
                                     />
                                 </View>
                             }
@@ -152,9 +152,8 @@ export default function CreateActivity({ isContent, classe, handleModal }) {
                             }
                         </View>
                         <View style={styles.button}>
-                            <Button name="Pronto" onPress={handleModal} />
+                            <Button name="Pronto" onPress={handleClassSelect} />
                             <Button name="Cancelar" color={colors.white} textColor={colors.title} onPress={handleModal} />
-                            <Button name="Deletar conta" color={colors.red} onPress={handleModal} />
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

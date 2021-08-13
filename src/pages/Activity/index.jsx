@@ -23,7 +23,8 @@ export default function Activity() {
     navigation.navigate('Calendar');
   }
 
-  const { activity } = route.params;
+  const { data } = route.params;
+
   return (
     <View style={styles.container}>
       <StatusBar
@@ -51,17 +52,17 @@ export default function Activity() {
       <ScrollView>
         <View style={styles.scrollContainer}>
           <View style={styles.titlesContainer}>
-            <Text style={styles.title}>{activity.title}</Text>
-            <Text style={styles.subTitle}>{activity.content}</Text>
+            <Text style={styles.title}>{data.title}</Text>
+            <Text style={styles.subTitle}>{data.content}</Text>
           </View>
           <View>
             <Text style={styles.text}>
-              {activity.content}
+              {data.content}
             </Text>
             {
-              activity.activityLink &&
+              data.activityLink &&
               <Text>
-                {activity.activityLink}
+                {data.activityLink}
               </Text>
             }
           </View>
