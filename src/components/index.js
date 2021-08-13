@@ -8,6 +8,7 @@ import ClassesCard from './ClassesCard';
 import EditAccount from './EditAccount';
 import EditProfile from './EditProfile';
 import ActivityCard from './ActivityCard';
+import CreateActivity from './CreateActivity';
 import LittleClassesCard from './LittleClassesCard';
 
 export {
@@ -21,5 +22,6 @@ export {
   EditAccount,
   EditProfile,
   ActivityCard,
+  CreateActivity,
   LittleClassesCard,
 };

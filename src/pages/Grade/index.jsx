@@ -14,10 +14,11 @@ import { useRoute, useNavigation } from '@react-navigation/core';
 import styles from './styles';
 import colors from '../../styles/colors';
 import {
-  GradeCard,
+  Button,
   Loading,
+  GradeCard,
   ModalView,
-  Button
+  CreateActivity,
 } from '../../components';
 import { useApi } from '../../hooks/auth';
 
@@ -26,6 +27,8 @@ export default function Grade() {
   const [teacher, setTeacher] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [halfModal, setHalfModal] = useState(false);
+  const [openCreateContent, setOpenCreateContent] = useState(false);
+  const [openCreateActivity, setOpenCreateActivity] = useState(false);
 
   const navigation = useNavigation();
   const { getDataById, loading } = useApi();
@@ -34,16 +37,22 @@ export default function Grade() {
   function handleGoBack() {
     navigation.goBack();
   }
-  function handleModal() {
-    setOpenModal(!openModal);
-    setHalfModal(!halfModal);
+  function handleOpenModal() {
+    setOpenModal(true);
+    setHalfModal(true);
+  }
+  function handleCloseModal() {
+    setOpenModal(false);
+    setHalfModal(false);
+    setOpenCreateContent(false);
+    setOpenCreateActivity(false);
   }
   const { data: grade } = route.params;
 
   async function getTeacherData() {
     const id = grade.teacher;
     if (loading) return;
-    const data = await getDataById({ id, path: "users"})
+    const data = await getDataById({ id, path: "users" })
     setTeacher(data);
   }
 
@@ -68,7 +77,7 @@ export default function Grade() {
 
         <Text style={styles.title}>{grade.discipline}</Text>
 
-        <BorderlessButton onPress={handleModal}>
+        <BorderlessButton onPress={handleOpenModal}>
           <Text style={styles.dots}>...</Text>
         </BorderlessButton>
       </View>
@@ -101,7 +110,7 @@ export default function Grade() {
           onPress={() => setIsMural(false)}
           style={isMural ? styles.text : styles.selectedText}
         >
-          Alunos
+          Alunos {`( ${grade.users.length} )`}
         </Text>
       </View>
       {
@@ -116,13 +125,32 @@ export default function Grade() {
           )}
         />
       }
-      <ModalView isVisible={openModal} closeModal={handleModal} half={halfModal} marginOfTop={0.59}>
-        <View style={styles.modalButtons}>
-          <Button name="Criar nova atividade" />
-          <Button name="Criar novo conteudo" />
-          <Button name="Editar turma" color='white' textColor='black' />
-          <Button name="Apagar turma" color='red' />
-        </View>
+      <ModalView isVisible={openModal} closeModal={handleCloseModal} half={halfModal} marginOfTop={0.59}>
+        {
+          (!openCreateActivity && !openCreateContent) &&
+          <View style={styles.modalButtons}>
+            <Button name="Criar nova atividade" onPress={() => {
+              setHalfModal(false),
+              setOpenCreateActivity(true);
+            }} 
+            />
+            <Button name="Criar novo conteudo" onPress={() => {
+              setHalfModal(false),
+              setOpenCreateContent(true);
+            }} 
+            />
+            <Button name="Editar turma" color='white' textColor='black' />
+            <Button name="Apagar turma" color='red' />
+          </View>
+        }
+        {
+          openCreateActivity &&
+          <CreateActivity handleModal={handleCloseModal} classe={grade}/>
+        }
+        {
+          openCreateContent &&
+          <CreateActivity handleModal={handleCloseModal} classe={grade} isContent />
+        }
       </ModalView>
     </View>
   );

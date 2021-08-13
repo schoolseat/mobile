@@ -75,7 +75,6 @@ export default function Calendar() {
 
   function handleLessons() {
     if (!lessons) return
-
     const parsed = lessons.filter(
       (lesson) => {
         dayjs(lesson.deadline).format('YYYY-MM-DD') === dayjs(selectedDay).format('YYYY-MM-DD')
@@ -163,7 +162,7 @@ export default function Calendar() {
                 : styles.ScrollViewText
             }
           >
-            Materia
+            Materia {`( ${content.length} )`}
           </Text>
           <View style={styles.ScrollViewTexts}>
             <Text
@@ -180,7 +179,7 @@ export default function Calendar() {
                   : styles.ScrollViewText
               }
             >
-              Atividades
+              Atividades{` ( ${parsedLessons.length} )`}
             </Text>
           </View>
           <View>
