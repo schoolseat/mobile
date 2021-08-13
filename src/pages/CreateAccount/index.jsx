@@ -256,7 +256,7 @@ export default function Welcome() {
                     testID="dateTimePicker"
                     maximumDate={new Date(today.getFullYear - 5, 1, 1)}
                     minimumDate={new Date(today.getFullYear - 80, 1, 1)}
-                    value={new Date(dayjs(today).format('YYYY-MM-DD'))}
+                    value={new Date()}
                     onChange={(event, data) => {
                       handleDatePicker();
                       setSelectedDay(dayjs(data).format('YYYY-MM-DD'));

@@ -137,12 +137,11 @@ export default function CreateActivity({ isContent, classe, handleModal }) {
                                 showPicker && (
                                     <DateTimePicker
                                         is24Hour
-                                        mode="date"
                                         display="default"
                                         testID="dateTimePicker"
-                                        maximumDate={new Date(today.getFullYear + 5, 1, 1)}
                                         minimumDate={new Date(today)}
-                                        value={new Date(dayjs(today).format('YYYY-MM-DD'))}
+                                        maximumDate={new Date(today.getFullYear + 5, 1, 1)}
+                                        value={new Date()}
                                         onChange={(event, data) => {
                                             setShowPicker(false);
                                             setDeadline(dayjs(data).format('YYYY-MM-DD'));
