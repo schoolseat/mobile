@@ -3,7 +3,6 @@
 ## ✨ Features
 
 - Hooks.
-- AsyncStorage.
 - Made with [Expo](https://expo.dev/).
 
 ## 🛠 Usage
@@ -17,9 +16,9 @@
 
 - [ ] Add i18next.
 - [ ] Verify grammar.
-- [ ] Login with Google.
-- [ ] Fix keyboard bugs.
+- [ ] Add AsyncStorage.
 - [ ] Improve responsivity.
+- [ ] Add login with Google.
 
 ## 📄 License
 
