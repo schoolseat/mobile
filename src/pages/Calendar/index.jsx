@@ -33,12 +33,12 @@ const { days, months } = dates['pt-br'];
 export default function Calendar() {
   const [content, setContent] = useState(false);
   const [lessons, setLessons] = useState(false);
-  const [parsedLessons, setParsedLessons] = useState(false);
   const [reverse, setReverse] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [isActivity, setIsActivity] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
-  const [openModal, setOpenModal] = useState(false);
+  const [parsedLessons, setParsedLessons] = useState(false);
 
   const {
     loading,

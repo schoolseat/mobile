@@ -90,7 +90,15 @@ export default function ActivityCard({
                 }]
             }
             >
-              {lesons.title}
+              {
+               isActivity ?
+               (
+                lesons.title.length > 10
+                 ? lesons.title.slice(0, 10).concat(" ", '...')
+                 : lesons.title
+               ) 
+               : lesons.title
+               }
             </Text>
             <Text
               style={
@@ -107,7 +115,17 @@ export default function ActivityCard({
                   }]
               }
             >
-              {lesons.content.length > 15 ? lesons.content.slice(0,15).concat(" ",'...') : lesons.content }
+              {
+              isActivity ?
+                (
+                  lesons.content.length > 10
+                  ? lesons.content.slice(0, 10).concat(" ", '...')
+                  : lesons.content
+                ) 
+                : (
+                  lesons.content.length > 15
+                    ? lesons.content.slice(0, 15).concat(" ", '...')
+                    : lesons.content)}
             </Text>
           </View>
           <BorderlessButton onPress={openModal} style={styles.TouchableOpacity}>
