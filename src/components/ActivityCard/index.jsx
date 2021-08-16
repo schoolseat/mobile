@@ -5,25 +5,24 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity,
 } from 'react-native';
 
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Ionicons, FontAwesome } from '@expo/vector-icons';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, BorderlessButton } from 'react-native-gesture-handler';
 
 import styles from './styles';
-import { useApi } from '../../hooks/auth';
 import colors from '../../styles/colors';
+import { useApi } from '../../hooks/auth';
 
 export default function ActivityCard({
   lesons, selected, isActivity, openModal, ...rest
 }) {
+  const [classe, setClasse] = useState(false);
+  const [teacher, setTeacher] = useState(false);
   const [isSelected, setSelected] = useState(false);
   const [emojiColor, setEmojiColor] = useState(false);
-  const [teacher, setTeacher] = useState(false);
-  const [classe, setClasse] = useState(false);
 
   const { getDataById } = useApi();
 
@@ -108,10 +107,10 @@ export default function ActivityCard({
                   }]
               }
             >
-              {lesons.content}
+              {lesons.content.length > 15 ? lesons.content.slice(0,15).concat(" ",'...') : lesons.content }
             </Text>
           </View>
-          <TouchableOpacity onPress={openModal} style={styles.TouchableOpacity}>
+          <BorderlessButton onPress={openModal} style={styles.TouchableOpacity}>
             <Text style={
               isActivity
                 ? (
@@ -125,9 +124,9 @@ export default function ActivityCard({
                   color: colors.white,
                 }]
             }>
-              . .
+              .{'\n'}.
             </Text>
-          </TouchableOpacity>
+          </BorderlessButton>
         </View>
         <View style={styles.data}>
           <Ionicons name="location-outline" size={24} color={emojiColor ? 'white' : 'black'} style={styles.icons} />

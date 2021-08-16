@@ -9,6 +9,7 @@ export default StyleSheet.create({
       height: '22rem',
       marginTop: '-2rem',
       marginBottom: -160,
+      paddingHorizontal: 15,
       alignContent: 'center',
     },
     longCard: {
@@ -25,11 +26,14 @@ export default StyleSheet.create({
       justifyContent: 'space-between',
     },
     TouchableOpacity: {
-      width: 20,
+      top: '10%',
+      width:  '50%',
       height: '100%',
+      alignItems: 'flex-end',
     },
     dots: {
       fontSize: 25,
+      lineHeight: 15,
       color: colors.heading,
       fontFamily: fonts.heading,
     },

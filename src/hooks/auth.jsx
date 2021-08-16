@@ -22,7 +22,7 @@ function ApiProvider({ children }) {
     const [content, setContent] = useState(false);
 
     async function getApiData({ login }) {
-        const { data: userReq } = await api.post(`auth`, login).catch((e) => {
+        const { data: userReq } = await api.post(`auth`, login).catch(() => {
             alert(["Ops", 'Seu e-mail ou senha parecem estar errados!'])
         })
         setUser(userReq);
