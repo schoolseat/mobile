@@ -24,6 +24,7 @@ import {
   Loading,
   ModalView,
   DaysOfWeek,
+  EditActivity,
   ActivityCard
 } from '../../components';
 
@@ -35,6 +36,7 @@ export default function Calendar() {
   const [lessons, setLessons] = useState(false);
   const [reverse, setReverse] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [modalData, setModalData] = useState(false);
   const [isActivity, setIsActivity] = useState(false);
   const [showPicker, setShowPicker] = useState(false);
   const [selectedDay, setSelectedDay] = useState(today);
@@ -56,7 +58,8 @@ export default function Calendar() {
     setParsedLessons(lessonsReq);
   }
 
-  function handleModal() {
+  function handleModal(data) {
+    if(data) setModalData(data);
     setOpenModal(!openModal);
   }
 
@@ -214,7 +217,7 @@ export default function Calendar() {
                 lesons={item}
                 selected={item.isActive}
                 isActivity={isActivity}
-                openModal={handleModal}
+                openModal={() => handleModal(item)}
                 onEndReachedThreshold={0.1}
                 showsVericalScrollIndicator={false}
                 onPress={() => handleActivitySelect(item)}
@@ -223,8 +226,8 @@ export default function Calendar() {
           />
         </View>
       </ScrollView>
-      <ModalView isVisible={openModal} closeModal={handleModal}>
-        <Text> Quem mora em tilambuco</Text>
+      <ModalView isVisible={openModal} closeModal={handleModal} half marginOfTop={0.5}>
+        <EditActivity data={modalData}/>
       </ModalView>
     </View>
   );
