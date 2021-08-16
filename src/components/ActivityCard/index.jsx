@@ -29,10 +29,9 @@ export default function ActivityCard({
   async function getTeacherData() {
     const id = lesons.classe
     const classeReq = await getDataById({ id, path: "classes" });
-    setClasse(classeReq)
-    const teacherId = classe.teacher.id
-    const data = await getDataById({ teacherId, path: "users" });
+    const data = await getDataById({ id: classeReq.teacher, path: "users" });
     setTeacher(data);
+    setClasse(classeReq);
   }
 
   useEffect(() => {

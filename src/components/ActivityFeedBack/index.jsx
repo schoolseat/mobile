@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-import Button from "../Button";
 import styles from "./styles";
+import Button from "../Button";
 import colors from "../../styles/colors";
 
 export default function ActivityFeedBack({ data }) {

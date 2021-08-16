@@ -27,9 +27,10 @@ export default StyleSheet.create({
     },
     TouchableOpacity: {
       top: '10%',
+      left: '190%',
       width:  '50%',
       height: '100%',
-      alignItems: 'flex-end',
+      alignItems: 'center',
     },
     dots: {
       fontSize: 25,
@@ -65,12 +66,12 @@ export default StyleSheet.create({
     },
     classesNumber: {
       fontSize: 12,
+      marginLeft: '5%',
       fontFamily: fonts.complement,
     },
     classesTName: {
       fontSize: 12,
-      marginTop: '5%',
-      marginLeft: '10%',
+      marginLeft: '5%',
       fontFamily: fonts.complement,
     }, 
     data: {
