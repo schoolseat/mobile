@@ -24,8 +24,8 @@ import {
   Loading,
   ModalView,
   DaysOfWeek,
-  EditActivity,
-  ActivityCard
+  ActivityCard,
+  ActivityFeedBack,
 } from '../../components';
 
 const today = new Date();
@@ -227,7 +227,7 @@ export default function Calendar() {
         </View>
       </ScrollView>
       <ModalView isVisible={openModal} closeModal={handleModal} half marginOfTop={0.5}>
-        <EditActivity data={modalData}/>
+        <ActivityFeedBack data={modalData}/>
       </ModalView>
     </View>
   );

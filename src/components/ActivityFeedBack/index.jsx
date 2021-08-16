@@ -6,7 +6,7 @@ import Button from "../Button";
 import styles from "./styles";
 import colors from "../../styles/colors";
 
-export default function EditActivity({ data }) {
+export default function ActivityFeedBack({ data }) {
   const [totalStars, setTotalStars] = useState(0);
 
   function stars(total) {

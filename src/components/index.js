@@ -7,9 +7,9 @@ import FieldError from './FieldError';
 import ClassesCard from './ClassesCard';
 import EditAccount from './EditAccount';
 import EditProfile from './EditProfile';
-import EditActivity from './EditActivity';
 import ActivityCard from './ActivityCard';
 import CreateActivity from './CreateActivity';
+import ActivityFeedBack from './ActivityFeedBack';
 import LittleClassesCard from './LittleClassesCard';
 
 export {
@@ -22,8 +22,8 @@ export {
   ClassesCard,
   EditAccount,
   EditProfile,
-  EditActivity,
   ActivityCard,
   CreateActivity,
+  ActivityFeedBack,
   LittleClassesCard,
 };
